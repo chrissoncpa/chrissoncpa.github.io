@@ -381,6 +381,24 @@ html[data-theme="dark"] .btn-primary:hover {
   background: var(--accent-soft);
 }
 
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 4px;
+  font-size: 14.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+.text-link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent-line);
+}
+.text-link svg { transition: transform 0.2s var(--ease); }
+.text-link:hover svg { transform: translateY(2px); }
+
 .hero-socials {
   display: flex;
   gap: 6px;
@@ -564,7 +582,9 @@ html[data-theme="dark"] .btn-primary:hover {
 
 .stack-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* auto-fill (not auto-fit) so a lone 5th card on a new row doesn't stretch
+     to full width — it sits at the same width as the others above it. */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
 }
 .stack-card {
@@ -610,8 +630,9 @@ html[data-theme="dark"] .btn-primary:hover {
 .timeline li {
   display: grid;
   grid-template-columns: 200px 1fr 200px;
-  gap: 32px;
-  padding: 22px 0;
+  column-gap: 32px;
+  row-gap: 8px;
+  padding: 26px 0;
   border-bottom: 1px solid var(--border-soft);
   align-items: baseline;
 }
@@ -629,16 +650,25 @@ html[data-theme="dark"] .btn-primary:hover {
   text-align: right;
   color: var(--text);
 }
+.t-blurb {
+  grid-column: 2 / 4;
+  margin: 4px 0 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 720px;
+}
 
 @media (max-width: 720px) {
   .timeline li {
     grid-template-columns: 1fr;
-    gap: 4px;
-    padding: 18px 0;
+    row-gap: 4px;
+    padding: 22px 0;
   }
   .t-org { text-align: left; order: 1; font-size: 16px; }
   .t-role { order: 2; }
   .t-date { order: 3; }
+  .t-blurb { grid-column: 1; order: 4; margin-top: 10px; max-width: none; }
 }
 
 .creds {
