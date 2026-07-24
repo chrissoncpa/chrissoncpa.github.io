@@ -304,6 +304,140 @@ html[data-theme="dark"] {
               0 4px 16px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
+/* ---------- proof strip: outcomes as board test-points ---------- */
+
+.proof {
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg);
+}
+.proof-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0;
+}
+.proof-strip li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 26px 24px;
+  border-left: 1px solid var(--border-soft);
+  position: relative;
+}
+.proof-strip li:first-child { border-left: 0; }
+.proof-strip li::before {
+  content: "";
+  position: absolute;
+  top: 32px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-line);
+  background: var(--bg);
+  transform: translateX(-50%);
+}
+.proof-strip li:first-child::before { display: none; }
+.proof-num {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+.proof-label {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+@media (max-width: 830px) {
+  .proof-strip { grid-template-columns: 1fr 1fr; }
+  .proof-strip li { border-left: 0; padding: 18px 12px; }
+  .proof-strip li::before { display: none; }
+}
+
+/* ---------- case diagram: sanitized system sketch ---------- */
+
+.case-diagram {
+  margin: 4px 0 18px;
+  padding: 20px 20px 14px;
+  max-width: 720px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+.case-diagram-scroll { overflow-x: auto; }
+.case-diagram svg {
+  min-width: 560px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.case-diagram .cd-chip rect {
+  fill: var(--bg-sunken);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.case-diagram .cd-trace path {
+  fill: none;
+  stroke: var(--accent-line);
+  stroke-width: 1.5;
+}
+.case-diagram .cd-pad circle { fill: var(--accent); }
+.case-diagram .cd-label text {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--text);
+}
+.case-diagram .cd-sub text {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  fill: var(--text-faint);
+}
+.case-diagram figcaption {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- contact section ---------- */
+
+.contact {
+  padding: clamp(64px, 9vw, 100px) 0;
+  border-top: 1px solid var(--border-soft);
+  background: var(--bg-sunken);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--text) 6%, transparent) 1px,
+    transparent 1.5px
+  );
+  background-size: 26px 26px;
+}
+.contact-line {
+  font-size: clamp(24px, 3.6vw, 34px);
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  max-width: 560px;
+}
+.contact-sub {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 28px;
+}
+.contact .cta-row { margin-bottom: 0; animation: none; }
+
+/* ---------- mobile: restore section navigation ---------- */
+
+@media (max-width: 640px) {
+  .topnav a:not([href="Chris_Son_Resume.pdf"]) { display: inline-block; }
+  .topbar { padding: 12px; gap: 10px; }
+  .topnav { gap: 0; }
+  .topnav a { font-size: 13px; padding: 6px 7px; }
+}
+
 /* ---------- footer: edge-connector fingers ---------- */
 
 .footer { position: relative; }
