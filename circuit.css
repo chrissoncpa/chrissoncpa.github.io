@@ -1,0 +1,325 @@
+/* =========================================================
+   circuit.css — visual redesign overlay (loaded after styles.css)
+   Circuit-board language: node pads, traces, bus lines, IC cards.
+   CSS-only per the visual-redesign skill: no JS, no structural HTML.
+   Remove this file + its <link> to fully roll back.
+   ========================================================= */
+
+:root {
+  --copper:       #A8713A;
+  --copper-soft:  rgba(168, 113, 58, 0.35);
+  --trace:        var(--accent-line);
+  --pad-ring:     0 0 0 4px var(--accent-soft);
+  --circuit-opacity: 0.55;
+}
+
+html[data-theme="dark"] {
+  --copper:       #C99857;
+  --copper-soft:  rgba(201, 152, 87, 0.40);
+  --circuit-opacity: 0.7;
+}
+
+/* ---------- hero: interlinked trace network ----------
+   One hand-drawn net, not a tile: trunks descend from the top-right,
+   branch at 45° (junction dots), cross-link between nets, and terminate
+   in pads — echoing a real routed board. A slow light-sweep travels
+   down the net to show flow; the global prefers-reduced-motion rule
+   in styles.css disables it. */
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--accent);
+  background-image: linear-gradient(
+    245deg,
+    rgba(255, 255, 255, 0) 42%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0) 58%
+  );
+  background-size: 250% 250%;
+  background-position: 100% 0%;
+  background-repeat: no-repeat;
+  animation: circuit-flow 11s linear infinite;
+  opacity: calc(0.22 * var(--circuit-opacity));
+  -webkit-mask-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M760 0 V120 L640 240 V400 L560 480 V620'/><path d='M640 300 L520 420 V540'/><path d='M700 0 V80 L580 200 V320 L460 440 V560'/><path d='M580 260 L480 360 H360'/><path d='M620 0 V60 L520 160 V260 L400 380 H280'/><path d='M520 210 L440 290 V400 L360 480'/><path d='M540 0 V100 L440 200 H320 L240 280 V360'/><path d='M380 200 V300 L300 380 V460'/><path d='M390 360 V380'/><path d='M560 500 H520'/><path d='M480 0 V40 L420 100'/><path d='M800 160 H740 L660 240 V340 L720 400 V440'/><path d='M800 520 H760 L680 600'/></g><g fill='black'><circle cx='560' cy='620' r='5'/><circle cx='520' cy='540' r='5'/><circle cx='460' cy='560' r='5'/><circle cx='360' cy='360' r='5'/><circle cx='280' cy='380' r='5'/><circle cx='360' cy='480' r='5'/><circle cx='240' cy='360' r='5'/><circle cx='300' cy='460' r='5'/><circle cx='420' cy='100' r='5'/><circle cx='720' cy='440' r='5'/><circle cx='680' cy='600' r='5'/><circle cx='640' cy='300' r='3.5'/><circle cx='580' cy='260' r='3.5'/><circle cx='520' cy='210' r='3.5'/><circle cx='380' cy='200' r='3.5'/><circle cx='390' cy='360' r='3.5'/><circle cx='390' cy='380' r='3.5'/><circle cx='560' cy='500' r='3.5'/><circle cx='520' cy='500' r='3.5'/></g><g fill='none' stroke='black' stroke-width='1.5'><circle cx='600' cy='80' r='3'/><circle cx='500' cy='300' r='3'/><circle cx='660' cy='460' r='3'/><circle cx='430' cy='240' r='3'/></g></svg>"),
+    linear-gradient(105deg, transparent 8%, black 45%);
+  -webkit-mask-size: auto 102%, 100% 100%;
+  -webkit-mask-position: right top, center;
+  -webkit-mask-repeat: no-repeat, no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M760 0 V120 L640 240 V400 L560 480 V620'/><path d='M640 300 L520 420 V540'/><path d='M700 0 V80 L580 200 V320 L460 440 V560'/><path d='M580 260 L480 360 H360'/><path d='M620 0 V60 L520 160 V260 L400 380 H280'/><path d='M520 210 L440 290 V400 L360 480'/><path d='M540 0 V100 L440 200 H320 L240 280 V360'/><path d='M380 200 V300 L300 380 V460'/><path d='M390 360 V380'/><path d='M560 500 H520'/><path d='M480 0 V40 L420 100'/><path d='M800 160 H740 L660 240 V340 L720 400 V440'/><path d='M800 520 H760 L680 600'/></g><g fill='black'><circle cx='560' cy='620' r='5'/><circle cx='520' cy='540' r='5'/><circle cx='460' cy='560' r='5'/><circle cx='360' cy='360' r='5'/><circle cx='280' cy='380' r='5'/><circle cx='360' cy='480' r='5'/><circle cx='240' cy='360' r='5'/><circle cx='300' cy='460' r='5'/><circle cx='420' cy='100' r='5'/><circle cx='720' cy='440' r='5'/><circle cx='680' cy='600' r='5'/><circle cx='640' cy='300' r='3.5'/><circle cx='580' cy='260' r='3.5'/><circle cx='520' cy='210' r='3.5'/><circle cx='380' cy='200' r='3.5'/><circle cx='390' cy='360' r='3.5'/><circle cx='390' cy='380' r='3.5'/><circle cx='560' cy='500' r='3.5'/><circle cx='520' cy='500' r='3.5'/></g><g fill='none' stroke='black' stroke-width='1.5'><circle cx='600' cy='80' r='3'/><circle cx='500' cy='300' r='3'/><circle cx='660' cy='460' r='3'/><circle cx='430' cy='240' r='3'/></g></svg>"),
+    linear-gradient(105deg, transparent 8%, black 45%);
+  mask-size: auto 102%, 100% 100%;
+  mask-position: right top, center;
+  mask-repeat: no-repeat, no-repeat;
+  mask-composite: intersect;
+}
+
+/* the highlight band sweeps top-right -> bottom-left, i.e. the
+   direction the net flows; through the mask it reads as current
+   travelling the traces */
+@keyframes circuit-flow {
+  0%   { background-position: 100% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+/* narrow screens: the net runs behind the hero text, so ease it back */
+@media (max-width: 640px) {
+  .hero::after { opacity: calc(0.15 * var(--circuit-opacity)); }
+}
+
+/* keep hero content above the trace field (styles.css already sets
+   .hero .container z-index, this covers the portrait explicitly) */
+.hero .container { position: relative; z-index: 1; }
+
+/* ---------- sunken sections: perfboard dot grid ---------- */
+
+.manifesto,
+.stack {
+  background-color: var(--bg-sunken);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--text) 6%, transparent) 1px,
+    transparent 1.5px
+  );
+  background-size: 26px 26px;
+}
+
+/* ---------- section heads: terminated trace underline ---------- */
+
+.section-head h2::after {
+  content: "";
+  display: block;
+  width: 76px;
+  height: 9px;
+  margin-top: 18px;
+  background:
+    radial-gradient(circle 3.5px at 71px 4.5px, var(--accent) 96%, transparent 100%),
+    linear-gradient(var(--trace), var(--trace)) 0 4px / 62px 1.5px no-repeat;
+  background-repeat: no-repeat;
+}
+
+/* ---------- manifesto: net endpoints on the quote trace ---------- */
+
+.quote { position: relative; }
+.quote::before,
+.quote::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg-sunken);
+}
+.quote::before { top: -6px; }
+.quote::after  { bottom: -6px; }
+
+/* ---------- case studies: bus line + node pads ---------- */
+
+.cases { position: relative; }
+
+/* vertical bus running through the node column */
+.cases::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--trace) 40px,
+    var(--trace) calc(100% - 40px),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* travelling signal on the bus */
+.cases::after {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px 2px var(--accent-soft);
+  animation: signal 7s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes signal {
+  0%   { top: 2%;  opacity: 0; }
+  8%   { opacity: 0.9; }
+  92%  { opacity: 0.9; }
+  100% { top: 97%; opacity: 0; }
+}
+
+/* number pill -> circular component pad on the bus */
+.case-num { position: relative; padding-top: 6px; }
+.case-num span {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-elev);
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease),
+              box-shadow 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+
+/* stub trace from pad out to the case body — the "connection" */
+.case-num::after {
+  content: "";
+  position: absolute;
+  top: 29px;
+  left: 54px;
+  right: -24px;
+  height: 1px;
+  background: var(--border);
+  transition: background-color 0.25s var(--ease);
+}
+
+/* connection made on hover: pad + stub light up */
+.case:hover .case-num span {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: var(--pad-ring);
+}
+.case:hover .case-num::after { background: var(--accent); }
+
+@media (max-width: 700px) {
+  .cases::before,
+  .cases::after,
+  .case-num::after { display: none; }
+  .case-num { padding-top: 0; }
+}
+
+/* ---------- stack: capability cards as IC packages ---------- */
+
+.stack-card { position: relative; }
+
+/* pin rows protruding from left and right edges */
+.stack-card::before,
+.stack-card::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  bottom: 28px;
+  width: 5px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--copper-soft) 0 5px,
+    transparent 5px 14px
+  );
+  transition: opacity 0.2s var(--ease);
+  opacity: 0.7;
+}
+.stack-card::before { left: -5px; }
+.stack-card::after  { right: -5px; }
+.stack-card:hover::before,
+.stack-card:hover::after { opacity: 1; }
+
+/* component designators, silkscreen-style */
+.stack-card h3::after {
+  position: absolute;
+  top: 30px;
+  right: 28px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--copper);
+  opacity: 0.85;
+}
+.stack-card:nth-child(1) h3::after { content: "U1"; }
+.stack-card:nth-child(2) h3::after { content: "U2"; }
+.stack-card:nth-child(3) h3::after { content: "U3"; }
+.stack-card:nth-child(4) h3::after { content: "U4"; }
+.stack-card:nth-child(5) h3::after { content: "U5"; }
+
+/* ---------- timeline: trace rail with via pads ---------- */
+
+.timeline {
+  position: relative;
+  padding-left: 36px;
+  border-top: 0;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--trace),
+    var(--trace) calc(100% - 60px),
+    transparent
+  );
+}
+.timeline li { position: relative; }
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: 33px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--accent-line);
+  border-radius: 50%;
+  background: var(--bg);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.timeline li:hover::before {
+  border-color: var(--accent);
+  box-shadow: var(--pad-ring);
+}
+.timeline li:first-child { border-top: 1px solid var(--border-soft); }
+
+@media (max-width: 720px) {
+  .timeline { padding-left: 28px; }
+  .timeline li::before { left: -27px; top: 28px; }
+}
+
+/* ---------- buttons: powered connection on hover ---------- */
+
+.btn-primary:hover {
+  box-shadow: 0 0 0 3px var(--accent-soft),
+              0 4px 16px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* ---------- footer: edge-connector fingers ---------- */
+
+.footer { position: relative; }
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--copper-soft) 0 16px,
+    transparent 16px 40px
+  );
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  pointer-events: none;
+}
