@@ -6,16 +6,12 @@
    ========================================================= */
 
 :root {
-  --copper:       #A8713A;
-  --copper-soft:  rgba(168, 113, 58, 0.35);
   --trace:        var(--accent-line);
   --pad-ring:     0 0 0 4px var(--accent-soft);
   --circuit-opacity: 0.55;
 }
 
 html[data-theme="dark"] {
-  --copper:       #C99857;
-  --copper-soft:  rgba(201, 152, 87, 0.40);
   --circuit-opacity: 0.7;
 }
 
@@ -103,23 +99,6 @@ html[data-theme="dark"] {
   background-repeat: no-repeat;
 }
 
-/* ---------- manifesto: net endpoints on the quote trace ---------- */
-
-.quote { position: relative; }
-.quote::before,
-.quote::after {
-  content: "";
-  position: absolute;
-  left: -5px;
-  width: 8px;
-  height: 8px;
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-  background: var(--bg-sunken);
-}
-.quote::before { top: -6px; }
-.quote::after  { bottom: -6px; }
-
 /* ---------- case studies: bus line + node pads ---------- */
 
 .cases { position: relative; }
@@ -140,28 +119,6 @@ html[data-theme="dark"] {
     transparent
   );
   pointer-events: none;
-}
-
-/* travelling signal on the bus */
-.cases::after {
-  content: "";
-  position: absolute;
-  left: 21px;
-  top: 0;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px 2px var(--accent-soft);
-  animation: signal 7s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes signal {
-  0%   { top: 2%;  opacity: 0; }
-  8%   { opacity: 0.9; }
-  92%  { opacity: 0.9; }
-  100% { top: 97%; opacity: 0; }
 }
 
 /* number pill -> circular component pad on the bus */
@@ -204,53 +161,9 @@ html[data-theme="dark"] {
 
 @media (max-width: 700px) {
   .cases::before,
-  .cases::after,
   .case-num::after { display: none; }
   .case-num { padding-top: 0; }
 }
-
-/* ---------- stack: capability cards as IC packages ---------- */
-
-.stack-card { position: relative; }
-
-/* pin rows protruding from left and right edges */
-.stack-card::before,
-.stack-card::after {
-  content: "";
-  position: absolute;
-  top: 28px;
-  bottom: 28px;
-  width: 5px;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--copper-soft) 0 5px,
-    transparent 5px 14px
-  );
-  transition: opacity 0.2s var(--ease);
-  opacity: 0.7;
-}
-.stack-card::before { left: -5px; }
-.stack-card::after  { right: -5px; }
-.stack-card:hover::before,
-.stack-card:hover::after { opacity: 1; }
-
-/* component designators, silkscreen-style */
-.stack-card h3::after {
-  position: absolute;
-  top: 30px;
-  right: 28px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--copper);
-  opacity: 0.85;
-}
-.stack-card:nth-child(1) h3::after { content: "U1"; }
-.stack-card:nth-child(2) h3::after { content: "U2"; }
-.stack-card:nth-child(3) h3::after { content: "U3"; }
-.stack-card:nth-child(4) h3::after { content: "U4"; }
-.stack-card:nth-child(5) h3::after { content: "U5"; }
 
 /* ---------- timeline: trace rail with via pads ---------- */
 
@@ -304,22 +217,137 @@ html[data-theme="dark"] {
               0 4px 16px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
-/* ---------- footer: edge-connector fingers ---------- */
+/* ---------- proof strip: outcomes as board test-points ---------- */
 
-.footer { position: relative; }
-.footer::before {
+.proof {
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg);
+}
+.proof-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0;
+}
+.proof-strip li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 26px 24px;
+  border-left: 1px solid var(--border-soft);
+  position: relative;
+}
+.proof-strip li:first-child { border-left: 0; }
+.proof-strip li::before {
   content: "";
   position: absolute;
-  top: -1px;
+  top: 32px;
   left: 0;
-  right: 0;
-  height: 4px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--copper-soft) 0 16px,
-    transparent 16px 40px
-  );
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-  pointer-events: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-line);
+  background: var(--bg);
+  transform: translateX(-50%);
 }
+.proof-strip li:first-child::before { display: none; }
+.proof-num {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+.proof-label {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+@media (max-width: 830px) {
+  .proof-strip { grid-template-columns: 1fr 1fr; }
+  .proof-strip li { border-left: 0; padding: 18px 12px; }
+  .proof-strip li::before { display: none; }
+}
+
+/* ---------- case diagram: sanitized system sketch ---------- */
+
+.case-diagram {
+  margin: 4px 0 18px;
+  padding: 20px 20px 14px;
+  max-width: 720px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+.case-diagram-scroll { overflow-x: auto; }
+.case-diagram svg {
+  min-width: 560px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.case-diagram .cd-chip rect {
+  fill: var(--bg-sunken);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.case-diagram .cd-trace path {
+  fill: none;
+  stroke: var(--accent-line);
+  stroke-width: 1.5;
+}
+.case-diagram .cd-pad circle { fill: var(--accent); }
+.case-diagram .cd-label text {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--text);
+}
+.case-diagram .cd-sub text {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  fill: var(--text-faint);
+}
+.case-diagram figcaption {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- contact section ---------- */
+
+.contact {
+  padding: clamp(64px, 9vw, 100px) 0;
+  border-top: 1px solid var(--border-soft);
+  background: var(--bg-sunken);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--text) 6%, transparent) 1px,
+    transparent 1.5px
+  );
+  background-size: 26px 26px;
+}
+.contact-line {
+  font-size: clamp(24px, 3.6vw, 34px);
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  max-width: 560px;
+}
+.contact-sub {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 28px;
+}
+.contact .cta-row { margin-bottom: 0; animation: none; }
+
+/* ---------- mobile: restore section navigation ---------- */
+
+@media (max-width: 640px) {
+  .topnav a:not([href="Chris_Son_Resume.pdf"]) { display: inline-block; }
+  .topbar { padding: 12px; gap: 10px; }
+  .topnav { gap: 0; }
+  .topnav a { font-size: 13px; padding: 6px 7px; }
+}
+
