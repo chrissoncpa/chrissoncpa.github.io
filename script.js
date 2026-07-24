@@ -26,6 +26,19 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  // mobile Menu disclosure: close after navigating or tapping outside
+  const mobnav = document.querySelector('.mobnav');
+  if (mobnav) {
+    mobnav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { mobnav.removeAttribute('open'); });
+    });
+    document.addEventListener('click', function (e) {
+      if (mobnav.hasAttribute('open') && !mobnav.contains(e.target)) {
+        mobnav.removeAttribute('open');
+      }
+    });
+  }
+
   const revealTargets = document.querySelectorAll(
     '.section-head, .case, .stack-card, .timeline li, .manifesto .quote, .manifesto-body, .creds, .creds-verify'
   );
