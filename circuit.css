@@ -297,12 +297,14 @@ html[data-theme="dark"] {
   stroke-width: 1.5;
 }
 .case-diagram .cd-pad circle { fill: var(--accent); }
+.case-diagram svg.cd-wide { min-width: 640px; }
 .case-diagram .cd-label text {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
   fill: var(--text);
 }
+.case-diagram .cd-label-sm text { font-size: 12px; }
 .case-diagram .cd-sub text {
   font-family: var(--font-mono);
   font-size: 9.5px;
@@ -342,12 +344,76 @@ html[data-theme="dark"] {
 }
 .contact .cta-row { margin-bottom: 0; animation: none; }
 
-/* ---------- mobile: restore section navigation ---------- */
+/* ---------- overflow hardening ----------
+   A 1fr grid track will not shrink below its content's intrinsic
+   minimum (the 560px diagram SVG) unless the track is minmax(0,1fr)
+   and the children may shrink. Without this the whole page grows
+   sideways on phones. */
+
+.case { grid-template-columns: 100px minmax(0, 1fr); }
+.case-body,
+.case-diagram,
+.case-diagram-scroll { min-width: 0; max-width: 100%; }
+
+@media (max-width: 700px) {
+  .case { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- mobile: compact Menu (logo + resume + menu + theme) ---------- */
+
+.mobnav { display: none; position: relative; }
+
+.mobnav summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s var(--ease), background-color 0.15s var(--ease);
+}
+.mobnav summary::-webkit-details-marker { display: none; }
+.mobnav summary svg { transition: transform 0.2s var(--ease); }
+.mobnav[open] summary {
+  color: var(--text);
+  background: var(--bg-sunken);
+}
+.mobnav[open] summary svg { transform: rotate(180deg); }
+
+.mobnav-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 190px;
+  padding: 8px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+}
+.mobnav-panel a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 15px;
+  color: var(--text);
+  border-radius: var(--radius-sm);
+}
+.mobnav-panel a:hover { background: var(--bg-sunken); }
 
 @media (max-width: 640px) {
-  .topnav a:not([href="Chris_Son_Resume.pdf"]) { display: inline-block; }
-  .topbar { padding: 12px; gap: 10px; }
+  .mobnav { display: block; }
+  /* comfortable touch targets */
+  .theme-toggle { width: 40px; height: 40px; flex-shrink: 0; }
   .topnav { gap: 0; }
-  .topnav a { font-size: 13px; padding: 6px 7px; }
+  .topnav a[href="Chris_Son_Resume.pdf"] { padding: 10px 12px; }
 }
 

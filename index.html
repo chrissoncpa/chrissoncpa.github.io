@@ -52,6 +52,18 @@
     <a href="#background">Background</a>
     <a href="Chris_Son_Resume.pdf" target="_blank" rel="noopener">Resume</a>
   </nav>
+  <details class="mobnav">
+    <summary aria-label="Section menu">
+      Menu
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <nav class="mobnav-panel" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </details>
   <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
     <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
     <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
@@ -69,8 +81,8 @@
         </h1>
         <p class="hero-roles">Accounting Architect &middot; CPA &middot; Salesforce Data Architect</p>
         <p class="hero-pitch">
-          I architect accounting infrastructure from zero to one at high-growth startups —
-          including an M&amp;A exit to Google. Finance as a systems function, not a ledger function.
+          I build the accounting systems high-growth startups run on — zero to one,
+          through an M&amp;A exit to Google. Finance as a systems function, not a ledger function.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="mailto:hosungson2011@gmail.com">Contact Chris</a>
@@ -105,7 +117,7 @@
       <ul class="proof-strip">
         <li><span class="proof-num">200+</span><span class="proof-label">clients served by one Controller</span></li>
         <li><span class="proof-num">3&times;</span><span class="proof-label">revenue-function productivity</span></li>
-        <li><span class="proof-num">Google</span><span class="proof-label">M&amp;A exit — diligence to integration</span></li>
+        <li><span class="proof-num">Google exit</span><span class="proof-label">M&amp;A diligence through integration</span></li>
         <li><span class="proof-num">9</span><span class="proof-label">Salesforce certifications</span></li>
       </ul>
     </div>
@@ -212,6 +224,50 @@
               instead of three reconciled versions.
             </p>
             <p class="case-why"><span>Why it matters &middot;</span> Tripled productivity across the revenue function. Divisional silos torn down by unifying data definitions.</p>
+            <figure class="case-diagram">
+              <div class="case-diagram-scroll">
+                <svg class="cd-wide" viewBox="0 0 740 150" role="img" aria-label="System diagram: one master data standard spans the full pipeline — marketing hands off to Salesforce opportunities, then contracts, ASC 606 treatment, revenue schedules, and reporting, producing a single unified revenue stream.">
+                  <g class="cd-trace">
+                    <path d="M65 18 H685"/>
+                    <path d="M65 18 V42"/><path d="M189 18 V42"/><path d="M313 18 V42"/>
+                    <path d="M437 18 V42"/><path d="M561 18 V42"/><path d="M685 18 V42"/>
+                    <path d="M120 74 H134"/><path d="M244 74 H258"/><path d="M368 74 H382"/>
+                    <path d="M492 74 H506"/><path d="M616 74 H630"/>
+                  </g>
+                  <g class="cd-pad">
+                    <circle cx="65" cy="18" r="2.5"/><circle cx="189" cy="18" r="2.5"/>
+                    <circle cx="313" cy="18" r="2.5"/><circle cx="437" cy="18" r="2.5"/>
+                    <circle cx="561" cy="18" r="2.5"/><circle cx="685" cy="18" r="2.5"/>
+                  </g>
+                  <g class="cd-chip">
+                    <rect x="10" y="42" width="110" height="64" rx="8"/>
+                    <rect x="134" y="42" width="110" height="64" rx="8"/>
+                    <rect x="258" y="42" width="110" height="64" rx="8"/>
+                    <rect x="382" y="42" width="110" height="64" rx="8"/>
+                    <rect x="506" y="42" width="110" height="64" rx="8"/>
+                    <rect x="630" y="42" width="110" height="64" rx="8"/>
+                  </g>
+                  <g class="cd-label cd-label-sm">
+                    <text x="65" y="68" text-anchor="middle">Marketing</text>
+                    <text x="189" y="68" text-anchor="middle">Salesforce</text>
+                    <text x="313" y="68" text-anchor="middle">Contract</text>
+                    <text x="437" y="68" text-anchor="middle">ASC 606</text>
+                    <text x="561" y="68" text-anchor="middle">Rev schedule</text>
+                    <text x="685" y="68" text-anchor="middle">Reporting</text>
+                  </g>
+                  <g class="cd-sub">
+                    <text x="65" y="88" text-anchor="middle">campaigns &#183; leads</text>
+                    <text x="189" y="88" text-anchor="middle">opportunity &#183; quote</text>
+                    <text x="313" y="88" text-anchor="middle">signed terms</text>
+                    <text x="437" y="88" text-anchor="middle">treatment</text>
+                    <text x="561" y="88" text-anchor="middle">recognition</text>
+                    <text x="685" y="88" text-anchor="middle">one stream</text>
+                    <text x="375" y="134" text-anchor="middle">one master data standard from marketing through finance</text>
+                  </g>
+                </svg>
+              </div>
+              <figcaption>System sketch &mdash; GTM-to-revenue pipeline on one master data standard, sanitized.</figcaption>
+            </figure>
             <ul class="case-tags">
               <li>Salesforce Data Architect</li>
               <li>Master data design</li>
@@ -416,6 +472,6 @@
   </div>
 </footer>
 
-<script src="script.js" defer></script>
+<script src="script.js?v=2" defer></script>
 </body>
 </html>
