@@ -279,7 +279,31 @@ html[data-theme="dark"] {
   border: 1px solid var(--border-soft);
   border-radius: var(--radius);
 }
+.case-diagram-shell { position: relative; min-width: 0; max-width: 100%; }
 .case-diagram-scroll { overflow-x: auto; }
+
+/* mobile-only affordance: swipe cue + right-edge fade signal overflow */
+@media (max-width: 700px) {
+  .case-diagram::before {
+    content: "swipe to explore \2192";
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+  .case-diagram-shell::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    background: linear-gradient(to right, transparent, var(--bg-elev));
+    pointer-events: none;
+  }
+}
 .case-diagram svg {
   min-width: 560px;
   width: 100%;
