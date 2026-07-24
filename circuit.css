@@ -19,7 +19,12 @@ html[data-theme="dark"] {
   --circuit-opacity: 0.7;
 }
 
-/* ---------- hero: etched trace field ---------- */
+/* ---------- hero: interlinked trace network ----------
+   One hand-drawn net, not a tile: trunks descend from the top-right,
+   branch at 45° (junction dots), cross-link between nets, and terminate
+   in pads — echoing a real routed board. A slow light-sweep travels
+   down the net to show flow; the global prefers-reduced-motion rule
+   in styles.css disables it. */
 
 .hero::after {
   content: "";
@@ -27,20 +32,45 @@ html[data-theme="dark"] {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: var(--accent);
-  opacity: calc(0.12 * var(--circuit-opacity));
+  background-color: var(--accent);
+  background-image: linear-gradient(
+    245deg,
+    rgba(255, 255, 255, 0) 42%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0) 58%
+  );
+  background-size: 250% 250%;
+  background-position: 100% 0%;
+  background-repeat: no-repeat;
+  animation: circuit-flow 11s linear infinite;
+  opacity: calc(0.22 * var(--circuit-opacity));
   -webkit-mask-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'><g fill='none' stroke='black' stroke-width='1.5'><path d='M0 66 H78 L108 96 V148'/><path d='M130 0 V34'/><path d='M260 32 H186 L158 60'/><path d='M196 260 V206 L224 178 H260'/><path d='M64 260 V212 L36 184 V124'/><path d='M260 130 H210'/><circle cx='188' cy='215' r='2.5'/><circle cx='60' cy='40' r='2.5'/><circle cx='230' cy='90' r='2.5'/></g><g fill='black'><circle cx='108' cy='148' r='4'/><circle cx='130' cy='34' r='4'/><circle cx='158' cy='60' r='4'/><circle cx='36' cy='124' r='4'/><circle cx='210' cy='130' r='4'/></g></svg>"),
-    linear-gradient(105deg, transparent 26%, black 72%);
-  -webkit-mask-size: 260px 260px, 100% 100%;
-  -webkit-mask-repeat: repeat, no-repeat;
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M760 0 V120 L640 240 V400 L560 480 V620'/><path d='M640 300 L520 420 V540'/><path d='M700 0 V80 L580 200 V320 L460 440 V560'/><path d='M580 260 L480 360 H360'/><path d='M620 0 V60 L520 160 V260 L400 380 H280'/><path d='M520 210 L440 290 V400 L360 480'/><path d='M540 0 V100 L440 200 H320 L240 280 V360'/><path d='M380 200 V300 L300 380 V460'/><path d='M390 360 V380'/><path d='M560 500 H520'/><path d='M480 0 V40 L420 100'/><path d='M800 160 H740 L660 240 V340 L720 400 V440'/><path d='M800 520 H760 L680 600'/></g><g fill='black'><circle cx='560' cy='620' r='5'/><circle cx='520' cy='540' r='5'/><circle cx='460' cy='560' r='5'/><circle cx='360' cy='360' r='5'/><circle cx='280' cy='380' r='5'/><circle cx='360' cy='480' r='5'/><circle cx='240' cy='360' r='5'/><circle cx='300' cy='460' r='5'/><circle cx='420' cy='100' r='5'/><circle cx='720' cy='440' r='5'/><circle cx='680' cy='600' r='5'/><circle cx='640' cy='300' r='3.5'/><circle cx='580' cy='260' r='3.5'/><circle cx='520' cy='210' r='3.5'/><circle cx='380' cy='200' r='3.5'/><circle cx='390' cy='360' r='3.5'/><circle cx='390' cy='380' r='3.5'/><circle cx='560' cy='500' r='3.5'/><circle cx='520' cy='500' r='3.5'/></g><g fill='none' stroke='black' stroke-width='1.5'><circle cx='600' cy='80' r='3'/><circle cx='500' cy='300' r='3'/><circle cx='660' cy='460' r='3'/><circle cx='430' cy='240' r='3'/></g></svg>"),
+    linear-gradient(105deg, transparent 8%, black 45%);
+  -webkit-mask-size: auto 102%, 100% 100%;
+  -webkit-mask-position: right top, center;
+  -webkit-mask-repeat: no-repeat, no-repeat;
   -webkit-mask-composite: source-in;
   mask-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'><g fill='none' stroke='black' stroke-width='1.5'><path d='M0 66 H78 L108 96 V148'/><path d='M130 0 V34'/><path d='M260 32 H186 L158 60'/><path d='M196 260 V206 L224 178 H260'/><path d='M64 260 V212 L36 184 V124'/><path d='M260 130 H210'/><circle cx='188' cy='215' r='2.5'/><circle cx='60' cy='40' r='2.5'/><circle cx='230' cy='90' r='2.5'/></g><g fill='black'><circle cx='108' cy='148' r='4'/><circle cx='130' cy='34' r='4'/><circle cx='158' cy='60' r='4'/><circle cx='36' cy='124' r='4'/><circle cx='210' cy='130' r='4'/></g></svg>"),
-    linear-gradient(105deg, transparent 26%, black 72%);
-  mask-size: 260px 260px, 100% 100%;
-  mask-repeat: repeat, no-repeat;
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M760 0 V120 L640 240 V400 L560 480 V620'/><path d='M640 300 L520 420 V540'/><path d='M700 0 V80 L580 200 V320 L460 440 V560'/><path d='M580 260 L480 360 H360'/><path d='M620 0 V60 L520 160 V260 L400 380 H280'/><path d='M520 210 L440 290 V400 L360 480'/><path d='M540 0 V100 L440 200 H320 L240 280 V360'/><path d='M380 200 V300 L300 380 V460'/><path d='M390 360 V380'/><path d='M560 500 H520'/><path d='M480 0 V40 L420 100'/><path d='M800 160 H740 L660 240 V340 L720 400 V440'/><path d='M800 520 H760 L680 600'/></g><g fill='black'><circle cx='560' cy='620' r='5'/><circle cx='520' cy='540' r='5'/><circle cx='460' cy='560' r='5'/><circle cx='360' cy='360' r='5'/><circle cx='280' cy='380' r='5'/><circle cx='360' cy='480' r='5'/><circle cx='240' cy='360' r='5'/><circle cx='300' cy='460' r='5'/><circle cx='420' cy='100' r='5'/><circle cx='720' cy='440' r='5'/><circle cx='680' cy='600' r='5'/><circle cx='640' cy='300' r='3.5'/><circle cx='580' cy='260' r='3.5'/><circle cx='520' cy='210' r='3.5'/><circle cx='380' cy='200' r='3.5'/><circle cx='390' cy='360' r='3.5'/><circle cx='390' cy='380' r='3.5'/><circle cx='560' cy='500' r='3.5'/><circle cx='520' cy='500' r='3.5'/></g><g fill='none' stroke='black' stroke-width='1.5'><circle cx='600' cy='80' r='3'/><circle cx='500' cy='300' r='3'/><circle cx='660' cy='460' r='3'/><circle cx='430' cy='240' r='3'/></g></svg>"),
+    linear-gradient(105deg, transparent 8%, black 45%);
+  mask-size: auto 102%, 100% 100%;
+  mask-position: right top, center;
+  mask-repeat: no-repeat, no-repeat;
   mask-composite: intersect;
+}
+
+/* the highlight band sweeps top-right -> bottom-left, i.e. the
+   direction the net flows; through the mask it reads as current
+   travelling the traces */
+@keyframes circuit-flow {
+  0%   { background-position: 100% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+/* narrow screens: the net runs behind the hero text, so ease it back */
+@media (max-width: 640px) {
+  .hero::after { opacity: calc(0.15 * var(--circuit-opacity)); }
 }
 
 /* keep hero content above the trace field (styles.css already sets
