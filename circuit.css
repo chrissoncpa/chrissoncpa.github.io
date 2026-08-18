@@ -15,12 +15,14 @@ html[data-theme="dark"] {
   --circuit-opacity: 0.7;
 }
 
-/* ---------- hero: interlinked trace network ----------
-   One hand-drawn net, not a tile: trunks descend from the top-right,
-   branch at 45° (junction dots), cross-link between nets, and terminate
-   in pads — echoing a real routed board. A slow light-sweep travels
-   down the net to show flow; the global prefers-reduced-motion rule
-   in styles.css disables it. */
+/* ---------- hero: ordered bus-fan trace field ----------
+   Eleven lanes, one uniform jog (46px, right-angle steps), fanning down-left
+   from the top-right edge — a routed bus, not an organic scribble. A few
+   lanes tie together at shared jog depths (bus grouping), same as a real
+   board. Rather than one diffuse sweep, a train of light pulses runs the
+   diagonal continuously — several bands in flight at once, in lockstep —
+   closer to how energy travels a magic-circuit than a single wipe. The
+   global prefers-reduced-motion rule in styles.css disables it. */
 
 .hero::after {
   content: "";
@@ -29,26 +31,29 @@ html[data-theme="dark"] {
   z-index: 0;
   pointer-events: none;
   background-color: var(--accent);
-  background-image: linear-gradient(
+  background-image: repeating-linear-gradient(
     245deg,
-    rgba(255, 255, 255, 0) 42%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(255, 255, 255, 0) 58%
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0) 108px,
+    rgba(255, 255, 255, 0.95) 108px,
+    rgba(255, 255, 255, 0.95) 116px,
+    rgba(255, 255, 255, 0) 116px,
+    rgba(255, 255, 255, 0) 140px
   );
-  background-size: 250% 250%;
+  background-size: 340% 340%;
   background-position: 100% 0%;
   background-repeat: no-repeat;
-  animation: circuit-flow 11s linear infinite;
-  opacity: calc(0.22 * var(--circuit-opacity));
+  animation: circuit-flow 9s linear infinite;
+  opacity: calc(0.26 * var(--circuit-opacity));
   -webkit-mask-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M760 0 V120 L640 240 V400 L560 480 V620'/><path d='M640 300 L520 420 V540'/><path d='M700 0 V80 L580 200 V320 L460 440 V560'/><path d='M580 260 L480 360 H360'/><path d='M620 0 V60 L520 160 V260 L400 380 H280'/><path d='M520 210 L440 290 V400 L360 480'/><path d='M540 0 V100 L440 200 H320 L240 280 V360'/><path d='M380 200 V300 L300 380 V460'/><path d='M390 360 V380'/><path d='M560 500 H520'/><path d='M480 0 V40 L420 100'/><path d='M800 160 H740 L660 240 V340 L720 400 V440'/><path d='M800 520 H760 L680 600'/></g><g fill='black'><circle cx='560' cy='620' r='5'/><circle cx='520' cy='540' r='5'/><circle cx='460' cy='560' r='5'/><circle cx='360' cy='360' r='5'/><circle cx='280' cy='380' r='5'/><circle cx='360' cy='480' r='5'/><circle cx='240' cy='360' r='5'/><circle cx='300' cy='460' r='5'/><circle cx='420' cy='100' r='5'/><circle cx='720' cy='440' r='5'/><circle cx='680' cy='600' r='5'/><circle cx='640' cy='300' r='3.5'/><circle cx='580' cy='260' r='3.5'/><circle cx='520' cy='210' r='3.5'/><circle cx='380' cy='200' r='3.5'/><circle cx='390' cy='360' r='3.5'/><circle cx='390' cy='380' r='3.5'/><circle cx='560' cy='500' r='3.5'/><circle cx='520' cy='500' r='3.5'/></g><g fill='none' stroke='black' stroke-width='1.5'><circle cx='600' cy='80' r='3'/><circle cx='500' cy='300' r='3'/><circle cx='660' cy='460' r='3'/><circle cx='430' cy='240' r='3'/></g></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='square' stroke-linejoin='miter'><path d='M780 0 V46 L734 46 V92 L688 92 V138 L642 138 V184 L596 184 V230 L550 230 V276 L504 276 V322 L458 322'/><path d='M734 0 V46 L688 46 V92 L642 92 V138 L596 138 V184 L550 184'/><path d='M688 0 V46 L642 46 V92 L596 92 V138 L550 138 V184 L504 184 V230 L458 230 V276 L412 276'/><path d='M642 0 V46 L596 46 V92 L550 92 V138 L504 138'/><path d='M596 0 V46 L550 46 V92 L504 92 V138 L458 138 V184 L412 184 V230 L366 230 V276 L320 276 V322 L274 322 V368 L228 368'/><path d='M550 0 V46 L504 46 V92 L458 92 V138 L412 138 V184 L366 184 V230 L320 230'/><path d='M504 0 V46 L458 46 V92 L412 92 V138 L366 138 V184 L320 184'/><path d='M458 0 V46 L412 46 V92 L366 92 V138 L320 138 V184 L274 184 V230 L228 230 V276 L182 276 V322 L136 322'/><path d='M412 0 V46 L366 46 V92 L320 92 V138 L274 138'/><path d='M366 0 V46 L320 46 V92 L274 92 V138 L228 138 V184 L182 184 V230 L136 230 V276 L90 276'/><path d='M320 0 V46 L274 46 V92 L228 92 V138 L182 138 V184 L136 184 V230 L90 230'/></g><g fill='none' stroke='black'><path d='M688 92 H642' stroke-width='1.4' opacity='0.6'/><path d='M550 138 H504' stroke-width='1.4' opacity='0.6'/><path d='M504 92 H458' stroke-width='1.4' opacity='0.6'/><path d='M366 138 H320' stroke-width='1.4' opacity='0.6'/><path d='M320 92 H274' stroke-width='1.4' opacity='0.6'/></g><g fill='black'><rect x='454.5' y='318.5' width='7' height='7'/><rect x='546.5' y='180.5' width='7' height='7'/><rect x='408.5' y='272.5' width='7' height='7'/><rect x='500.5' y='134.5' width='7' height='7'/><rect x='224.5' y='364.5' width='7' height='7'/><rect x='316.5' y='226.5' width='7' height='7'/><rect x='316.5' y='180.5' width='7' height='7'/><rect x='132.5' y='318.5' width='7' height='7'/><rect x='270.5' y='134.5' width='7' height='7'/><rect x='86.5' y='272.5' width='7' height='7'/><rect x='86.5' y='226.5' width='7' height='7'/><circle cx='780' cy='46' r='2.4'/><circle cx='734' cy='92' r='2.4'/><circle cx='688' cy='138' r='2.4'/><circle cx='642' cy='184' r='2.4'/><circle cx='596' cy='230' r='2.4'/><circle cx='550' cy='276' r='2.4'/><circle cx='504' cy='322' r='2.4'/><circle cx='734' cy='46' r='2.4'/><circle cx='688' cy='92' r='2.4'/><circle cx='642' cy='138' r='2.4'/><circle cx='596' cy='184' r='2.4'/><circle cx='688' cy='46' r='2.4'/><circle cx='642' cy='92' r='2.4'/><circle cx='596' cy='138' r='2.4'/><circle cx='550' cy='184' r='2.4'/><circle cx='504' cy='230' r='2.4'/><circle cx='458' cy='276' r='2.4'/><circle cx='642' cy='46' r='2.4'/><circle cx='596' cy='92' r='2.4'/><circle cx='550' cy='138' r='2.4'/><circle cx='596' cy='46' r='2.4'/><circle cx='550' cy='92' r='2.4'/><circle cx='504' cy='138' r='2.4'/><circle cx='458' cy='184' r='2.4'/><circle cx='412' cy='230' r='2.4'/><circle cx='366' cy='276' r='2.4'/><circle cx='320' cy='322' r='2.4'/><circle cx='274' cy='368' r='2.4'/><circle cx='550' cy='46' r='2.4'/><circle cx='504' cy='92' r='2.4'/><circle cx='458' cy='138' r='2.4'/><circle cx='412' cy='184' r='2.4'/><circle cx='366' cy='230' r='2.4'/><circle cx='504' cy='46' r='2.4'/><circle cx='458' cy='92' r='2.4'/><circle cx='412' cy='138' r='2.4'/><circle cx='366' cy='184' r='2.4'/><circle cx='458' cy='46' r='2.4'/><circle cx='412' cy='92' r='2.4'/><circle cx='366' cy='138' r='2.4'/><circle cx='320' cy='184' r='2.4'/><circle cx='274' cy='230' r='2.4'/><circle cx='228' cy='276' r='2.4'/><circle cx='182' cy='322' r='2.4'/><circle cx='412' cy='46' r='2.4'/><circle cx='366' cy='92' r='2.4'/><circle cx='320' cy='138' r='2.4'/><circle cx='366' cy='46' r='2.4'/><circle cx='320' cy='92' r='2.4'/><circle cx='274' cy='138' r='2.4'/><circle cx='228' cy='184' r='2.4'/><circle cx='182' cy='230' r='2.4'/><circle cx='136' cy='276' r='2.4'/><circle cx='320' cy='46' r='2.4'/><circle cx='274' cy='92' r='2.4'/><circle cx='228' cy='138' r='2.4'/><circle cx='182' cy='184' r='2.4'/><circle cx='136' cy='230' r='2.4'/></g></svg>"),
     linear-gradient(105deg, transparent 8%, black 45%);
   -webkit-mask-size: auto 102%, 100% 100%;
   -webkit-mask-position: right top, center;
   -webkit-mask-repeat: no-repeat, no-repeat;
   -webkit-mask-composite: source-in;
   mask-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M760 0 V120 L640 240 V400 L560 480 V620'/><path d='M640 300 L520 420 V540'/><path d='M700 0 V80 L580 200 V320 L460 440 V560'/><path d='M580 260 L480 360 H360'/><path d='M620 0 V60 L520 160 V260 L400 380 H280'/><path d='M520 210 L440 290 V400 L360 480'/><path d='M540 0 V100 L440 200 H320 L240 280 V360'/><path d='M380 200 V300 L300 380 V460'/><path d='M390 360 V380'/><path d='M560 500 H520'/><path d='M480 0 V40 L420 100'/><path d='M800 160 H740 L660 240 V340 L720 400 V440'/><path d='M800 520 H760 L680 600'/></g><g fill='black'><circle cx='560' cy='620' r='5'/><circle cx='520' cy='540' r='5'/><circle cx='460' cy='560' r='5'/><circle cx='360' cy='360' r='5'/><circle cx='280' cy='380' r='5'/><circle cx='360' cy='480' r='5'/><circle cx='240' cy='360' r='5'/><circle cx='300' cy='460' r='5'/><circle cx='420' cy='100' r='5'/><circle cx='720' cy='440' r='5'/><circle cx='680' cy='600' r='5'/><circle cx='640' cy='300' r='3.5'/><circle cx='580' cy='260' r='3.5'/><circle cx='520' cy='210' r='3.5'/><circle cx='380' cy='200' r='3.5'/><circle cx='390' cy='360' r='3.5'/><circle cx='390' cy='380' r='3.5'/><circle cx='560' cy='500' r='3.5'/><circle cx='520' cy='500' r='3.5'/></g><g fill='none' stroke='black' stroke-width='1.5'><circle cx='600' cy='80' r='3'/><circle cx='500' cy='300' r='3'/><circle cx='660' cy='460' r='3'/><circle cx='430' cy='240' r='3'/></g></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='square' stroke-linejoin='miter'><path d='M780 0 V46 L734 46 V92 L688 92 V138 L642 138 V184 L596 184 V230 L550 230 V276 L504 276 V322 L458 322'/><path d='M734 0 V46 L688 46 V92 L642 92 V138 L596 138 V184 L550 184'/><path d='M688 0 V46 L642 46 V92 L596 92 V138 L550 138 V184 L504 184 V230 L458 230 V276 L412 276'/><path d='M642 0 V46 L596 46 V92 L550 92 V138 L504 138'/><path d='M596 0 V46 L550 46 V92 L504 92 V138 L458 138 V184 L412 184 V230 L366 230 V276 L320 276 V322 L274 322 V368 L228 368'/><path d='M550 0 V46 L504 46 V92 L458 92 V138 L412 138 V184 L366 184 V230 L320 230'/><path d='M504 0 V46 L458 46 V92 L412 92 V138 L366 138 V184 L320 184'/><path d='M458 0 V46 L412 46 V92 L366 92 V138 L320 138 V184 L274 184 V230 L228 230 V276 L182 276 V322 L136 322'/><path d='M412 0 V46 L366 46 V92 L320 92 V138 L274 138'/><path d='M366 0 V46 L320 46 V92 L274 92 V138 L228 138 V184 L182 184 V230 L136 230 V276 L90 276'/><path d='M320 0 V46 L274 46 V92 L228 92 V138 L182 138 V184 L136 184 V230 L90 230'/></g><g fill='none' stroke='black'><path d='M688 92 H642' stroke-width='1.4' opacity='0.6'/><path d='M550 138 H504' stroke-width='1.4' opacity='0.6'/><path d='M504 92 H458' stroke-width='1.4' opacity='0.6'/><path d='M366 138 H320' stroke-width='1.4' opacity='0.6'/><path d='M320 92 H274' stroke-width='1.4' opacity='0.6'/></g><g fill='black'><rect x='454.5' y='318.5' width='7' height='7'/><rect x='546.5' y='180.5' width='7' height='7'/><rect x='408.5' y='272.5' width='7' height='7'/><rect x='500.5' y='134.5' width='7' height='7'/><rect x='224.5' y='364.5' width='7' height='7'/><rect x='316.5' y='226.5' width='7' height='7'/><rect x='316.5' y='180.5' width='7' height='7'/><rect x='132.5' y='318.5' width='7' height='7'/><rect x='270.5' y='134.5' width='7' height='7'/><rect x='86.5' y='272.5' width='7' height='7'/><rect x='86.5' y='226.5' width='7' height='7'/><circle cx='780' cy='46' r='2.4'/><circle cx='734' cy='92' r='2.4'/><circle cx='688' cy='138' r='2.4'/><circle cx='642' cy='184' r='2.4'/><circle cx='596' cy='230' r='2.4'/><circle cx='550' cy='276' r='2.4'/><circle cx='504' cy='322' r='2.4'/><circle cx='734' cy='46' r='2.4'/><circle cx='688' cy='92' r='2.4'/><circle cx='642' cy='138' r='2.4'/><circle cx='596' cy='184' r='2.4'/><circle cx='688' cy='46' r='2.4'/><circle cx='642' cy='92' r='2.4'/><circle cx='596' cy='138' r='2.4'/><circle cx='550' cy='184' r='2.4'/><circle cx='504' cy='230' r='2.4'/><circle cx='458' cy='276' r='2.4'/><circle cx='642' cy='46' r='2.4'/><circle cx='596' cy='92' r='2.4'/><circle cx='550' cy='138' r='2.4'/><circle cx='596' cy='46' r='2.4'/><circle cx='550' cy='92' r='2.4'/><circle cx='504' cy='138' r='2.4'/><circle cx='458' cy='184' r='2.4'/><circle cx='412' cy='230' r='2.4'/><circle cx='366' cy='276' r='2.4'/><circle cx='320' cy='322' r='2.4'/><circle cx='274' cy='368' r='2.4'/><circle cx='550' cy='46' r='2.4'/><circle cx='504' cy='92' r='2.4'/><circle cx='458' cy='138' r='2.4'/><circle cx='412' cy='184' r='2.4'/><circle cx='366' cy='230' r='2.4'/><circle cx='504' cy='46' r='2.4'/><circle cx='458' cy='92' r='2.4'/><circle cx='412' cy='138' r='2.4'/><circle cx='366' cy='184' r='2.4'/><circle cx='458' cy='46' r='2.4'/><circle cx='412' cy='92' r='2.4'/><circle cx='366' cy='138' r='2.4'/><circle cx='320' cy='184' r='2.4'/><circle cx='274' cy='230' r='2.4'/><circle cx='228' cy='276' r='2.4'/><circle cx='182' cy='322' r='2.4'/><circle cx='412' cy='46' r='2.4'/><circle cx='366' cy='92' r='2.4'/><circle cx='320' cy='138' r='2.4'/><circle cx='366' cy='46' r='2.4'/><circle cx='320' cy='92' r='2.4'/><circle cx='274' cy='138' r='2.4'/><circle cx='228' cy='184' r='2.4'/><circle cx='182' cy='230' r='2.4'/><circle cx='136' cy='276' r='2.4'/><circle cx='320' cy='46' r='2.4'/><circle cx='274' cy='92' r='2.4'/><circle cx='228' cy='138' r='2.4'/><circle cx='182' cy='184' r='2.4'/><circle cx='136' cy='230' r='2.4'/></g></svg>"),
     linear-gradient(105deg, transparent 8%, black 45%);
   mask-size: auto 102%, 100% 100%;
   mask-position: right top, center;
@@ -56,9 +61,10 @@ html[data-theme="dark"] {
   mask-composite: intersect;
 }
 
-/* the highlight band sweeps top-right -> bottom-left, i.e. the
-   direction the net flows; through the mask it reads as current
-   travelling the traces */
+/* the pulse train runs top-right -> bottom-left, the direction the bus
+   fans out; because the gradient repeats, several light bands are always
+   in flight together through the mask, reading as current travelling
+   the traces rather than one wipe crossing the field. */
 @keyframes circuit-flow {
   0%   { background-position: 100% 0%; }
   100% { background-position: 0% 100%; }
