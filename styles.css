@@ -1004,3 +1004,16 @@ html[data-theme="dark"] .btn-primary:hover {
   .topnav { gap: 0; }
   .topnav a[href="Chris_Son_Resume.pdf"] { padding: 10px 12px; }
 }
+
+/* ---------- mobile density ---------- */
+/* Measured on a 390x844 phone: stack cards ran ~281px for ~16 words
+   (~18px/word) — by far the least dense block on the page, versus ~4px
+   /word for case prose. Tightening padding and the heading gap here
+   shortens the page far more than cutting copy would, without touching
+   a word of it. Desktop spacing is unchanged. */
+
+@media (max-width: 640px) {
+  .stack-card { padding: 20px; }
+  .stack-card h3 { margin-bottom: 12px; }
+  .stack-card ul li { padding: 6px 0; }
+}
