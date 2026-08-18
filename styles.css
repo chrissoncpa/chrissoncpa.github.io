@@ -3,11 +3,18 @@
    Single stylesheet. Self-hosted Inter. Light + dark themes.
    ========================================================= */
 
+/* Subset build of Inter (345KB -> 75KB). Glyphs: Latin-1 + General
+   Punctuation + arrows — a superset of what the copy uses today, so
+   ordinary copy edits (accents, curly quotes, ellipses) stay safe.
+   The wght axis is instanced to 400-700, the only range this design
+   uses. ⚠ If you ever need a weight outside 400-700 it will silently
+   clamp, not render — rebuild the subset instead of widening this
+   declaration. Rebuild: see fonts/README.md. */
 @font-face {
   font-family: "InterVariable";
-  src: url("fonts/InterVariable.woff2") format("woff2-variations"),
-       url("fonts/InterVariable.woff2") format("woff2");
-  font-weight: 100 900;
+  src: url("fonts/InterVariable-subset.woff2") format("woff2-variations"),
+       url("fonts/InterVariable-subset.woff2") format("woff2");
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
