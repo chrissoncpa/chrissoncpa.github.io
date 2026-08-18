@@ -39,25 +39,6 @@
     });
   }
 
-  // copy-to-clipboard fallback for the mailto CTA (some mobile browsers
-  // have no configured mail client, so mailto: silently dead-ends)
-  const copyBtn = document.querySelector('.copy-email');
-  if (copyBtn && navigator.clipboard) {
-    const label = copyBtn.querySelector('.copy-email-label');
-    const original = label ? label.textContent : '';
-    copyBtn.addEventListener('click', function () {
-      const email = copyBtn.dataset.email;
-      navigator.clipboard.writeText(email).then(function () {
-        if (label) {
-          label.textContent = 'Copied!';
-          setTimeout(function () { label.textContent = original; }, 2000);
-        }
-      }).catch(function () {});
-    });
-  } else if (copyBtn) {
-    copyBtn.style.display = 'none';
-  }
-
   const revealTargets = document.querySelectorAll(
     '.section-head, .case, .stack-card, .timeline li, .manifesto .quote, .manifesto-body, .creds, .creds-verify'
   );
