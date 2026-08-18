@@ -399,18 +399,6 @@ html[data-theme="dark"] .btn-primary:hover {
 .text-link svg { transition: transform 0.2s var(--ease); }
 .text-link:hover svg { transform: translateY(2px); }
 
-/* .text-link doubles as a <button> for the copy-email affordance --
-   reset button chrome so it matches the <a> version exactly */
-button.text-link {
-  background: none;
-  border: none;
-  border-bottom: 1px solid transparent;
-  font: inherit;
-  font-size: 14.5px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
 .hero-socials {
   display: flex;
   gap: 6px;
