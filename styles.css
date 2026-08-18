@@ -132,6 +132,20 @@ img, svg { display: block; max-width: 100%; }
 }
 .skip:focus { left: 16px; top: 16px; }
 
+/* visually hidden but exposed to assistive tech */
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ---------- topbar ---------- */
 
 .topbar {
@@ -755,4 +769,11 @@ html[data-theme="dark"] .btn-primary:hover {
 .reveal.in {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* reduced motion: never let the reveal hide content. The global rule above
+   kills the transition but not the opacity:0 start state, so content would
+   stay invisible until IntersectionObserver fired. Force it visible. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
 }
