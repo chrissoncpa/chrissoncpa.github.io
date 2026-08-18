@@ -1,8 +1,19 @@
 /* =========================================================
    circuit.css — visual redesign overlay (loaded after styles.css)
    Circuit-board language: node pads, traces, bus lines, IC cards.
-   CSS-only per the visual-redesign skill: no JS, no structural HTML.
-   Remove this file + its <link> to fully roll back.
+   Styling is CSS-only per the visual-redesign skill; the one exception
+   is a decorative, aria-hidden <div class="circuit-container"><svg
+   class="circuit-svg">...</svg></div> inline in the hero markup (see
+   below) — CSS masks can't animate individual trace paths, and the
+   hero's line-draw + station-pulse effect needs that. No other
+   structural HTML, no other JS.
+   NOTE: the hero traces below use a fixed 5-color transit-line palette
+   (yellow/orange/red/green/blue) that does NOT follow --accent and does
+   NOT adapt between light/dark theme — a deliberate exception to this
+   file's usual theme-aware convention, kept as pasted per Chris's
+   explicit call to implement verbatim.
+   Remove this file, its <link>, and the .circuit-container block in
+   index.html to fully roll back.
    ========================================================= */
 
 :root {
@@ -15,63 +26,65 @@ html[data-theme="dark"] {
   --circuit-opacity: 0.7;
 }
 
-/* ---------- hero: interlinked trace network ----------
-   One hand-drawn net, not a tile: trunks descend from the top-right,
-   branch at 45° (junction dots), cross-link between nets, and terminate
-   in pads — echoing a real routed board. A slow light-sweep travels
-   down the net to show flow; the global prefers-reduced-motion rule
-   in styles.css disables it. */
-
-.hero::after {
-  content: "";
+/* ---------- hero: inline SVG network ---------- */
+.circuit-container {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-color: var(--accent);
-  background-image: linear-gradient(
-    245deg,
-    rgba(255, 255, 255, 0) 42%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(255, 255, 255, 0) 58%
-  );
-  background-size: 250% 250%;
-  background-position: 100% 0%;
-  background-repeat: no-repeat;
-  animation: circuit-flow 11s linear infinite;
-  opacity: calc(0.22 * var(--circuit-opacity));
-  -webkit-mask-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M760 0 V120 L640 240 V400 L560 480 V620'/><path d='M640 300 L520 420 V540'/><path d='M700 0 V80 L580 200 V320 L460 440 V560'/><path d='M580 260 L480 360 H360'/><path d='M620 0 V60 L520 160 V260 L400 380 H280'/><path d='M520 210 L440 290 V400 L360 480'/><path d='M540 0 V100 L440 200 H320 L240 280 V360'/><path d='M380 200 V300 L300 380 V460'/><path d='M390 360 V380'/><path d='M560 500 H520'/><path d='M480 0 V40 L420 100'/><path d='M800 160 H740 L660 240 V340 L720 400 V440'/><path d='M800 520 H760 L680 600'/></g><g fill='black'><circle cx='560' cy='620' r='5'/><circle cx='520' cy='540' r='5'/><circle cx='460' cy='560' r='5'/><circle cx='360' cy='360' r='5'/><circle cx='280' cy='380' r='5'/><circle cx='360' cy='480' r='5'/><circle cx='240' cy='360' r='5'/><circle cx='300' cy='460' r='5'/><circle cx='420' cy='100' r='5'/><circle cx='720' cy='440' r='5'/><circle cx='680' cy='600' r='5'/><circle cx='640' cy='300' r='3.5'/><circle cx='580' cy='260' r='3.5'/><circle cx='520' cy='210' r='3.5'/><circle cx='380' cy='200' r='3.5'/><circle cx='390' cy='360' r='3.5'/><circle cx='390' cy='380' r='3.5'/><circle cx='560' cy='500' r='3.5'/><circle cx='520' cy='500' r='3.5'/></g><g fill='none' stroke='black' stroke-width='1.5'><circle cx='600' cy='80' r='3'/><circle cx='500' cy='300' r='3'/><circle cx='660' cy='460' r='3'/><circle cx='430' cy='240' r='3'/></g></svg>"),
-    linear-gradient(105deg, transparent 8%, black 45%);
-  -webkit-mask-size: auto 102%, 100% 100%;
-  -webkit-mask-position: right top, center;
-  -webkit-mask-repeat: no-repeat, no-repeat;
-  -webkit-mask-composite: source-in;
-  mask-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='700' viewBox='0 0 800 700'><g fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M760 0 V120 L640 240 V400 L560 480 V620'/><path d='M640 300 L520 420 V540'/><path d='M700 0 V80 L580 200 V320 L460 440 V560'/><path d='M580 260 L480 360 H360'/><path d='M620 0 V60 L520 160 V260 L400 380 H280'/><path d='M520 210 L440 290 V400 L360 480'/><path d='M540 0 V100 L440 200 H320 L240 280 V360'/><path d='M380 200 V300 L300 380 V460'/><path d='M390 360 V380'/><path d='M560 500 H520'/><path d='M480 0 V40 L420 100'/><path d='M800 160 H740 L660 240 V340 L720 400 V440'/><path d='M800 520 H760 L680 600'/></g><g fill='black'><circle cx='560' cy='620' r='5'/><circle cx='520' cy='540' r='5'/><circle cx='460' cy='560' r='5'/><circle cx='360' cy='360' r='5'/><circle cx='280' cy='380' r='5'/><circle cx='360' cy='480' r='5'/><circle cx='240' cy='360' r='5'/><circle cx='300' cy='460' r='5'/><circle cx='420' cy='100' r='5'/><circle cx='720' cy='440' r='5'/><circle cx='680' cy='600' r='5'/><circle cx='640' cy='300' r='3.5'/><circle cx='580' cy='260' r='3.5'/><circle cx='520' cy='210' r='3.5'/><circle cx='380' cy='200' r='3.5'/><circle cx='390' cy='360' r='3.5'/><circle cx='390' cy='380' r='3.5'/><circle cx='560' cy='500' r='3.5'/><circle cx='520' cy='500' r='3.5'/></g><g fill='none' stroke='black' stroke-width='1.5'><circle cx='600' cy='80' r='3'/><circle cx='500' cy='300' r='3'/><circle cx='660' cy='460' r='3'/><circle cx='430' cy='240' r='3'/></g></svg>"),
-    linear-gradient(105deg, transparent 8%, black 45%);
-  mask-size: auto 102%, 100% 100%;
-  mask-position: right top, center;
-  mask-repeat: no-repeat, no-repeat;
-  mask-composite: intersect;
+  opacity: calc(0.4 * var(--circuit-opacity));
+  overflow: hidden;
 }
-
-/* the highlight band sweeps top-right -> bottom-left, i.e. the
-   direction the net flows; through the mask it reads as current
-   travelling the traces */
-@keyframes circuit-flow {
-  0%   { background-position: 100% 0%; }
-  100% { background-position: 0% 100%; }
+.circuit-svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  /* Fades out towards the left/bottom so it doesn't hard stop */
+  -webkit-mask-image: radial-gradient(ellipse at top right, black 30%, transparent 70%);
+  mask-image: radial-gradient(ellipse at top right, black 30%, transparent 70%);
 }
-
+.trace {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* Animation setup */
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: draw 6s ease-out infinite alternate;
+}
+.trace-y { stroke: #ffe800; filter: drop-shadow(0 0 3px rgba(255, 232, 0, 0.5)); animation-delay: 0s; stroke-dasharray: 1200; stroke-dashoffset: 1200; }
+.trace-o { stroke: #ff9933; filter: drop-shadow(0 0 3px rgba(255, 153, 51, 0.5)); animation-delay: -1s; stroke-dasharray: 1300; stroke-dashoffset: 1300; }
+.trace-r { stroke: #e31937; filter: drop-shadow(0 0 3px rgba(227, 25, 55, 0.5)); animation-delay: -2s; stroke-dasharray: 1200; stroke-dashoffset: 1200; }
+.trace-g { stroke: #44ad4b; filter: drop-shadow(0 0 3px rgba(68, 173, 75, 0.5)); animation-delay: -3s; stroke-dasharray: 1500; stroke-dashoffset: 1500; }
+.trace-b { stroke: #2aadd8; filter: drop-shadow(0 0 3px rgba(42, 173, 216, 0.5)); animation-delay: -4s; stroke-dasharray: 1600; stroke-dashoffset: 1600; }
+@keyframes draw {
+  0% { stroke-dashoffset: 2000; opacity: 0.2; }
+  40% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+.station {
+  fill: var(--bg);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.2));
+  animation: pulse 4s ease-in-out infinite alternate;
+}
+@keyframes pulse {
+  0% { opacity: 0.6; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trace, .station { animation: none !important; stroke-dashoffset: 0 !important; opacity: 0.8 !important; }
+}
 /* narrow screens: the net runs behind the hero text, so ease it back */
 @media (max-width: 640px) {
-  .hero::after { opacity: calc(0.15 * var(--circuit-opacity)); }
+  .circuit-container { opacity: calc(0.15 * var(--circuit-opacity)); }
 }
 
-/* keep hero content above the trace field (styles.css already sets
-   .hero .container z-index, this covers the portrait explicitly) */
 .hero .container { position: relative; z-index: 1; }
+
 
 /* ---------- sunken sections: perfboard dot grid ---------- */
 

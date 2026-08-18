@@ -36,6 +36,26 @@
     } catch (e) {}
   })();
 </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Chris Son",
+  "url": "https://chrissoncpa.github.io/",
+  "jobTitle": "Controller & Accounting Architect",
+  "description": "CPA and accounting systems architect who builds zero-to-one finance infrastructure at high-growth startups.",
+  "alumniOf": [
+    { "@type": "Organization", "name": "Google" },
+    { "@type": "CollegeOrUniversity", "name": "Golden Gate University" },
+    { "@type": "CollegeOrUniversity", "name": "University of California, Berkeley" }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/chs1",
+    "https://github.com/chrissoncpa"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -73,6 +93,26 @@
 <main id="main">
 
   <section id="top" class="hero">
+    <div class="circuit-container" aria-hidden="true">
+      <svg class="circuit-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMin slice" aria-hidden="true" width="100%" height="100%">
+        <defs>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+        <!-- Tracks -->
+        <path class="trace trace-y" style="animation-delay: 0.0s;" d="M 650 -50 L 550 50 L 550 220 L 330 440 L -50 440" />
+        <path class="trace trace-o" style="animation-delay: 0.2s;" d="M 518 -50 L 518 210 L 298 430 L 298 650" />
+        <path class="trace trace-r" style="animation-delay: 0.4s;" d="M 530 -50 L 530 215 L 310 435 L -50 435" />
+        <path class="trace trace-g" style="animation-delay: 0.6s;" d="M 750 50 L 680 50 L 526 180 L 526 205 L 306 425 L 306 650" />
+        <path class="trace trace-b" style="animation-delay: 0.8s;" d="M 750 62 L 680 62 L 514 192 L 514 200 L 294 420 L -50 420" />
+        <!-- Stations -->
+        <circle class="station node" cx="550" cy="150" r="7" style="animation-delay: 1.0s; transform-origin: 550px 150px; fill: var(--bg); stroke: var(--accent); stroke-width: 2;" />
+        <circle class="station node" cx="530" cy="150" r="7" style="animation-delay: 1.2s; transform-origin: 530px 150px; fill: var(--bg); stroke: var(--accent); stroke-width: 2;" />
+        <circle class="station node" cx="518" cy="150" r="7" style="animation-delay: 1.4s; transform-origin: 518px 150px; fill: var(--bg); stroke: var(--accent); stroke-width: 2;" />
+      </svg>
+    </div>
     <div class="container hero-grid">
       <div class="hero-text">
         <p class="eyebrow">San Francisco · Open to Controller &amp; Head of Finance roles · Series A–C</p>
@@ -107,7 +147,10 @@
       </div>
 
       <div class="hero-portrait" aria-hidden="true">
-        <img class="portrait-img" src="portrait.png" width="400" height="391" alt="" decoding="async" fetchpriority="high">
+        <picture>
+          <source srcset="portrait.webp" type="image/webp">
+          <img class="portrait-img" src="portrait.png" width="400" height="391" alt="" decoding="async" fetchpriority="high">
+        </picture>
       </div>
     </div>
   </section>
@@ -445,6 +488,10 @@
       <div class="cta-row">
         <a class="btn btn-primary" href="mailto:hosungson2011@gmail.com">Email Chris</a>
         <a class="btn btn-ghost" href="Chris_Son_Resume.pdf" target="_blank" rel="noopener">Resume PDF</a>
+        <button type="button" class="text-link copy-email" data-email="hosungson2011@gmail.com">
+          <span class="copy-email-label">hosungson2011@gmail.com</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -477,6 +524,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=2" defer></script>
+<script src="script.js?v=3" defer></script>
 </body>
 </html>
