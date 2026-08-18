@@ -7,6 +7,16 @@
    below) — CSS masks can't animate individual trace paths, and the
    hero's line-draw + station-pulse effect needs that. No other
    structural HTML, no other JS.
+
+   ⚠ DECORATION ONLY — keep it that way. Layout, interaction, and
+   overflow-safety rules belong in styles.css, not here. This file used
+   to also carry the mobile menu, the contact section, the proof-strip
+   grid, the case-diagram scroll container and the mobile overflow
+   guards, which quietly made the "just delete it" rollback below a lie.
+   Those now live in styles.css under "Layout + interaction rules that
+   used to live in circuit.css". If you add a rule here, it must be safe
+   to delete.
+
    NOTE: the hero traces below use a fixed 5-color transit-line palette
    (yellow/orange/red/green/blue) that does NOT follow --accent and does
    NOT adapt between light/dark theme — a deliberate exception to this
@@ -230,27 +240,8 @@ html[data-theme="dark"] {
               0 4px 16px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
-/* ---------- proof strip: outcomes as board test-points ---------- */
+/* ---------- proof strip: test-point dots on the dividers ---------- */
 
-.proof {
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
-  background: var(--bg);
-}
-.proof-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 0;
-}
-.proof-strip li {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 26px 24px;
-  border-left: 1px solid var(--border-soft);
-  position: relative;
-}
-.proof-strip li:first-child { border-left: 0; }
 .proof-strip li::before {
   content: "";
   position: absolute;
@@ -264,193 +255,18 @@ html[data-theme="dark"] {
   transform: translateX(-50%);
 }
 .proof-strip li:first-child::before { display: none; }
-.proof-num {
-  font-family: var(--font-mono);
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--accent);
-}
-.proof-label {
-  font-size: 13.5px;
-  color: var(--text-muted);
-  line-height: 1.45;
-}
 @media (max-width: 830px) {
-  .proof-strip { grid-template-columns: 1fr 1fr; }
-  .proof-strip li { border-left: 0; padding: 18px 12px; }
   .proof-strip li::before { display: none; }
 }
 
-/* ---------- case diagram: sanitized system sketch ---------- */
-
-.case-diagram {
-  margin: 4px 0 18px;
-  padding: 20px 20px 14px;
-  max-width: 720px;
-  background: var(--bg-elev);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-}
-.case-diagram-shell { position: relative; min-width: 0; max-width: 100%; }
-.case-diagram-scroll { overflow-x: auto; }
-
-/* mobile-only affordance: swipe cue + right-edge fade signal overflow */
-@media (max-width: 700px) {
-  .case-diagram::before {
-    content: "swipe to explore \2192";
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.03em;
-    color: var(--text-faint);
-    margin-bottom: 10px;
-  }
-  .case-diagram-shell::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 40px;
-    background: linear-gradient(to right, transparent, var(--bg-elev));
-    pointer-events: none;
-  }
-}
-.case-diagram svg {
-  min-width: 560px;
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.case-diagram .cd-chip rect {
-  fill: var(--bg-sunken);
-  stroke: var(--border);
-  stroke-width: 1;
-}
-.case-diagram .cd-trace path {
-  fill: none;
-  stroke: var(--accent-line);
-  stroke-width: 1.5;
-}
-.case-diagram .cd-pad circle { fill: var(--accent); }
-.case-diagram svg.cd-wide { min-width: 640px; }
-.case-diagram .cd-label text {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  fill: var(--text);
-}
-.case-diagram .cd-label-sm text { font-size: 12px; }
-.case-diagram .cd-sub text {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  fill: var(--text-faint);
-}
-.case-diagram figcaption {
-  margin-top: 12px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: var(--text-faint);
-  letter-spacing: 0.02em;
-}
-
-/* ---------- contact section ---------- */
+/* ---------- contact: perfboard texture ---------- */
+/* background-color lives in styles.css; this layers the dot grid on top */
 
 .contact {
-  padding: clamp(64px, 9vw, 100px) 0;
-  border-top: 1px solid var(--border-soft);
-  background: var(--bg-sunken);
   background-image: radial-gradient(
     color-mix(in srgb, var(--text) 6%, transparent) 1px,
     transparent 1.5px
   );
   background-size: 26px 26px;
-}
-.contact-line {
-  font-size: clamp(24px, 3.6vw, 34px);
-  letter-spacing: -0.02em;
-  margin: 0 0 10px;
-  max-width: 560px;
-}
-.contact-sub {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--text-muted);
-  margin: 0 0 28px;
-}
-.contact .cta-row { margin-bottom: 0; animation: none; }
-
-/* ---------- overflow hardening ----------
-   A 1fr grid track will not shrink below its content's intrinsic
-   minimum (the 560px diagram SVG) unless the track is minmax(0,1fr)
-   and the children may shrink. Without this the whole page grows
-   sideways on phones. */
-
-.case { grid-template-columns: 100px minmax(0, 1fr); }
-.case-body,
-.case-diagram,
-.case-diagram-scroll { min-width: 0; max-width: 100%; }
-
-@media (max-width: 700px) {
-  .case { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* ---------- mobile: compact Menu (logo + resume + menu + theme) ---------- */
-
-.mobnav { display: none; position: relative; }
-
-.mobnav summary {
-  list-style: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  font-size: 14px;
-  color: var(--text-muted);
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  transition: color 0.15s var(--ease), background-color 0.15s var(--ease);
-}
-.mobnav summary::-webkit-details-marker { display: none; }
-.mobnav summary svg { transition: transform 0.2s var(--ease); }
-.mobnav[open] summary {
-  color: var(--text);
-  background: var(--bg-sunken);
-}
-.mobnav[open] summary svg { transform: rotate(180deg); }
-
-.mobnav-panel {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 8px);
-  min-width: 190px;
-  padding: 8px;
-  background: var(--bg-elev);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-direction: column;
-  z-index: 60;
-}
-.mobnav-panel a {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 14px;
-  font-size: 15px;
-  color: var(--text);
-  border-radius: var(--radius-sm);
-}
-.mobnav-panel a:hover { background: var(--bg-sunken); }
-
-@media (max-width: 640px) {
-  .mobnav { display: block; }
-  /* comfortable touch targets */
-  .theme-toggle { width: 40px; height: 40px; flex-shrink: 0; }
-  .topnav { gap: 0; }
-  .topnav a[href="Chris_Son_Resume.pdf"] { padding: 10px 12px; }
 }
 
