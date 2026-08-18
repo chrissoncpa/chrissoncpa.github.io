@@ -9,11 +9,19 @@
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   if (toggle) {
+    // label describes the ACTION, aria-pressed carries the state
+    const syncToggle = function () {
+      const isDark = root.dataset.theme === 'dark';
+      toggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+    };
+    syncToggle();
     toggle.addEventListener('click', function () {
       const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
       if (next === 'dark') root.dataset.theme = 'dark';
       else delete root.dataset.theme;
       try { localStorage.setItem('theme', next); } catch (e) {}
+      syncToggle();
     });
   }
 
@@ -37,9 +45,22 @@
         mobnav.removeAttribute('open');
       }
     });
+    // Escape closes the disclosure and returns focus to its summary
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobnav.hasAttribute('open')) {
+        mobnav.removeAttribute('open');
+        const summary = mobnav.querySelector('summary');
+        if (summary) summary.focus();
+      }
+    });
   }
 
-  const revealTargets = document.querySelectorAll(
+  // scroll reveal is decoration: skip it entirely for reduced-motion users
+  // rather than tying their content visibility to scroll position
+  const prefersReducedMotion =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const revealTargets = prefersReducedMotion ? [] : document.querySelectorAll(
     '.section-head, .case, .stack-card, .timeline li, .manifesto .quote, .manifesto-body, .creds, .creds-verify'
   );
   revealTargets.forEach(function (el) { el.classList.add('reveal'); });
