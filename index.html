@@ -8,7 +8,12 @@
 <title>Chris Son · Accounting Architect</title>
 <meta name="description" content="Chris Son, CPA and Salesforce Data Architect. I build the finance systems that take a company from one house to a city.">
 <meta property="og:title" content="Chris Son · Accounting Architect">
-<meta property="og:description" content="Finance as a systems function, not a ledger function.">
+<meta property="og:description" content="CPA and Salesforce Data Architect. Finance designed as one system, from contract to close.">
+<meta property="og:image" content="https://chrissoncpa.github.io/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chris Son, Accounting Architect: an isometric line drawing of a city built around a general ledger">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrissoncpa.github.io/">
 <meta property="og:site_name" content="Chris Son">
@@ -64,7 +69,7 @@ header nav a:hover,header nav a:focus-visible{border-color:var(--accent);outline
 
 .sheet{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px;align-items:start}
 .fig{position:sticky;top:env(safe-area-inset-top,0px);height:100svh;display:flex;align-items:center;overflow:hidden;contain:layout paint}
-.fig svg{width:100%;height:auto;max-height:94svh;display:block;transform-origin:0 0;will-change:transform;
+.fig svg{width:100%;height:auto;max-height:94svh;display:block;overflow:visible;transform-origin:0 0;will-change:transform;
   transition:transform 1.2s cubic-bezier(.35,0,.15,1)}
 .copy{padding-block:6vh}
 section.st{min-height:80svh;display:flex;flex-direction:column;justify-content:center;padding-block:32px}
@@ -112,27 +117,46 @@ svg .f{stroke:var(--dash);stroke-width:.45}
 svg .a{stroke:var(--accent);stroke-width:.9}
 svg .b{stroke:var(--accent2);stroke-width:.9}
 svg .ds{stroke-dasharray:2 2}
-svg text{fill:var(--ink2);font-size:6.5px;letter-spacing:.05em}
+/* --fs is set per camera stop so labels hold ~9 screen px; .nolab when that would crowd the drawing */
+svg text{fill:var(--ink2);font-size:calc(var(--fs,6.5)*1px);letter-spacing:.05em;transition:font-size 1.2s cubic-bezier(.35,0,.15,1)}
+svg.nolab text{visibility:hidden}
 svg text.lab{fill:var(--ink)}
 svg text.acc{fill:var(--accent)}
 svg text.dat{fill:var(--accent2)}
 svg line,svg path{fill:none;stroke-linecap:round;stroke-linejoin:round}
-/* closing frame: only the title block and rail label carry labels */
-svg[data-st="6"] g.s:not(#g6) text{visibility:hidden}
+/* only the stage in view carries labels; earlier ones would crowd the wider shots */
+svg g.s:not(.cur) text{visibility:hidden}
 @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 svg g.s .p{stroke-dasharray:1;stroke-dashoffset:0}
-.js svg g.s:not(.on) .p{stroke-dashoffset:1}
+/* hidden, not just dash-offset: round caps otherwise leave a dot at every undrawn line end */
+.js svg g.s:not(.on) .p{stroke-dashoffset:1;visibility:hidden}
 .js svg g.s:not(.on) text{opacity:0}
 .js svg g.s.on:not(.init) .p{animation:draw .8s cubic-bezier(.4,0,.2,1) both;animation-delay:calc(min(var(--i,0),60)*18ms)}
 .js svg g.s.on:not(.init) text{animation:fade .5s ease .7s both}
 svg g.m{cursor:crosshair}
 svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
+/* title block: HTML in screen space so it stays legible whatever the drawing's scale */
+.dw{position:relative;width:100%}
+.tb{position:absolute;right:2.5%;bottom:2.5%;border:1px solid var(--ink);background:var(--paper);
+  font-family:var(--mono);font-size:10px;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.tb.on{opacity:1;visibility:visible;transition:opacity .5s ease .7s}
+.tb>div{display:grid;grid-template-columns:1fr auto;border-top:1px solid var(--line)}
+.tb>div:first-child{border-top:0;color:var(--ink)}
+.tb span{padding:4px 8px}
+.tb span+span{border-left:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  svg g.s .p,svg g.s text{animation:none!important}.fig svg{transition:none!important}
+  svg g.s .p,svg g.s text{animation:none!important}.fig svg,svg text,.tb{transition:none!important}
 }
 @media (max-width:860px){
+  header{flex-direction:column;align-items:flex-start;gap:8px}
+  header nav{gap:14px}
+  /* hero first so name + links are on the first screen; the drawing sticks once it arrives */
+  .copy{display:contents}
+  #s0{order:-2}
+  .tb{display:none}
   .sheet{grid-template-columns:1fr;gap:0}
   .fig{order:-1;height:44svh;z-index:1;background:var(--paper);border-bottom:1px solid var(--faint)}
   .fig svg{max-height:42svh}
@@ -182,7 +206,7 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
   <p>Contracts, metering, billing, payables, payroll. Each runs from its source straight into the ledger, so throughput scales without headcount.</p>
   <dl class="spec"><dt>Inputs</dt><dd>5 · source → GL</dd><dt>Standard</dt><dd>One master-data schema</dd><dt>Failure mode</dt><dd>Manual re-keying</dd></dl>
   <details><summary><span class="d">B</span><span class="t">Newo.ai · usage-based revenue</span><span class="r">2026–</span></summary>
-    <div class="body"><p>Controller, Series A AI voice platform.</p><p>Contract → meter → invoice → recognition → GL as one continuous belt. ASC 606 built into the metering, not bolted on at close.</p></div></details>
+    <div class="body"><p>Controller, Series A AI voice platform.</p><p>Contract → meter → invoice → recognition → GL as one continuous belt. ASC 606 designed into the metering, so recognition is settled before close begins.</p></div></details>
 </section>
 
 <section class="st" id="s3" data-st="3">
@@ -197,8 +221,8 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 <section class="st" id="s4" data-st="4">
   <div class="eyebrow"><b>04</b><span class="mono">The 606 line</span></div>
   <h2>Revenue runs out past the city limits.</h2>
-  <p>ASC 606 is the elevated line: contract in, obligation sorted, recognition out, on schedule, over ground nobody else has built on. Ten years keeping it running.</p>
-  <dl class="spec"><dt>Route</dt><dd>Contract → obligation → recognition</dd><dt>Cargo</dt><dd>Usage, subscription, multi-element</dd><dt>Uptime</dt><dd>10 years</dd></dl>
+  <p>ASC 606 is the elevated line: contract in, performance obligations identified, price allocated, revenue recognized on schedule. All five steps, run the same way every period.</p>
+  <dl class="spec"><dt>Route</dt><dd>Contract → obligation → recognition</dd><dt>Cargo</dt><dd>Usage, subscription, multi-element</dd><dt>In service</dt><dd>Rev rec since 2016 · ASC 606 since adoption</dd></dl>
   <details><summary><span class="d">D</span><span class="t">BrightBytes · GTM-to-revenue</span><span class="r">2016–23</span></summary>
     <div class="body"><p>Salesforce Architect &amp; Assistant Controller. Classic → Lightning migration.</p><p>One master-data standard across marketing, sales, contracts and 606. Revenue-function throughput 3×. Carried through the Google acquisition.</p></div></details>
 </section>
@@ -206,7 +230,7 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 <section class="st" id="s5" data-st="5">
   <div class="eyebrow"><b>05</b><span class="mono">Data core</span></div>
   <h2>One tower every building is piped into.</h2>
-  <p>Salesforce as the utility. Master data is a governance decision, not a tooling one, so every district reads from the same source.</p>
+  <p>Salesforce as the utility. Master data gets governed before it gets tooled, so every district reads from the same source.</p>
   <dl class="spec"><dt>Core</dt><dd>Salesforce · 9 certs incl. Data Architect</dd><dt>Pipes</dt><dd>SQL · BigQuery · Metabase · Tableau</dd><dt>Plant</dt><dd>NetSuite · QuickBooks · AppsScript · AI reconciliation</dd></dl>
   <details><summary><span class="d">E</span><span class="t">BrightBytes · payments platform</span><span class="r">2022</span></summary>
     <div class="body"><p>Finance Lead. Modern Treasury + Stripe.</p><p>Automated collections, multi-party disbursements, bank reconciliation. Money moves through the core like everything else.</p></div></details>
@@ -214,8 +238,8 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 
 <section class="st" id="s6" data-st="6">
   <div class="eyebrow"><b>06</b><span class="mono">City · revisions</span></div>
-  <h2>Now drafting for Series A–D.</h2>
-  <p>Controller or Head of Finance. AI and SaaS. Systems first, from the first house.</p>
+  <h2>Now building for the AI future at Newo.ai</h2>
+  <p>Systems first, from the first house.</p>
   <table>
     <thead><tr><th>Rev</th><th>Date</th><th>Description</th></tr></thead>
     <tbody>
@@ -237,7 +261,14 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 </div>
 
 <div class="fig" aria-hidden="true">
+<div class="dw">
 <svg id="dwg" viewBox="0 0 800 620" role="img" aria-label="Isometric wireframe city that grows from one house as you scroll"></svg>
+<div class="tb" id="tb">
+  <div><span>Chris Son · Accounting architect</span></div>
+  <div><span>Finance as a system<br>Contract to close</span><span>CPA<br>SFDC ×9</span></div>
+  <div><span>Sheet A-1 · Rev 05 · 2026</span><span>SF, CA</span></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -259,7 +290,7 @@ function seg(a,b,c){var p=P(a[0],a[1],a[2]),q=P(b[0],b[1],b[2]);
   stages[cur]+='<line class="p '+c+'" x1="'+p[0].toFixed(1)+'" y1="'+p[1].toFixed(1)+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" pathLength="1" style="--i:'+(cnt++)+'"/>';}
 function path(dstr,c){stages[cur]+='<path class="p '+c+'" d="'+dstr+'" pathLength="1" style="--i:'+(cnt++)+'"/>';}
 function poly(pts,c,close){var s='';for(var i=0;i<pts.length;i++){var p=P(pts[i][0],pts[i][1],pts[i][2]);s+=(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}path(s+(close?'Z':''),c);}
-function txt(x,y,z,t,c,anchor){var p=P(x,y,z);stages[cur]+='<text class="'+(c||'')+'" x="'+p[0].toFixed(1)+'" y="'+p[1].toFixed(1)+'"'+(anchor?' text-anchor="'+anchor+'"':'')+'>'+t+'</text>';}
+function txt(x,y,z,t,c,anchor,rot){var p=P(x,y,z),x1=p[0].toFixed(1),y1=p[1].toFixed(1);stages[cur]+='<text class="'+(c||'')+'" x="'+x1+'" y="'+y1+'"'+(anchor?' text-anchor="'+anchor+'"':'')+(rot?' transform="rotate('+rot+' '+x1+' '+y1+')"':'')+'>'+t+'</text>';}
 /* box with hidden edges faint */
 function box(x,y,w,dp,h,c,hid){c=c||'k';hid=hid===undefined?'f':hid;
   poly([[x,y,h],[x+w,y,h],[x+w,y+dp,h],[x,y+dp,h]],c,true);
@@ -294,7 +325,7 @@ S(0);
 for(var g=0;g<=24;g+=4){seg([g,0,0],[g,24,0],'f');seg([0,g,0],[24,g,0],'f');}
 house(11.2,11.2,1.6,1.6,.9);
 road([12,12.8],[12,18],'f');
-txt(11.6,13.4,0,'1 HOUSE · YEAR 0','lab','start');
+txt(13.6,11.9,0,'1 HOUSE · YEAR 0','lab','start');
 txt(0,24,0,'DATUM 0.00','','start');
 
 /* ---- Stage 1: ledger hall ---- */
@@ -354,11 +385,7 @@ road([0,6.5],[24,6.5]);road([6,0],[6,24]);road([18.5,12.5],[18.5,24]);
 /* rail loop */
 poly([[-.6,-.6,0],[24.6,-.6,0],[24.6,24.6,0],[-.6,24.6,0]],'k',true);
 poly([[-.9,-.9,0],[24.9,-.9,0],[24.9,24.9,0],[-.9,24.9,0]],'l',true);
-txt(12,25.2,0,'CITY · POP. 200+ CLIENTS · SERIES A–D','lab','middle');
-/* title block, screen space */
-stages[6]+='<path class="p k" d="M570 546H780V606H570Z" pathLength="1" style="--i:'+(cnt++)+'"/><path class="p l" d="M570 561H780M570 585H780M736 561V606" pathLength="1" style="--i:'+(cnt++)+'"/>'
- +'<text class="lab" x="576" y="556">CHRIS SON · ACCOUNTING ARCHITECT</text><text x="576" y="574">FINANCE AS A SYSTEMS FUNCTION</text><text x="576" y="581">NOT A LEDGER FUNCTION</text>'
- +'<text x="742" y="574">CPA</text><text x="742" y="581">SFDC ×9</text><text x="576" y="598">SHEET A-1 · REV 05 · 2026</text><text x="742" y="598">SF, CA</text>';
+txt(12,26,0,'CITY · POP. 200+ CLIENTS · SERIES A–D','lab','middle',26.57);
 
 var svg=document.getElementById('dwg'),html='';
 for(var k=0;k<7;k++)html+='<g class="s'+(k?' m':' on init')+'" id="g'+k+'">'+stages[k]+'</g>';
@@ -367,12 +394,17 @@ svg.innerHTML=html;
 /* ---------- camera: [world x, world y, scale] ---------- */
 var cam=[[12,12.5,2.6],[14,11,2],[10.5,9,1.5],[13,13,1.3],[21,8,1.25],[11,16,1.2],[12,12,1]];
 var gs=[];for(k=0;k<7;k++)gs.push(document.getElementById('g'+k));
+var tb=document.getElementById('tb');
 var st=0,pending=false;
-function apply(){pending=false;for(var k=0;k<7;k++)gs[k].classList.toggle('on',k<=st);
+function apply(){pending=false;for(var k=0;k<7;k++){gs[k].classList.toggle('on',k<=st);gs[k].classList.toggle('cur',k===st);}
   var c=cam[st],p=P(c[0],c[1],0),s=c[2];
   /* viewBox center 400,310 -> zoom toward world point */
   var tx=(400-p[0]*s)/800*100,ty=(310-p[1]*s)/620*100;
-  svg.style.transform='translate('+tx+'%,'+ty+'%) scale('+s+')';svg.setAttribute('data-st',st);}
+  svg.style.transform='translate('+tx+'%,'+ty+'%) scale('+s+')';svg.setAttribute('data-st',st);
+  /* screen px per drawing unit at this stop; size labels to ~9px, drop them if that would be > 14 units */
+  var cs=getComputedStyle(svg),u=Math.min(parseFloat(cs.width)/800,parseFloat(cs.height)/620)*s,fs=9/u;
+  svg.style.setProperty('--fs',Math.max(6.5,fs).toFixed(2));svg.classList.toggle('nolab',!(fs<=14));
+  tb.classList.toggle('on',st===6);}
 function set(n){if(n===st)return;st=n;if(!pending){pending=true;requestAnimationFrame(apply);}}
 var secs=document.querySelectorAll('section.st');
 if('IntersectionObserver' in window){
@@ -381,6 +413,7 @@ if('IntersectionObserver' in window){
     if(best)set(+best.target.getAttribute('data-st'));},{threshold:[.35,.6],rootMargin:'-10% 0px -10% 0px'});
   secs.forEach(function(s){io.observe(s);});
 }else{st=6;}
+addEventListener('resize',function(){if(!pending){pending=true;requestAnimationFrame(apply);}});
 apply();
 })();
 </script>
