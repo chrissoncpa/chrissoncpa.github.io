@@ -2,47 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chris Son — Accounting Architect · CPA · Salesforce Data Architect</title>
-<meta name="description" content="CPA and accounting architect. I design the systems finance runs on: zero-to-one infrastructure at high-growth startups, through an M&amp;A exit to Google.">
-<meta name="author" content="Chris Son">
-<meta name="theme-color" content="#1f5d4e">
-
-<link rel="canonical" href="https://chrissoncpa.github.io/">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#1b1d21">
+<title>Chris Son · Accounting Architect</title>
+<meta name="description" content="Chris Son, CPA and Salesforce Data Architect. I build the finance systems that take a company from one house to a city.">
+<meta property="og:title" content="Chris Son · Accounting Architect">
+<meta property="og:description" content="Finance as a systems function, not a ledger function.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Chris Son — Accounting Architect · CPA · Salesforce Data Architect">
-<meta property="og:description" content="An accounting architect designs the systems finance runs on. Zero-to-one infrastructure at high-growth startups. M&amp;A exit to Google.">
 <meta property="og:url" content="https://chrissoncpa.github.io/">
-<meta property="og:image" content="https://chrissoncpa.github.io/og-card.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Chris Son — Accounting Architect, CPA, Salesforce Data Architect">
 <meta property="og:site_name" content="Chris Son">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Chris Son — Accounting Architect · CPA · Salesforce Data Architect">
-<meta name="twitter:description" content="An accounting architect designs the systems finance runs on. Zero-to-one infrastructure at high-growth startups. M&amp;A exit to Google.">
-<meta name="twitter:image" content="https://chrissoncpa.github.io/og-card.png">
-<meta name="twitter:image:alt" content="Chris Son — Accounting Architect, CPA, Salesforce Data Architect">
-
-<link rel="icon" type="image/png" sizes="32x32" href="logo-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
-<link rel="apple-touch-icon" sizes="192x192" href="logo-192.png">
-<link rel="preload" href="fonts/InterVariable-subset.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=7">
-<link rel="stylesheet" href="circuit.css?v=4">
-
-<script>
-  (function () {
-    try {
-      var stored = localStorage.getItem('theme');
-      if (stored === 'dark' || (stored === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.dataset.theme = 'dark';
-      }
-    } catch (e) {}
-  })();
-</script>
-
+<meta name="author" content="Chris Son">
+<link rel="canonical" href="https://chrissoncpa.github.io/">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,545 +32,357 @@
     "credentialCategory": "Certified Public Accountant (CPA)",
     "recognizedBy": { "@type": "Organization", "name": "California Board of Accountancy" }
   },
-  "image": "https://chrissoncpa.github.io/og-card.png",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "San Francisco",
-    "addressRegion": "CA",
-    "addressCountry": "US"
-  },
-  "knowsAbout": [
-    "ASC 606 revenue recognition",
-    "Technical accounting",
-    "Financial reporting",
-    "Salesforce data architecture",
-    "Quote-to-cash automation",
-    "SaaS finance operations"
-  ],
-  "sameAs": [
-    "https://www.linkedin.com/in/chs1",
-    "https://github.com/chrissoncpa"
-  ]
+  "address": { "@type": "PostalAddress", "addressLocality": "San Francisco", "addressRegion": "CA", "addressCountry": "US" },
+  "knowsAbout": ["ASC 606 revenue recognition", "Technical accounting", "Financial reporting", "Salesforce data architecture", "Quote-to-cash automation", "SaaS finance operations"],
+  "sameAs": ["https://www.linkedin.com/in/chs1", "https://github.com/chrissoncpa"]
 }
 </script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 4 28 10v12L16 28 4 22V10z' fill='none' stroke='%231b1d21' stroke-width='2'/%3E%3Cpath d='M16 4v24M4 10l12 6 12-6' fill='none' stroke='%231b1d21' stroke-width='1.2'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f7f5f0;--ink:#1b1d21;--ink2:#575c64;--line:#7d828a;--faint:#e5e2db;--dash:#c3c0b9;
+  --accent:#c2362c;--accent2:#2b66ad;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#13171c;--ink:#e9e7e2;--ink2:#aab0b8;--line:#737981;--faint:#272c33;--dash:#3c424a;--accent:#e8604f;--accent2:#7fb0ea;}}
+:root[data-theme="dark"]{
+  --paper:#13171c;--ink:#e9e7e2;--ink2:#aab0b8;--line:#737981;--faint:#272c33;--dash:#3c424a;--accent:#e8604f;--accent2:#7fb0ea;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--sans);
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+
+header{display:flex;justify-content:space-between;align-items:baseline;padding-block:18px;border-bottom:1px solid var(--faint)}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{text-decoration:none;border-bottom:1px solid transparent}
+header nav a:hover,header nav a:focus-visible{border-color:var(--accent);outline:none}
+
+.sheet{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px;align-items:start}
+.fig{position:sticky;top:env(safe-area-inset-top,0px);height:100svh;display:flex;align-items:center;overflow:hidden;contain:layout paint}
+.fig svg{width:100%;height:auto;max-height:94svh;display:block;transform-origin:0 0;will-change:transform;
+  transition:transform 1.2s cubic-bezier(.35,0,.15,1)}
+.copy{padding-block:6vh}
+section.st{min-height:80svh;display:flex;flex-direction:column;justify-content:center;padding-block:32px}
+section.st:first-child{min-height:88svh}
+.eyebrow{display:flex;gap:12px;align-items:baseline;margin-bottom:14px}
+.eyebrow b{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:11px;letter-spacing:.08em}
+h1{font-size:clamp(34px,4.6vw,54px);line-height:1;letter-spacing:-.02em;font-weight:500;margin:0 0 14px;text-wrap:balance}
+h2{font-size:clamp(24px,2.6vw,32px);line-height:1.08;letter-spacing:-.015em;font-weight:500;margin:0 0 14px;text-wrap:balance;max-width:22ch}
+p{max-width:50ch;margin:0 0 10px;color:var(--ink2)}
+p.lead{color:var(--ink);font-size:17px}
+.thesis{font-size:clamp(19px,2vw,23px);line-height:1.3;letter-spacing:-.01em;color:var(--ink);max-width:36ch;margin:18px 0 22px;text-wrap:pretty}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.cta a{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:9px 14px;border:1px solid var(--line);border-radius:2px}
+.cta a.p{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.cta a:hover,.cta a:focus-visible{border-color:var(--accent);outline:none}
+
+.spec{display:grid;grid-template-columns:max-content 1fr;gap:4px 18px;margin:16px 0 6px;font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums}
+.spec dt{color:var(--ink2);text-transform:uppercase;letter-spacing:.06em;font-size:10.5px;padding-top:2px}
+.spec dd{margin:0;color:var(--ink)}
+
+details{margin-top:18px;border-top:1px solid var(--faint);max-width:56ch}
+summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:12px;padding:12px 0;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+summary::-webkit-details-marker{display:none}
+summary .d{width:26px;height:26px;border:1px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:10px;flex:none}
+summary .t{color:var(--ink)}
+summary .r{margin-left:auto;color:var(--ink2);font-size:10.5px}
+summary:focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+details[open] summary .d{background:var(--accent);color:var(--paper)}
+details .body{padding:0 0 16px 38px;color:var(--ink2);font-size:14px}
+details .body p{margin:0 0 8px}
+
+table{border-collapse:collapse;font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;margin:14px 0 4px;width:100%;max-width:56ch}
+td,th{text-align:left;padding:7px 14px 7px 0;border-bottom:1px solid var(--faint);vertical-align:top}
+th{font-weight:500;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+td:first-child{color:var(--accent)}
+td:nth-child(2){white-space:nowrap;color:var(--ink2)}
+footer{border-top:1px solid var(--faint);padding-block:22px 40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-top:8px}
+
+/* drawing */
+svg{font-family:var(--mono)}
+svg .k{stroke:var(--ink);stroke-width:.8}
+svg .l{stroke:var(--line);stroke-width:.6}
+svg .f{stroke:var(--dash);stroke-width:.45}
+svg .a{stroke:var(--accent);stroke-width:.9}
+svg .b{stroke:var(--accent2);stroke-width:.9}
+svg .ds{stroke-dasharray:2 2}
+svg text{fill:var(--ink2);font-size:6.5px;letter-spacing:.05em}
+svg text.lab{fill:var(--ink)}
+svg text.acc{fill:var(--accent)}
+svg text.dat{fill:var(--accent2)}
+svg line,svg path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+/* closing frame: only the title block and rail label carry labels */
+svg[data-st="6"] g.s:not(#g6) text{visibility:hidden}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+svg g.s .p{stroke-dasharray:1;stroke-dashoffset:0}
+.js svg g.s:not(.on) .p{stroke-dashoffset:1}
+.js svg g.s:not(.on) text{opacity:0}
+.js svg g.s.on:not(.init) .p{animation:draw .8s cubic-bezier(.4,0,.2,1) both;animation-delay:calc(min(var(--i,0),60)*18ms)}
+.js svg g.s.on:not(.init) text{animation:fade .5s ease .7s both}
+svg g.m{cursor:crosshair}
+svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  svg g.s .p,svg g.s text{animation:none!important}.fig svg{transition:none!important}
+}
+@media (max-width:860px){
+  .sheet{grid-template-columns:1fr;gap:0}
+  .fig{order:-1;height:44svh;z-index:1;background:var(--paper);border-bottom:1px solid var(--faint)}
+  .fig svg{max-height:42svh}
+  section.st{min-height:0;padding-block:40px}
+  section.st:first-child{min-height:0}
+  h1{font-size:34px}
+}
+</style>
 </head>
 <body>
 
-<a class="skip" href="#main">Skip to content</a>
-
-<header class="topbar">
-  <a class="brand" href="#top" aria-label="Chris Son — home">
-    <img class="brand-mark" src="logo-64.png" width="28" height="28" alt="" aria-hidden="true">
-    <span class="brand-name">Chris Son</span>
-  </a>
-  <nav class="topnav" aria-label="Primary">
-    <a href="#work">Work</a>
-    <a href="#stack">Stack</a>
-    <a href="#background">Background</a>
-    <a href="Chris_Son_Resume.pdf" target="_blank" rel="noopener">Resume<span class="vh"> (opens in new tab)</span></a>
+<div class="wrap">
+<header>
+  <div><span class="mono">Chris Son · CPA</span></div>
+  <nav class="mono">
+    <a href="#s1">The city</a><a href="#s4">Rev Rec</a><a href="#s6">Revisions</a><a href="https://github.com/chrissoncpa">GitHub</a>
   </nav>
-  <details class="mobnav">
-    <summary aria-label="Section menu">
-      Menu
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-    </summary>
-    <nav class="mobnav-panel" aria-label="Sections">
-      <a href="#work">Work</a>
-      <a href="#stack">Stack</a>
-      <a href="#background">Background</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </details>
-  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
-    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
-  </button>
 </header>
 
-<main id="main">
+<div class="sheet">
+<div class="copy">
 
-  <section id="top" class="hero">
-    <div class="circuit-container" aria-hidden="true">
-      <svg class="circuit-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMin slice" aria-hidden="true" width="100%" height="100%">
-        <defs>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-        <!-- Tracks -->
-        <path class="trace trace-y" style="animation-delay: 0.0s;" d="M 650 -50 L 550 50 L 550 220 L 330 440 L -50 440" />
-        <path class="trace trace-o" style="animation-delay: 0.2s;" d="M 518 -50 L 518 210 L 298 430 L 298 650" />
-        <path class="trace trace-r" style="animation-delay: 0.4s;" d="M 530 -50 L 530 215 L 310 435 L -50 435" />
-        <path class="trace trace-g" style="animation-delay: 0.6s;" d="M 750 50 L 680 50 L 526 180 L 526 205 L 306 425 L 306 650" />
-        <path class="trace trace-b" style="animation-delay: 0.8s;" d="M 750 62 L 680 62 L 514 192 L 514 200 L 294 420 L -50 420" />
-        <!-- Stations -->
-        <circle class="station node" cx="550" cy="150" r="7" style="animation-delay: 1.0s; transform-origin: 550px 150px; fill: var(--bg); stroke: var(--accent); stroke-width: 2;" />
-        <circle class="station node" cx="530" cy="150" r="7" style="animation-delay: 1.2s; transform-origin: 530px 150px; fill: var(--bg); stroke: var(--accent); stroke-width: 2;" />
-        <circle class="station node" cx="518" cy="150" r="7" style="animation-delay: 1.4s; transform-origin: 518px 150px; fill: var(--bg); stroke: var(--accent); stroke-width: 2;" />
-      </svg>
-    </div>
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <p class="eyebrow">San Francisco · Controller · Series A–C</p>
-        <h1 class="hero-name">
-          <span class="grad">Chris Son</span>
-        </h1>
-        <p class="hero-roles">Accounting Architect &middot; CPA &middot; Salesforce Data Architect</p>
-        <p class="hero-pitch">
-          I scratch-build accounting systems at startups from zero to one,
-          including an M&amp;A exit to Google. Finance as a systems function, not a ledger function.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="https://www.linkedin.com/in/chs1" target="_blank" rel="noopener">Contact Chris<span class="vh"> (opens in new tab)</span></a>
-          <a class="btn btn-ghost" href="#work">See projects</a>
-          <a class="text-link" href="Chris_Son_Resume.pdf" target="_blank" rel="noopener">
-            Resume PDF<span class="vh"> (opens in new tab)</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v14M5 12l7 7 7-7"/></svg>
-          </a>
-        </div>
-        <ul class="hero-socials" aria-label="Contact">
-          <li>
-            <a href="https://www.linkedin.com/in/chs1" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43A2.06 2.06 0 1 1 5.34 3.3a2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/chrissoncpa" target="_blank" rel="noopener" aria-label="GitHub (opens in new tab)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.92c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.5 3.18-1.18 3.18-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.18c0 .31.21.66.79.55 4.57-1.52 7.86-5.83 7.86-10.91C23.5 5.65 18.35.5 12 .5z"/></svg>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="hero-portrait">
-        <picture>
-          <source srcset="portrait.webp" type="image/webp">
-          <img class="portrait-img" src="portrait.png" width="400" height="391" alt="Chris Son, CPA and Accounting Architect" decoding="async" fetchpriority="high">
-        </picture>
-      </div>
-    </div>
-  </section>
-
-  <section class="proof" aria-label="Key outcomes">
-    <div class="container">
-      <ul class="proof-strip">
-        <li><span class="proof-num">200+</span><span class="proof-label">clients served by one Controller</span></li>
-        <li><span class="proof-num">3&times;</span><span class="proof-label">revenue-function productivity</span></li>
-        <li><span class="proof-num">Acquired</span><span class="proof-label">by Google &mdash; M&amp;A diligence through integration</span></li>
-        <li><span class="proof-num">9</span><span class="proof-label">Salesforce certifications</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="manifesto" class="manifesto" aria-labelledby="manifesto-heading">
-    <div class="container narrow">
-      <h2 id="manifesto-heading" class="vh">Finance systems thesis</h2>
-      <p class="kicker">Thesis</p>
-      <blockquote class="quote">
-        <p>Accountants aren&rsquo;t ledger keepers anymore. They&rsquo;re business systems architects.</p>
-        <p>The future of accounting isn&rsquo;t closing the books &mdash; it&rsquo;s orchestrating the data.
-        Own the definitions. Control the inputs. Enforce quality and standards.
-        Then let automation take over to turn numbers into narrative.</p>
-      </blockquote>
-      <p class="manifesto-body">
-        Traditional accounting organizations still treat CPAs as ledger keepers.
-        Most Salesforce architects don&rsquo;t understand GAAP.
-        I&rsquo;m both &mdash; and I use AI to compound the leverage. That&rsquo;s the seam where
-        modern finance lives.
-      </p>
-      <p class="manifesto-body">
-        I&rsquo;ve also spent years on the GTM side of the seam &mdash; building the ARR mechanics,
-        capacity models, and intra-quarter forecasts that Sales, CS, and leadership run off of.
-        Strategic finance lands harder when the person building the model knows where the actuals
-        come from.
-      </p>
-    </div>
-  </section>
-
-  <section id="work" class="work">
-    <div class="container">
-      <header class="section-head">
-        <h2>Case studies</h2>
-      </header>
-
-      <ol class="cases">
-        <li class="case">
-          <div class="case-num"><span>01</span></div>
-          <div class="case-body">
-            <h3 class="case-title">Modern accounting stack &mdash; usage-based revenue</h3>
-            <p class="case-role">Controller &middot; Newo.ai</p>
-            <p>
-              Designing the finance architecture for a Series A AI voice platform: contracts and
-              usage metering flowing through an ASC 606 rev rec and AR layer into a single general
-              ledger of record. Recognition is built into the pipeline rather than reconciled
-              after the fact.
-            </p>
-            <p class="case-why"><span>Why it matters &middot;</span> Usage-based revenue breaks the standard SaaS rev-rec playbook. The architecture has to meter, price, and recognize in one flow.</p>
-            <figure class="case-diagram">
-              <div class="case-diagram-shell">
-              <div class="case-diagram-scroll">
-                <svg class="cd-wide" viewBox="0 0 820 280" role="img" aria-label="System diagram: contracts and usage metering feed a revenue recognition and AR layer built on ASC 606, which is in build; that layer joins payables and payroll and equity at a single general ledger of record, which then feeds close and investor reporting.">
-                  <g class="cd-trace">
-                    <path d="M165 37 C190 37, 190 70, 215 70"/>
-                    <path d="M165 103 C190 103, 190 70, 215 70"/>
-                    <path d="M380 70 C405 70, 405 136, 430 136"/>
-                    <path d="M165 169 C298 169, 298 136, 430 136"/>
-                    <path d="M165 235 C298 235, 298 136, 430 136"/>
-                    <path d="M595 136 H645"/>
-                  </g>
-                  <g class="cd-pad">
-                    <circle cx="215" cy="70" r="4"/>
-                    <circle cx="430" cy="136" r="4"/>
-                    <circle cx="625" cy="136" r="3.5"/>
-                  </g>
-                  <g class="cd-chip">
-                    <rect x="10" y="10" width="155" height="54" rx="8"/>
-                    <rect x="10" y="76" width="155" height="54" rx="8"/>
-                    <rect x="10" y="142" width="155" height="54" rx="8"/>
-                    <rect x="10" y="208" width="155" height="54" rx="8"/>
-                    <rect x="215" y="36" width="165" height="68" rx="8" stroke-dasharray="4 3"/>
-                    <rect x="430" y="46" width="165" height="180" rx="8"/>
-                    <rect x="645" y="109" width="165" height="54" rx="8"/>
-                  </g>
-                  <g class="cd-label">
-                    <text x="88" y="34" text-anchor="middle">Contracts</text>
-                    <text x="88" y="100" text-anchor="middle">Usage metering</text>
-                    <text x="88" y="166" text-anchor="middle">Payables</text>
-                    <text x="88" y="232" text-anchor="middle">Payroll &amp; equity</text>
-                    <text x="298" y="64" text-anchor="middle">Rev rec &amp; AR</text>
-                    <text x="513" y="130" text-anchor="middle">General ledger</text>
-                    <text x="728" y="133" text-anchor="middle">Reporting</text>
-                  </g>
-                  <g class="cd-sub">
-                    <text x="88" y="50" text-anchor="middle">terms &#183; pricing</text>
-                    <text x="88" y="116" text-anchor="middle">token consumption</text>
-                    <text x="88" y="182" text-anchor="middle">AP &#183; cards</text>
-                    <text x="88" y="248" text-anchor="middle">comp &#183; cap table</text>
-                    <text x="298" y="82" text-anchor="middle">ASC 606 &#183; in build</text>
-                    <text x="513" y="150" text-anchor="middle">single source of record</text>
-                    <text x="728" y="149" text-anchor="middle">close &#183; investor reporting</text>
-                  </g>
-                </svg>
-              </div>
-              </div>
-              <figcaption>System sketch &mdash; the revenue-through-ledger architecture, sanitized.</figcaption>
-            </figure>
-            <ul class="case-tags">
-              <li>ASC 606</li>
-              <li>Usage-based billing</li>
-              <li>Stripe</li>
-              <li>QuickBooks</li>
-              <li>Series A</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="case">
-          <div class="case-num"><span>02</span></div>
-          <div class="case-body">
-            <h3 class="case-title">Practice automation &mdash; 200+ client pipeline</h3>
-            <p class="case-role">Founder &amp; Controller &middot; Son CPA Corp.</p>
-            <p>
-              Built a proprietary data integration pipeline that syncs client books into
-              QuickBooks via Google Sheets. One Controller serves 200+ Bay Area clients across
-              every entity type &mdash; without proportional headcount.
-            </p>
-            <p class="case-why"><span>Why it matters &middot;</span> AI-native finance architecture in practice, not theory.</p>
-            <figure class="case-diagram">
-              <div class="case-diagram-shell">
-              <div class="case-diagram-scroll">
-                <svg viewBox="0 0 680 150" role="img" aria-label="System diagram: client books flow through a Google Sheets intake into AppsScript categorization and transformation logic, then into QuickBooks serving 200 plus client files.">
-                  <g class="cd-trace">
-                    <path d="M140 74 H180"/>
-                    <path d="M310 74 H350"/>
-                    <path d="M480 74 H520"/>
-                    <path d="M245 42 V18 H415 V42"/>
-                  </g>
-                  <g class="cd-pad">
-                    <circle cx="160" cy="74" r="3.5"/>
-                    <circle cx="330" cy="74" r="3.5"/>
-                    <circle cx="500" cy="74" r="3.5"/>
-                    <circle cx="330" cy="18" r="3.5"/>
-                  </g>
-                  <g class="cd-chip">
-                    <rect x="10" y="42" width="130" height="64" rx="8"/>
-                    <rect x="180" y="42" width="130" height="64" rx="8"/>
-                    <rect x="350" y="42" width="130" height="64" rx="8"/>
-                    <rect x="520" y="42" width="150" height="64" rx="8"/>
-                  </g>
-                  <g class="cd-label">
-                    <text x="75" y="70" text-anchor="middle">Client books</text>
-                    <text x="245" y="70" text-anchor="middle">Google Sheets</text>
-                    <text x="415" y="70" text-anchor="middle">AppsScript</text>
-                    <text x="595" y="70" text-anchor="middle">QuickBooks</text>
-                  </g>
-                  <g class="cd-sub">
-                    <text x="75" y="90" text-anchor="middle">banks &#183; statements</text>
-                    <text x="245" y="90" text-anchor="middle">structured intake</text>
-                    <text x="415" y="90" text-anchor="middle">auto-categorize &#183; transform</text>
-                    <text x="595" y="90" text-anchor="middle">200+ client files</text>
-                    <text x="330" y="134" text-anchor="middle">bi-directional sync &#183; one categorization standard across entity types</text>
-                  </g>
-                </svg>
-              </div>
-              </div>
-              <figcaption>System sketch &mdash; the client-books pipeline, sanitized.</figcaption>
-            </figure>
-            <ul class="case-tags">
-              <li>Google AppsScript</li>
-              <li>QuickBooks API</li>
-              <li>Tax workflow</li>
-              <li>200+ clients</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="case">
-          <div class="case-num"><span>03</span></div>
-          <div class="case-body">
-            <h3 class="case-title">GTM-to-revenue recognition pipeline</h3>
-            <p class="case-role">Salesforce Architect &amp; Assistant Controller &middot; BrightBytes</p>
-            <p>
-              Led migration from Salesforce Classic to Lightning and redesigned the entire data
-              pipeline from marketing through finance. Aligned every division to a single master
-              data standard &mdash; one unified revenue stream instead of three reconciled versions.
-            </p>
-            <p class="case-why"><span>Why it matters &middot;</span> Tripled productivity across the revenue function. Divisional silos torn down by unifying data definitions.</p>
-            <figure class="case-diagram">
-              <div class="case-diagram-shell">
-              <div class="case-diagram-scroll">
-                <svg class="cd-wide" viewBox="0 0 740 150" role="img" aria-label="System diagram: one master data standard spans the full pipeline — marketing hands off to Salesforce opportunities, then contracts, ASC 606 treatment, revenue schedules, and reporting, producing a single unified revenue stream.">
-                  <g class="cd-trace">
-                    <path d="M65 18 H685"/>
-                    <path d="M65 18 V42"/><path d="M189 18 V42"/><path d="M313 18 V42"/>
-                    <path d="M437 18 V42"/><path d="M561 18 V42"/><path d="M685 18 V42"/>
-                    <path d="M120 74 H134"/><path d="M244 74 H258"/><path d="M368 74 H382"/>
-                    <path d="M492 74 H506"/><path d="M616 74 H630"/>
-                  </g>
-                  <g class="cd-pad">
-                    <circle cx="65" cy="18" r="2.5"/><circle cx="189" cy="18" r="2.5"/>
-                    <circle cx="313" cy="18" r="2.5"/><circle cx="437" cy="18" r="2.5"/>
-                    <circle cx="561" cy="18" r="2.5"/><circle cx="685" cy="18" r="2.5"/>
-                  </g>
-                  <g class="cd-chip">
-                    <rect x="10" y="42" width="110" height="64" rx="8"/>
-                    <rect x="134" y="42" width="110" height="64" rx="8"/>
-                    <rect x="258" y="42" width="110" height="64" rx="8"/>
-                    <rect x="382" y="42" width="110" height="64" rx="8"/>
-                    <rect x="506" y="42" width="110" height="64" rx="8"/>
-                    <rect x="630" y="42" width="110" height="64" rx="8"/>
-                  </g>
-                  <g class="cd-label cd-label-sm">
-                    <text x="65" y="68" text-anchor="middle">Marketing</text>
-                    <text x="189" y="68" text-anchor="middle">Salesforce</text>
-                    <text x="313" y="68" text-anchor="middle">Contract</text>
-                    <text x="437" y="68" text-anchor="middle">ASC 606</text>
-                    <text x="561" y="68" text-anchor="middle">Rev schedule</text>
-                    <text x="685" y="68" text-anchor="middle">Reporting</text>
-                  </g>
-                  <g class="cd-sub">
-                    <text x="65" y="88" text-anchor="middle">campaigns &#183; leads</text>
-                    <text x="189" y="88" text-anchor="middle">opportunity &#183; quote</text>
-                    <text x="313" y="88" text-anchor="middle">signed terms</text>
-                    <text x="437" y="88" text-anchor="middle">treatment</text>
-                    <text x="561" y="88" text-anchor="middle">recognition</text>
-                    <text x="685" y="88" text-anchor="middle">one stream</text>
-                    <text x="375" y="134" text-anchor="middle">one master data standard from marketing through finance</text>
-                  </g>
-                </svg>
-              </div>
-              </div>
-              <figcaption>System sketch &mdash; GTM-to-revenue pipeline on one master data standard, sanitized.</figcaption>
-            </figure>
-            <ul class="case-tags">
-              <li>Salesforce Data Architect</li>
-              <li>Master data design</li>
-              <li>ASC 606</li>
-              <li>3&times; productivity</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="case">
-          <div class="case-num"><span>04</span></div>
-          <div class="case-body">
-            <h3 class="case-title">Payments platform architecture</h3>
-            <p class="case-role">Finance Lead &middot; BrightBytes</p>
-            <p>
-              Helped architect a custom payments infrastructure on Modern Treasury and Stripe
-              &mdash; automating collections and multi-party disbursements, maintaining audit
-              compliance, and syncing directly with the bank.
-            </p>
-            <p class="case-why"><span>Why it matters &middot;</span> Automated reconciliation across multi-party flows that previously required manual matching every close. Finance partnering with engineering on infrastructure, not just reporting on it.</p>
-            <ul class="case-tags">
-              <li>Modern Treasury</li>
-              <li>Stripe</li>
-              <li>Bank sync</li>
-              <li>Disbursements</li>
-            </ul>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="stack" class="stack">
-    <div class="container">
-      <header class="section-head">
-        <p class="kicker">Capabilities</p>
-        <h2>The stack underneath the work.</h2>
-      </header>
-
-      <div class="stack-grid">
-        <article class="stack-card">
-          <h3>Technical Accounting</h3>
-          <ul>
-            <li>U.S. GAAP</li>
-            <li>ASC 606 Revenue Recognition</li>
-            <li>Multi-Entity Close</li>
-            <li>Audit Readiness</li>
-            <li>M&amp;A Diligence &amp; Integration</li>
-          </ul>
-        </article>
-
-        <article class="stack-card">
-          <h3>Systems &amp; Data</h3>
-          <ul>
-            <li>Salesforce &mdash; Data Architect, Sharing &amp; Visibility Architect, +7 certs</li>
-            <li>NetSuite &middot; QuickBooks</li>
-            <li>SQL &middot; Google BigQuery</li>
-            <li>Metabase &middot; Tableau</li>
-            <li>Google AppsScript</li>
-          </ul>
-        </article>
-
-        <article class="stack-card">
-          <h3>AI &amp; Automation</h3>
-          <ul>
-            <li>Active AI adoption for reconciliation, flux, and recurring reporting</li>
-            <li>Proprietary data integration moats</li>
-            <li>The differentiator is the governance underneath the tooling &mdash; not the tooling itself</li>
-          </ul>
-        </article>
-
-        <article class="stack-card">
-          <h3>Strategic Finance &amp; FP&amp;A</h3>
-          <ul>
-            <li>ARR, retention, CAC, payback modeling</li>
-            <li>Intra-quarter forecasting in partnership with Sales and RevOps</li>
-            <li>Annual Operating Planning and long-range forecasting</li>
-            <li>Capacity, headcount, and quota modeling</li>
-            <li>Board materials and investor reporting</li>
-          </ul>
-        </article>
-
-        <article class="stack-card">
-          <h3>Leadership &amp; Partnership</h3>
-          <ul>
-            <li>Team management</li>
-            <li>Cross-functional partnership: Sales, Product, Engineering, Legal, GTM</li>
-            <li>External auditor and tax advisor coordination</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="background" class="background">
-    <div class="container">
-      <header class="section-head">
-        <p class="kicker">Background</p>
-        <h2>Ten years building finance for high-growth SaaS.</h2>
-      </header>
-
-      <ol class="timeline">
-        <li>
-          <time class="t-date" datetime="2026-07">Jul 2026 &mdash; Present</time>
-          <span class="t-role">Controller</span>
-          <span class="t-org">Newo.ai</span>
-          <p class="t-blurb">Leading accounting operations, financial reporting, and technical accounting (ASC 606) for a Series A AI voice automation platform, including revenue recognition system design for a hybrid usage- and partner-driven revenue model.</p>
-        </li>
-        <li>
-          <time class="t-date" datetime="2025-04">Apr 2025 &mdash; Jul 2026</time>
-          <span class="t-role">Controller</span>
-          <span class="t-org">Son CPA Corp.</span>
-          <p class="t-blurb">Hands-on practice serving 200+ Bay Area clients across C Corps, S Corps, LLCs, partnerships, and individuals. Built the data automation that makes the scale possible.</p>
-        </li>
-        <li>
-          <time class="t-date" datetime="2023-04">Apr 2023 &mdash; Mar 2025</time>
-          <span class="t-role">Controller</span>
-          <span class="t-org">Doorstead</span>
-          <p class="t-blurb">Owned monthly and quarterly close at a high-growth proptech startup. Managed four accountants, partnered cross-functionally with Sales, Product, Engineering, and GTM on the upstream data discipline scalable accounting depends on.</p>
-        </li>
-        <li>
-          <time class="t-date" datetime="2022-05">May 2022 &mdash; Apr 2023</time>
-          <span class="t-role">Assistant Controller, BrightBytes (post-acquisition)</span>
-          <span class="t-org">Google</span>
-          <p class="t-blurb">Owned the systems migration and financial integration of BrightBytes into Google&rsquo;s ecosystem. Maintained seamless ASC 606 revenue recognition and reporting through the transition.</p>
-        </li>
-        <li>
-          <time class="t-date" datetime="2016-06">Jun 2016 &mdash; May 2022</time>
-          <span class="t-role">Finance Revenue Coordinator &rarr; Lead &rarr; Assistant Controller</span>
-          <span class="t-org">BrightBytes</span>
-          <p class="t-blurb">Six years building the SaaS finance infrastructure end-to-end &mdash; revenue recognition, audit readiness, Salesforce data architecture, quote-to-cash automation. The work that ultimately enabled the Google acquisition.</p>
-        </li>
-      </ol>
-
-      <p class="creds">
-        <strong>CPA</strong>, California Board of Accountancy &nbsp;&middot;&nbsp;
-        M.S. Taxation, Golden Gate University &nbsp;&middot;&nbsp;
-        B.A. Statistics, UC Berkeley &nbsp;&middot;&nbsp;
-        9 Salesforce certifications
-      </p>
-      <p class="creds-verify">
-        <a href="https://search.dca.ca.gov/details/300/CPA/162174/7d5d1f67cac37cdb268e48c9dfb6209e" target="_blank" rel="noopener">
-          Verify CPA license<span class="vh"> (opens in new tab)</span> &nbsp;&rarr;
-        </a>
-      </p>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="container narrow">
-      <p class="kicker">Contact</p>
-      <h2 class="contact-line">Building a finance function that has to scale? Let&rsquo;s talk.</h2>
-      <p class="contact-sub">Controller &middot; Head of Finance &middot; Strategic Finance &mdash; Series A&ndash;C</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://www.linkedin.com/in/chs1" target="_blank" rel="noopener">Message Chris on LinkedIn<span class="vh"> (opens in new tab)</span></a>
-        <a class="btn btn-ghost" href="Chris_Son_Resume.pdf" target="_blank" rel="noopener">Resume PDF<span class="vh"> (opens in new tab)</span></a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer class="footer">
-  <div class="container">
-    <div class="foot-row">
-      <div class="foot-left">
-        <p class="foot-name">Chris Son</p>
-        <p class="foot-line">Architecting finance as a systems function.</p>
-      </div>
-      <div class="foot-right">
-        <a href="https://www.linkedin.com/in/chs1" target="_blank" rel="noopener">Message on LinkedIn<span class="vh"> (opens in new tab)</span></a>
-        <div class="foot-socials">
-          <a href="https://www.linkedin.com/in/chs1" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43A2.06 2.06 0 1 1 5.34 3.3a2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg>
-          </a>
-          <a href="https://github.com/chrissoncpa" target="_blank" rel="noopener" aria-label="GitHub (opens in new tab)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.92c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.5 3.18-1.18 3.18-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.18c0 .31.21.66.79.55 4.57-1.52 7.86-5.83 7.86-10.91C23.5 5.65 18.35.5 12 .5z"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-    <p class="foot-small">
-      &copy; <span id="year">2026</span> Chris Son &nbsp;&middot;&nbsp;
-      Built with Claude Code, hosted on GitHub Pages.
-    </p>
+<section class="st" id="s0" data-st="0">
+  <div class="eyebrow"><b>00</b><span class="mono">One house</span></div>
+  <h1>Chris Son</h1>
+  <p class="lead">Accounting architect. CPA. Salesforce Data Architect. San&nbsp;Francisco.</p>
+  <p class="thesis">I scratch-build accounting systems at startups from zero to one, including an M&amp;A exit to Google. I don't just keep the ledger. I build the city that feeds it.</p>
+  <div class="cta">
+    <a class="p" href="https://www.linkedin.com/in/chs1/">LinkedIn</a>
+    <a href="Chris_Son_Resume.pdf">Resume · PDF</a>
   </div>
-</footer>
+  <div class="hint">Scroll to build ↓</div>
+</section>
 
-<script src="script.js?v=5" defer></script>
+<section class="st" id="s1" data-st="1">
+  <div class="eyebrow"><b>01</b><span class="mono">Foundation</span></div>
+  <h2>First, the ledger hall. Everything else is zoned around it.</h2>
+  <p>General ledger, chart of accounts, multi-entity close. Poured once, correctly, so nothing built later has to be torn down.</p>
+  <dl class="spec"><dt>Material</dt><dd>U.S. GAAP</dd><dt>Zoning</dt><dd>Multi-entity · consolidated</dd><dt>Tolerance</dt><dd>Audit-ready</dd></dl>
+  <details><summary><span class="d">A</span><span class="t">Son CPA Corp · 200 books, one pipeline</span><span class="r">2025–26</span></summary>
+    <div class="body"><p>Founder &amp; Controller. One person, 200+ VC-backed clients.</p><p>Sheets → AppsScript → QuickBooks. Categorization standardized across entity types. One hall, two hundred foundations.</p></div></details>
+</section>
+
+<section class="st" id="s2" data-st="2">
+  <div class="eyebrow"><b>02</b><span class="mono">Supply lines</span></div>
+  <h2>Five belts feed the hall. No hands on the line.</h2>
+  <p>Contracts, metering, billing, payables, payroll. Each runs from its source straight into the ledger, so throughput scales without headcount.</p>
+  <dl class="spec"><dt>Inputs</dt><dd>5 · source → GL</dd><dt>Standard</dt><dd>One master-data schema</dd><dt>Failure mode</dt><dd>Manual re-keying</dd></dl>
+  <details><summary><span class="d">B</span><span class="t">Newo.ai · usage-based revenue</span><span class="r">2026–</span></summary>
+    <div class="body"><p>Controller, Series A AI voice platform.</p><p>Contract → meter → invoice → recognition → GL as one continuous belt. ASC 606 built into the metering, not bolted on at close.</p></div></details>
+</section>
+
+<section class="st" id="s3" data-st="3">
+  <div class="eyebrow"><b>03</b><span class="mono">Town hall</span></div>
+  <h2>Close, audit, board. Three floors, then the roads.</h2>
+  <p>A monthly close that finishes in days, books an auditor can walk, and a deck a board can read. Then avenues, so the next districts have somewhere to connect.</p>
+  <dl class="spec"><dt>L1</dt><dd>Close · 5 days</dd><dt>L2</dt><dd>Audit &amp; diligence</dd><dt>L3</dt><dd>Board · ARR · CAC · payback</dd></dl>
+  <details><summary><span class="d">C</span><span class="t">Doorstead · finance function from zero</span><span class="r">2023–25</span></summary>
+    <div class="body"><p>Controller, proptech. Built the function from nothing; led four accountants.</p><p>Close, forecast, operating plan, capacity model. Every floor drawn before it was poured.</p></div></details>
+</section>
+
+<section class="st" id="s4" data-st="4">
+  <div class="eyebrow"><b>04</b><span class="mono">The 606 line</span></div>
+  <h2>Revenue runs out past the city limits.</h2>
+  <p>ASC 606 is the elevated line: contract in, obligation sorted, recognition out, on schedule, over ground nobody else has built on. Ten years keeping it running.</p>
+  <dl class="spec"><dt>Route</dt><dd>Contract → obligation → recognition</dd><dt>Cargo</dt><dd>Usage, subscription, multi-element</dd><dt>Uptime</dt><dd>10 years</dd></dl>
+  <details><summary><span class="d">D</span><span class="t">BrightBytes · GTM-to-revenue</span><span class="r">2016–23</span></summary>
+    <div class="body"><p>Salesforce Architect &amp; Assistant Controller. Classic → Lightning migration.</p><p>One master-data standard across marketing, sales, contracts and 606. Revenue-function throughput 3×. Carried through the Google acquisition.</p></div></details>
+</section>
+
+<section class="st" id="s5" data-st="5">
+  <div class="eyebrow"><b>05</b><span class="mono">Data core</span></div>
+  <h2>One tower every building is piped into.</h2>
+  <p>Salesforce as the utility. Master data is a governance decision, not a tooling one, so every district reads from the same source.</p>
+  <dl class="spec"><dt>Core</dt><dd>Salesforce · 9 certs incl. Data Architect</dd><dt>Pipes</dt><dd>SQL · BigQuery · Metabase · Tableau</dd><dt>Plant</dt><dd>NetSuite · QuickBooks · AppsScript · AI reconciliation</dd></dl>
+  <details><summary><span class="d">E</span><span class="t">BrightBytes · payments platform</span><span class="r">2022</span></summary>
+    <div class="body"><p>Finance Lead. Modern Treasury + Stripe.</p><p>Automated collections, multi-party disbursements, bank reconciliation. Money moves through the core like everything else.</p></div></details>
+</section>
+
+<section class="st" id="s6" data-st="6">
+  <div class="eyebrow"><b>06</b><span class="mono">City · revisions</span></div>
+  <h2>Now drafting for Series A–D.</h2>
+  <p>Controller or Head of Finance. AI and SaaS. Systems first, from the first house.</p>
+  <table>
+    <thead><tr><th>Rev</th><th>Date</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>05</td><td>2026.07–</td><td>Controller · Newo.ai</td></tr>
+      <tr><td>04</td><td>2025.04–2026.07</td><td>Controller · Son CPA Corp</td></tr>
+      <tr><td>03</td><td>2023.04–2025.03</td><td>Controller · Doorstead</td></tr>
+      <tr><td>02</td><td>2022.05–2023.04</td><td>Asst. Controller · BrightBytes / Google</td></tr>
+      <tr><td>01</td><td>2016.06–2022.05</td><td>Coordinator → Asst. Controller · BrightBytes</td></tr>
+    </tbody>
+  </table>
+  <dl class="spec"><dt>Stamp</dt><dd>CPA · California</dd><dt>Degrees</dt><dd>M.S. Taxation, GGU · B.A. Statistics, UC Berkeley</dd><dt>Certs</dt><dd>Salesforce ×9</dd></dl>
+  <div class="cta">
+    <a class="p" href="https://www.linkedin.com/in/chs1/">LinkedIn</a>
+    <a href="Chris_Son_Resume.pdf">Resume · PDF</a>
+    <a href="https://github.com/chrissoncpa">GitHub</a>
+  </div>
+</section>
+
+</div>
+
+<div class="fig" aria-hidden="true">
+<svg id="dwg" viewBox="0 0 800 620" role="img" aria-label="Isometric wireframe city that grows from one house as you scroll"></svg>
+</div>
+</div>
+
+<footer class="mono">
+  <span>© 2026 Chris Son</span>
+  <span>Accounting architect · CPA · Salesforce Data Architect · Series A–D</span>
+</footer>
+</div>
+
+<script>
+(function(){
+var d=document.documentElement;d.classList.add('js');
+/* ---------- isometric generator ---------- */
+var TW=16,TH=8,ZH=12,OX=400,OY=110;
+function P(x,y,z){return [OX+(x-y)*TW,OY+(x+y)*TH-(z||0)*ZH];}
+var stages=[],cnt=0,cur=0;
+function S(n){cur=n;cnt=0;if(!stages[n])stages[n]='';}
+function seg(a,b,c){var p=P(a[0],a[1],a[2]),q=P(b[0],b[1],b[2]);
+  stages[cur]+='<line class="p '+c+'" x1="'+p[0].toFixed(1)+'" y1="'+p[1].toFixed(1)+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" pathLength="1" style="--i:'+(cnt++)+'"/>';}
+function path(dstr,c){stages[cur]+='<path class="p '+c+'" d="'+dstr+'" pathLength="1" style="--i:'+(cnt++)+'"/>';}
+function poly(pts,c,close){var s='';for(var i=0;i<pts.length;i++){var p=P(pts[i][0],pts[i][1],pts[i][2]);s+=(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}path(s+(close?'Z':''),c);}
+function txt(x,y,z,t,c,anchor){var p=P(x,y,z);stages[cur]+='<text class="'+(c||'')+'" x="'+p[0].toFixed(1)+'" y="'+p[1].toFixed(1)+'"'+(anchor?' text-anchor="'+anchor+'"':'')+'>'+t+'</text>';}
+/* box with hidden edges faint */
+function box(x,y,w,dp,h,c,hid){c=c||'k';hid=hid===undefined?'f':hid;
+  poly([[x,y,h],[x+w,y,h],[x+w,y+dp,h],[x,y+dp,h]],c,true);
+  seg([x+w,y,0],[x+w,y,h],c);seg([x+w,y+dp,0],[x+w,y+dp,h],c);seg([x,y+dp,0],[x,y+dp,h],c);
+  poly([[x+w,y,0],[x+w,y+dp,0],[x,y+dp,0]],c);
+  if(hid){seg([x,y,0],[x,y,h],hid);poly([[x+w,y,0],[x,y,0],[x,y+dp,0]],hid);}}
+function floors(x,y,w,dp,zs,c){for(var i=0;i<zs.length;i++)poly([[x+w,y,zs[i]],[x+w,y+dp,zs[i]],[x,y+dp,zs[i]]],c||'l');}
+function ell(x,y,z,r,c,half){var p=P(x,y,z),rx=r*TW,ry=r*TH;
+  path(half?('M'+(p[0]-rx).toFixed(1)+' '+p[1].toFixed(1)+'A'+rx+' '+ry+' 0 0 0 '+(p[0]+rx).toFixed(1)+' '+p[1].toFixed(1))
+   :('M'+(p[0]-rx).toFixed(1)+' '+p[1].toFixed(1)+'A'+rx+' '+ry+' 0 1 0 '+(p[0]+rx).toFixed(1)+' '+p[1].toFixed(1)+'A'+rx+' '+ry+' 0 1 0 '+(p[0]-rx).toFixed(1)+' '+p[1].toFixed(1)),c);}
+function cyl(x,y,r,h,c){c=c||'k';ell(x,y,h,r,c);ell(x,y,0,r,c,true);
+  var p=P(x,y,0);var rx=r*TW;
+  stages[cur]+='<line class="p '+c+'" x1="'+(p[0]-rx).toFixed(1)+'" y1="'+(p[1]).toFixed(1)+'" x2="'+(p[0]-rx).toFixed(1)+'" y2="'+(p[1]-h*ZH).toFixed(1)+'" pathLength="1" style="--i:'+(cnt++)+'"/>';
+  stages[cur]+='<line class="p '+c+'" x1="'+(p[0]+rx).toFixed(1)+'" y1="'+(p[1]).toFixed(1)+'" x2="'+(p[0]+rx).toFixed(1)+'" y2="'+(p[1]-h*ZH).toFixed(1)+'" pathLength="1" style="--i:'+(cnt++)+'"/>';}
+/* conveyor belt: two rails + chevrons */
+function belt(a,b,z,c){c=c||'l';var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy),ux=dx/L,uy=dy/L,nx=-uy*.22,ny=ux*.22;
+  seg([a[0]+nx,a[1]+ny,z],[b[0]+nx,b[1]+ny,z],c);seg([a[0]-nx,a[1]-ny,z],[b[0]-nx,b[1]-ny,z],c);
+  for(var t=.6;t<L-.3;t+=.8){var cx=a[0]+ux*t,cy=a[1]+uy*t;
+    poly([[cx-ux*.25+nx*.8,cy-uy*.25+ny*.8,z],[cx,cy,z],[cx-ux*.25-nx*.8,cy-uy*.25-ny*.8,z]],'f');}}
+function road(a,b,c){var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy),nx=-dy/L*.45,ny=dx/L*.45;
+  seg([a[0]+nx,a[1]+ny,0],[b[0]+nx,b[1]+ny,0],c||'l');seg([a[0]-nx,a[1]-ny,0],[b[0]-nx,b[1]-ny,0],c||'l');
+  seg([a[0],a[1],0],[b[0],b[1],0],'f ds');}
+function house(x,y,w,dp,h,c){c=c||'k';box(x,y,w,dp,h,c);
+  var r=h+.7;seg([x,y+dp/2,r],[x+w,y+dp/2,r],c);
+  seg([x+w,y,h],[x+w,y+dp/2,r],c);seg([x+w,y+dp,h],[x+w,y+dp/2,r],c);seg([x,y+dp,h],[x,y+dp/2,r],c);seg([x,y,h],[x,y+dp/2,r],'f');}
+function pylonLine(a,b,z,c){seg(a.concat(z),b.concat(z),c);seg([a[0],a[1]+.25,z-.15],[b[0],b[1]+.25,z-.15],c);
+  var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy);
+  for(var t=0;t<=L;t+=2){var px=a[0]+dx/L*t,py=a[1]+dy/L*t;seg([px,py,0],[px,py,z],'l');seg([px,py+.25,0],[px,py+.25,z-.15],'f');}}
+
+/* ---- Stage 0: ground + one house ---- */
+S(0);
+for(var g=0;g<=24;g+=4){seg([g,0,0],[g,24,0],'f');seg([0,g,0],[24,g,0],'f');}
+house(11.2,11.2,1.6,1.6,.9);
+road([12,12.8],[12,18],'f');
+txt(11.6,13.4,0,'1 HOUSE · YEAR 0','lab','start');
+txt(0,24,0,'DATUM 0.00','','start');
+
+/* ---- Stage 1: ledger hall ---- */
+S(1);
+poly([[13,8,0],[18,8,0],[18,12,0],[13,12,0]],'a ds',true);
+box(13,8,5,4,1.1);
+floors(13,8,5,4,[.55],'f');
+box(18.4,9,.8,.8,.5,'l');box(18.4,10.2,.8,.8,.5,'l');box(18.4,11.4,.8,.8,.5,'l');
+road([12,12.8],[12,18]);road([12,14],[13,14]);
+txt(13,7.4,1.1,'GL HALL · CHART OF ACCOUNTS','lab','start');
+txt(19.4,9,0,'ENTITIES','','start');
+
+/* ---- Stage 2: silos + belts ---- */
+S(2);
+var names=['CONTRACTS','METERING','BILLING','PAYABLES','PAYROLL'];
+for(var i=0;i<5;i++){var sy=4+i*2;cyl(6.5,sy+.5,.6,1.6);belt([7.3,sy+.5],[11.3,sy+.5],.15);txt(5.6,sy+.6,1.9,names[i],'','end');}
+belt([11.5,4.3],[11.5,10.5],.15);belt([11.5,10.5],[13,10.5],.15);
+txt(11.5,3.4,.3,'TRUNK → GL','','middle');
+
+/* ---- Stage 3: tower + avenues ---- */
+S(3);
+box(13,13,4,4,3);
+floors(13,13,4,4,[1,2],'l');
+poly([[13,13,3.35],[17,13,3.35],[17,17,3.35],[13,17,3.35]],'f',true);seg([17,13,3],[17,13,3.35],'f');seg([17,17,3],[17,17,3.35],'f');seg([13,17,3],[13,17,3.35],'f');
+txt(17.4,13,3.1,'L3 BOARD','','start');txt(17.4,13,2.1,'L2 AUDIT','','start');txt(17.4,13,1.1,'L1 CLOSE','','start');
+road([0,18.5],[24,18.5]);road([12,0],[12,24]);
+txt(1,18.2,0,'MAIN AVE','','start');
+
+/* ---- Stage 4: ASC 606 elevated line + plant ---- */
+S(4);
+box(19,3,4,3,1.4);cyl(20,7,.7,1.2);cyl(22,7,.7,1.2);
+seg([22.4,3.4,1.4],[22.4,3.4,3.2],'k');ell(22.4,3.4,3.2,.2,'k');
+belt([18,10],[19,7.6],.15);
+pylonLine([18,9.6],[31,9.6],1.5,'a');
+txt(19,2.4,1.4,'REV REC PLANT','lab','start');
+txt(25,9.2,1.7,'ASC 606 LINE · OUT PAST CITY LIMITS','acc','start');
+txt(24.6,10.4,0,'CITY LIMIT','','start');seg([24,0,0],[24,24,0],'l ds');
+
+/* ---- Stage 5: data core + pipes ---- */
+S(5);
+cyl(10.5,17.5,1.1,5);
+for(var z=1;z<5;z++)ell(10.5,17.5,z,1.1,'b');
+ell(10.5,17.5,5.4,.4,'k');seg([10.5,17.5,5],[10.5,17.5,5.9],'k');
+var core=[10.5,17.5];
+var targets=[[15,12.2],[6.5,12.5],[13,15],[19,6],[13,11]];
+for(var t=0;t<targets.length;t++)seg([core[0],core[1],.35],[targets[t][0],targets[t][1],.35],'b');
+txt(10.5,19.3,5.4,'DATA CORE · SALESFORCE','lab','start');
+txt(10.9,19.6,.35,'PIPES · SQL · BIGQUERY','dat','start');
+
+/* ---- Stage 6: full city ---- */
+S(6);
+var occ=[[11,11,2,2],[13,8,6,4],[6,4,2,10],[7,4,6,8],[13,13,4,4],[19,3,4,5],[9,16,3,3],[11.5,0,1,24],[0,18,24,1],[18,9,7,1.5]];
+function free(x,y,w,dp){for(var i=0;i<occ.length;i++){var o=occ[i];if(x<o[0]+o[2]&&x+w>o[0]&&y<o[1]+o[3]&&y+dp>o[1])return false;}return true;}
+var seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647;}
+for(var yy=0.5;yy<23;yy+=2.5)for(var xx=0.5;xx<23;xx+=2.5){var w=1.2+rnd()*1,dp=1.2+rnd()*1,h=.5+rnd()*2.2;if(rnd()<.18)continue;if(free(xx,yy,w,dp)){box(xx,yy,w,dp,h,'l',null);if(h>1.6)floors(xx,yy,w,dp,[Math.round(h/2)],'f');}}
+road([0,6.5],[24,6.5]);road([6,0],[6,24]);road([18.5,12.5],[18.5,24]);
+/* rail loop */
+poly([[-.6,-.6,0],[24.6,-.6,0],[24.6,24.6,0],[-.6,24.6,0]],'k',true);
+poly([[-.9,-.9,0],[24.9,-.9,0],[24.9,24.9,0],[-.9,24.9,0]],'l',true);
+txt(12,25.2,0,'CITY · POP. 200+ CLIENTS · SERIES A–D','lab','middle');
+/* title block, screen space */
+stages[6]+='<path class="p k" d="M570 546H780V606H570Z" pathLength="1" style="--i:'+(cnt++)+'"/><path class="p l" d="M570 561H780M570 585H780M736 561V606" pathLength="1" style="--i:'+(cnt++)+'"/>'
+ +'<text class="lab" x="576" y="556">CHRIS SON · ACCOUNTING ARCHITECT</text><text x="576" y="574">FINANCE AS A SYSTEMS FUNCTION</text><text x="576" y="581">NOT A LEDGER FUNCTION</text>'
+ +'<text x="742" y="574">CPA</text><text x="742" y="581">SFDC ×9</text><text x="576" y="598">SHEET A-1 · REV 05 · 2026</text><text x="742" y="598">SF, CA</text>';
+
+var svg=document.getElementById('dwg'),html='';
+for(var k=0;k<7;k++)html+='<g class="s'+(k?' m':' on init')+'" id="g'+k+'">'+stages[k]+'</g>';
+svg.innerHTML=html;
+
+/* ---------- camera: [world x, world y, scale] ---------- */
+var cam=[[12,12.5,2.6],[14,11,2],[10.5,9,1.5],[13,13,1.3],[21,8,1.25],[11,16,1.2],[12,12,1]];
+var gs=[];for(k=0;k<7;k++)gs.push(document.getElementById('g'+k));
+var st=0,pending=false;
+function apply(){pending=false;for(var k=0;k<7;k++)gs[k].classList.toggle('on',k<=st);
+  var c=cam[st],p=P(c[0],c[1],0),s=c[2];
+  /* viewBox center 400,310 -> zoom toward world point */
+  var tx=(400-p[0]*s)/800*100,ty=(310-p[1]*s)/620*100;
+  svg.style.transform='translate('+tx+'%,'+ty+'%) scale('+s+')';svg.setAttribute('data-st',st);}
+function set(n){if(n===st)return;st=n;if(!pending){pending=true;requestAnimationFrame(apply);}}
+var secs=document.querySelectorAll('section.st');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){var best=null;
+    es.forEach(function(e){if(e.isIntersecting&&(!best||e.intersectionRatio>best.intersectionRatio))best=e;});
+    if(best)set(+best.target.getAttribute('data-st'));},{threshold:[.35,.6],rootMargin:'-10% 0px -10% 0px'});
+  secs.forEach(function(s){io.observe(s);});
+}else{st=6;}
+apply();
+})();
+</script>
 </body>
 </html>
