@@ -1,12 +1,10 @@
 /* =========================================================
    circuit.css — visual redesign overlay (loaded after styles.css)
    Circuit-board language: node pads, traces, bus lines, IC cards.
-   Styling is CSS-only per the visual-redesign skill; the one exception
-   is a decorative, aria-hidden <div class="circuit-container"><svg
-   class="circuit-svg">...</svg></div> inline in the hero markup (see
-   below) — CSS masks can't animate individual trace paths, and the
-   hero's line-draw + station-pulse effect needs that. No other
-   structural HTML, no other JS.
+   Styling is CSS-only; the one scripted exception is the hero drawing
+   (.city, painted by city.js onto a canvas) — a procedurally grown city
+   can't be expressed in CSS, and inline SVG at that complexity would cost
+   thousands of DOM nodes.
 
    ⚠ DECORATION ONLY — keep it that way. Layout, interaction, and
    overflow-safety rules belong in styles.css, not here. This file used
@@ -17,13 +15,8 @@
    used to live in circuit.css". If you add a rule here, it must be safe
    to delete.
 
-   NOTE: the hero traces below use a fixed 5-color transit-line palette
-   (yellow/orange/red/green/blue) that does NOT follow --accent and does
-   NOT adapt between light/dark theme — a deliberate exception to this
-   file's usual theme-aware convention, kept as pasted per Chris's
-   explicit call to implement verbatim.
-   Remove this file, its <link>, and the .circuit-container block in
-   index.html to fully roll back.
+   Remove this file and its <link> to roll back the decoration; remove
+   city.js, its <script> and the .city element to drop the hero drawing.
    ========================================================= */
 
 :root {
@@ -36,61 +29,28 @@ html[data-theme="dark"] {
   --circuit-opacity: 0.7;
 }
 
-/* ---------- hero: inline SVG network ---------- */
-.circuit-container {
+/* ---------- hero: a house growing into a city (drawn by city.js) ---------- */
+
+.city {
   position: absolute;
-  inset: 0;
+  inset: 0 0 0 30%;
   z-index: 0;
   pointer-events: none;
-  opacity: calc(0.4 * var(--circuit-opacity));
-  overflow: hidden;
+  /* fade out toward the hero text so the drawing never competes with it */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 32%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 32%);
 }
-.circuit-svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  /* Fades out towards the left/bottom so it doesn't hard stop */
-  -webkit-mask-image: radial-gradient(ellipse at top right, black 30%, transparent 70%);
-  mask-image: radial-gradient(ellipse at top right, black 30%, transparent 70%);
-}
-.trace {
-  fill: none;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  /* Animation setup */
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
-  animation: draw 6s ease-out infinite alternate;
-}
-.trace-y { stroke: #ffe800; filter: drop-shadow(0 0 3px rgba(255, 232, 0, 0.5)); animation-delay: 0s; stroke-dasharray: 1200; stroke-dashoffset: 1200; }
-.trace-o { stroke: #ff9933; filter: drop-shadow(0 0 3px rgba(255, 153, 51, 0.5)); animation-delay: -1s; stroke-dasharray: 1300; stroke-dashoffset: 1300; }
-.trace-r { stroke: #e31937; filter: drop-shadow(0 0 3px rgba(227, 25, 55, 0.5)); animation-delay: -2s; stroke-dasharray: 1200; stroke-dashoffset: 1200; }
-.trace-g { stroke: #44ad4b; filter: drop-shadow(0 0 3px rgba(68, 173, 75, 0.5)); animation-delay: -3s; stroke-dasharray: 1500; stroke-dashoffset: 1500; }
-.trace-b { stroke: #2aadd8; filter: drop-shadow(0 0 3px rgba(42, 173, 216, 0.5)); animation-delay: -4s; stroke-dasharray: 1600; stroke-dashoffset: 1600; }
-@keyframes draw {
-  0% { stroke-dashoffset: 2000; opacity: 0.2; }
-  40% { stroke-dashoffset: 0; opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 1; }
-}
-.station {
-  fill: var(--bg);
-  stroke-width: 2.5;
-  filter: drop-shadow(0 0 2px rgba(255,255,255,0.2));
-  animation: pulse 4s ease-in-out infinite alternate;
-}
-@keyframes pulse {
-  0% { opacity: 0.6; transform: scale(0.85); }
-  100% { opacity: 1; transform: scale(1.15); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .trace, .station { animation: none !important; stroke-dashoffset: 0 !important; opacity: 0.8 !important; }
-}
-/* narrow screens: the net runs behind the hero text, so ease it back */
-@media (max-width: 640px) {
-  .circuit-container { opacity: calc(0.15 * var(--circuit-opacity)); }
+.city canvas { display: block; width: 100%; height: 100%; }
+
+/* narrow screens: the drawing sits top-right beside the portrait and
+   fades out before the stacked hero text begins */
+@media (max-width: 820px) {
+  .city {
+    inset: 0;
+    opacity: 0.7;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 30%, transparent 40%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 30%, transparent 40%);
+  }
 }
 
 .hero .container { position: relative; z-index: 1; }
