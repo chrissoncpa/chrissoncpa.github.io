@@ -85,16 +85,11 @@ p.lead{color:var(--ink);font-size:17px;margin-bottom:6px}
 p.loc{margin:0}
 .thesis{font-size:clamp(19px,2vw,23px);line-height:1.3;letter-spacing:-.01em;color:var(--ink);max-width:36ch;margin:18px 0 22px;text-wrap:pretty}
 /* proof strip: figures on top (dt comes first in the markup, so reverse the column) */
-.proof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:30rem;margin:0 0 22px;border-block:1px solid var(--faint)}
+.proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:24rem;margin:0 0 22px;border-block:1px solid var(--faint)}
 .proof div{display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:6px;padding:12px 12px 12px 0}
 .proof div+div{border-left:1px solid var(--faint);padding-left:12px}
 .proof dd{margin:0;font-size:24px;line-height:1;letter-spacing:-.015em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
 .proof dt{font-family:var(--mono);font-size:10.5px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
-@media (max-width:480px){
-  .proof{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .proof div:nth-child(odd){border-left:0;padding-left:0}
-  .proof div:nth-child(n+3){border-top:1px solid var(--faint)}
-}
 .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 .cta a{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:9px 14px;border:1px solid var(--line);border-radius:2px}
 .cta a.p{background:var(--ink);border-color:var(--ink);color:var(--paper)}
@@ -201,8 +196,7 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
   <p class="thesis">I scratch-build accounting systems at startups from zero to one, including BrightBytes which had an M&amp;A exit with Google. I don't just keep the ledger. I build the city that feeds it.</p>
   <dl class="proof">
     <div><dt>VC-backed clients</dt><dd>200+</dd></div>
-    <div><dt>Monthly close</dt><dd>5 days</dd></div>
-    <div><dt>Revenue-function throughput</dt><dd>3×</dd></div>
+    <div><dt>Years in rev rec</dt><dd>10</dd></div>
     <div><dt>Salesforce certs</dt><dd>9</dd></div>
   </dl>
   <div class="cta">
