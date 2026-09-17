@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#1b1d21">
+<meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#13171c" media="(prefers-color-scheme:dark)">
 <title>Chris Son, CPA · Accounting Architect</title>
 <meta name="description" content="Chris Son, CPA and Salesforce Data Architect. I build the finance systems that take a company from one house to a city.">
 <meta property="og:title" content="Chris Son, CPA · Accounting Architect">
@@ -166,6 +167,18 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
   html{scroll-behavior:auto}
   svg g.s .p,svg g.s text,svg .ac{animation:none!important}.cam,.tb{transition:none!important}
 }
+@media print{
+  /* the drawing is a sticky viewport-height column: on paper it is just blank space */
+  .fig,.hint,header nav{display:none}
+  .sheet{display:block}
+  .copy{padding:0}
+  section.st,section.st:first-child{min-height:0;padding-block:14px;break-inside:avoid}
+  /* print the case studies open, not just their headings */
+  details::details-content{content-visibility:visible;block-size:auto}
+  details .body{display:block}
+  .cta a,.cta a.p{border:0;padding:0;background:none;color:inherit}
+  .cta a[href^="http"]::after{content:" " attr(href);letter-spacing:0}
+}
 @media (max-width:860px){
   header{flex-direction:column;align-items:flex-start;gap:8px}
   header nav{gap:14px}
@@ -192,7 +205,7 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
   </nav>
 </header>
 
-<div class="sheet">
+<main class="sheet">
 <div class="copy">
 
 <section class="st" id="s0" data-st="0">
@@ -299,7 +312,7 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 </div>
 </div>
 </div>
-</div>
+</main>
 
 <footer class="mono">
   <span>© 2026 Chris Son</span>
@@ -436,7 +449,7 @@ for(var i=0;i<depts.length;i++){var dy=depts[i][0],dh=depts[i][1],my=dy+.9;
   txt(-.2,dy+1.8,0,depts[i][2],'lab','end');}
 box(3.4,15.6,2.4,2.2,.2,'l');cyl(4.1,16.8,.45,1);cyl(5.1,16.8,.45,1);
 txt(2.9,17.6,0,'FINANCE SUBSTATION','lab','end');
-txt(3.8,18.5,0,'DATA ⇄ INSIGHT','','end');
+txt(3.8,18.5,0,'DATA ↔ INSIGHT','','end');
 
 /* ---- Stage 7: full city ---- */
 S(7);
