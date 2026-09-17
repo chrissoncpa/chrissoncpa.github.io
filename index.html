@@ -46,14 +46,14 @@
 <style>
 :root{
   --paper:#f7f5f0;--ink:#1b1d21;--ink2:#575c64;--line:#7d828a;--faint:#e5e2db;--dash:#c3c0b9;
-  --accent:#c2362c;--accent2:#2b66ad;
+  --accent:#c2362c;--accent2:#2b66ad;--accent3:#a67c00;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
   --sans:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#13171c;--ink:#e9e7e2;--ink2:#aab0b8;--line:#737981;--faint:#272c33;--dash:#3c424a;--accent:#e8604f;--accent2:#7fb0ea;}}
+  --paper:#13171c;--ink:#e9e7e2;--ink2:#aab0b8;--line:#737981;--faint:#272c33;--dash:#3c424a;--accent:#e8604f;--accent2:#7fb0ea;--accent3:#f2c14e;}}
 :root[data-theme="dark"]{
-  --paper:#13171c;--ink:#e9e7e2;--ink2:#aab0b8;--line:#737981;--faint:#272c33;--dash:#3c424a;--accent:#e8604f;--accent2:#7fb0ea;}
+  --paper:#13171c;--ink:#e9e7e2;--ink2:#aab0b8;--line:#737981;--faint:#272c33;--dash:#3c424a;--accent:#e8604f;--accent2:#7fb0ea;--accent3:#f2c14e;}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--sans);
@@ -125,6 +125,7 @@ svg .l{stroke:var(--line);stroke-width:.6}
 svg .f{stroke:var(--dash);stroke-width:.45}
 svg .a{stroke:var(--accent);stroke-width:.9}
 svg .b{stroke:var(--accent2);stroke-width:.9}
+svg .y{stroke:var(--accent3);stroke-width:.9}
 svg .ds{stroke-dasharray:2 2}
 /* --fs is set per camera stop so labels hold ~9 screen px; .nolab when that would crowd the drawing */
 svg text{fill:var(--ink2);font-size:calc(var(--fs,6.5)*1px);letter-spacing:.05em;transition:font-size 1.2s cubic-bezier(.35,0,.15,1)}
@@ -143,6 +144,11 @@ svg g.s .p{stroke-dasharray:1;stroke-dashoffset:0}
 .js svg g.s:not(.on) text{opacity:0}
 .js svg g.s.on:not(.init) .p{animation:draw .8s cubic-bezier(.4,0,.2,1) both;animation-delay:calc(min(var(--i,0),60)*18ms)}
 .js svg g.s.on:not(.init) text{animation:fade .5s ease .7s both}
+/* alternating current: pulses slosh toward finance and back; only runs while the grid stage is in view */
+@keyframes ac{from{stroke-dashoffset:0}to{stroke-dashoffset:-17}}
+svg .ac{stroke:var(--accent3);stroke-width:1.7;stroke-dasharray:1.5 7;opacity:0;transition:opacity .4s;
+  animation:ac 1.3s ease-in-out infinite alternate;animation-play-state:paused}
+svg g.s.cur .ac{opacity:1;transition-delay:.9s;animation-play-state:running}
 svg g.m{cursor:crosshair}
 svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 /* title block: HTML in screen space so it stays legible whatever the drawing's scale */
@@ -157,7 +163,7 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 .tb span+span{border-left:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  svg g.s .p,svg g.s text{animation:none!important}.fig svg,svg text,.tb{transition:none!important}
+  svg g.s .p,svg g.s text,svg .ac{animation:none!important}.fig svg,svg text,.tb{transition:none!important}
 }
 @media (max-width:860px){
   header{flex-direction:column;align-items:flex-start;gap:8px}
@@ -181,7 +187,7 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 <header>
   <div><span class="mono">Chris Son</span></div>
   <nav class="mono">
-    <a href="#s1">The city</a><a href="#s4">Rev Rec</a><a href="#s6">Revisions</a><a href="https://github.com/chrissoncpa">GitHub</a>
+    <a href="#s1">The city</a><a href="#s4">Rev Rec</a><a href="#s7">Revisions</a><a href="https://github.com/chrissoncpa">GitHub</a>
   </nav>
 </header>
 
@@ -193,7 +199,7 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
   <h1>Chris Son, CPA</h1>
   <p class="lead">Accounting Architect. <span class="unit">Salesforce Certified Data Architect.</span></p>
   <p class="mono loc">San Francisco</p>
-  <p class="thesis">I scratch-build accounting systems at startups from zero to one, including BrightBytes which had an M&amp;A exit with Google. I don't just keep the ledger. I build the city that feeds it.</p>
+  <p class="thesis">I build zero-to-one accounting infrastructure for startups. I don't just keep the ledger—I build the city that feeds it.</p>
   <dl class="proof">
     <div><dt>VC-backed clients</dt><dd>200+</dd></div>
     <div><dt>Years in startups</dt><dd>10+</dd></div>
@@ -252,7 +258,14 @@ svg g.m:hover .k,svg g.m:hover .l{stroke:var(--accent)}
 </section>
 
 <section class="st" id="s6" data-st="6">
-  <div class="eyebrow"><b>06</b><span class="mono">City · revisions</span></div>
+  <div class="eyebrow"><b>06</b><span class="mono">The grid</span></div>
+  <h2>Raw data in, executive insight out.</h2>
+  <p>Sales, marketing and operations each run their own systems. I wire them into finance: pipeline, spend, headcount and usage come in raw, and forecasts, margins and unit economics go back out to the people making the calls. The current runs both ways, every close.</p>
+  <dl class="spec"><dt>Feeds</dt><dd>Sales · Marketing · Operations</dd><dt>Inbound</dt><dd>Pipeline · spend · headcount · usage</dd><dt>Outbound</dt><dd>Forecast · margin · unit economics</dd></dl>
+</section>
+
+<section class="st" id="s7" data-st="7">
+  <div class="eyebrow"><b>07</b><span class="mono">City · revisions</span></div>
   <h2>Now building for the AI future at Newo.ai</h2>
   <p>Systems first, from the first house.</p>
   <table>
@@ -335,6 +348,24 @@ function pylonLine(a,b,z,c){seg(a.concat(z),b.concat(z),c);seg([a[0],a[1]+.25,z-
   var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy);
   for(var t=0;t<=L;t+=2){var px=a[0]+dx/L*t,py=a[1]+dy/L*t;seg([px,py,0],[px,py,z],'l');seg([px,py+.25,0],[px,py+.25,z-.15],'f');}}
 
+function pt(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}
+function dist(a,b){return Math.sqrt((b[0]-a[0])*(b[0]-a[0])+(b[1]-a[1])*(b[1]-a[1]));}
+/* utility pipe: axis-aligned runs with rounded elbows, flange tick where it enters the building */
+function pipe(pts,z,c){var d='M'+pt(P(pts[0][0],pts[0][1],z));
+  for(var i=1;i<pts.length-1;i++){var a=pts[i-1],b=pts[i],n=pts[i+1],la=dist(a,b),ln=dist(b,n),ra=Math.min(.35,la/2),rn=Math.min(.35,ln/2);
+    d+='L'+pt(P(b[0]+(a[0]-b[0])/la*ra,b[1]+(a[1]-b[1])/la*ra,z))+'Q'+pt(P(b[0],b[1],z))+' '+pt(P(b[0]+(n[0]-b[0])/ln*rn,b[1]+(n[1]-b[1])/ln*rn,z));}
+  var e=pts[pts.length-1],q=pts[pts.length-2],l=dist(q,e),ux=(e[0]-q[0])/l,uy=(e[1]-q[1])/l;
+  path(d+'L'+pt(P(e[0],e[1],z)),c);
+  seg([e[0]-uy*.22,e[1]+ux*.22,z],[e[0]+uy*.22,e[1]-ux*.22,z],c);}
+/* power line: two conductors on H-frame poles every 2 units, plus an animated current overlay */
+function ac(a,b,z){var p=P(a[0],a[1],z),q=P(b[0],b[1],z);
+  stages[cur]+='<line class="ac" x1="'+p[0].toFixed(1)+'" y1="'+p[1].toFixed(1)+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'"/>';}
+function grid(a,b,z){var L=dist(a,b),ux=(b[0]-a[0])/L,uy=(b[1]-a[1])/L,nx=-uy*.2,ny=ux*.2;
+  seg([a[0]+nx,a[1]+ny,z],[b[0]+nx,b[1]+ny,z],'y');seg([a[0]-nx,a[1]-ny,z],[b[0]-nx,b[1]-ny,z],'y');
+  for(var t=0;t<=L+.01;t+=2){var x=a[0]+ux*t,y=a[1]+uy*t;
+    seg([x+nx,y+ny,0],[x+nx,y+ny,z+.2],'l');seg([x-nx,y-ny,0],[x-nx,y-ny,z+.2],'l');seg([x+nx*1.6,y+ny*1.6,z],[x-nx*1.6,y-ny*1.6,z],'l');}
+  ac([a[0]+nx,a[1]+ny],[b[0]+nx,b[1]+ny],z);ac([a[0]-nx,a[1]-ny],[b[0]-nx,b[1]-ny],z);}
+
 /* ---- Stage 0: ground + one house ---- */
 S(0);
 for(var g=0;g<=24;g+=4){seg([g,0,0],[g,24,0],'f');seg([0,g,0],[24,g,0],'f');}
@@ -384,15 +415,32 @@ S(5);
 cyl(10.5,17.5,1.1,5);
 for(var z=1;z<5;z++)ell(10.5,17.5,z,1.1,'b');
 ell(10.5,17.5,5.4,.4,'k');seg([10.5,17.5,5],[10.5,17.5,5.9],'k');
-var core=[10.5,17.5];
-var targets=[[15,12.2],[6.5,12.5],[13,15],[19,6],[13,11]];
-for(var t=0;t<targets.length;t++)seg([core[0],core[1],.35],[targets[t][0],targets[t][1],.35],'b');
-txt(10.5,19.3,5.4,'DATA CORE · SALESFORCE','lab','start');
-txt(10.9,19.6,.35,'PIPES · SQL · BIGQUERY','dat','start');
+/* leave the core where each lane sits, then follow Main Ave and the x=12 road; lanes that run
+   furthest east sit furthest south so no run crosses another */
+function ex(y,s){return 10.5+s*Math.sqrt(1.21-(y-17.5)*(y-17.5));}
+pipe([[ex(17.2,1),17.2],[12.25,17.2],[12.25,15],[13,15]],.35,'b');                          /* town hall */
+pipe([[ex(17.95,1),17.95],[17.75,17.95],[17.75,12.5],[15.5,12.5],[15.5,12.05]],.35,'b');   /* ledger hall */
+pipe([[ex(18.2,1),18.2],[18.15,18.2],[18.15,11.8],[18.4,11.8]],.35,'b');                   /* entities */
+pipe([[ex(18.45,1),18.45],[23.6,18.45],[23.6,4.5],[23,4.5]],.35,'b');                      /* rev rec plant */
+pipe([[ex(18.2,-1),18.2],[6.6,18.2],[6.6,13.1]],.35,'b');                                    /* payroll silo */
+txt(9.1,17.5,5.4,'DATA CORE · SALESFORCE','lab','end');
+txt(4,20.2,0,'PIPES · SQL · BIGQUERY','dat','start',26.57);
 
-/* ---- Stage 6: full city ---- */
+/* ---- Stage 6: the grid: departments <-> finance, on the open west side ---- */
 S(6);
-var occ=[[11,11,2,2],[13,8,6,4],[6,4,2,10],[7,4,6,8],[13,13,4,4],[19,3,4,5],[9,16,3,3],[11.5,0,1,24],[0,18,24,1],[18,9,7,1.5]];
+var depts=[[2.5,1.4,'SALES'],[6.8,1.1,'MARKETING'],[11.1,1.7,'OPERATIONS']];
+grid([4.6,3.4],[4.6,15.8],1.6);
+for(var i=0;i<depts.length;i++){var dy=depts[i][0],dh=depts[i][1],my=dy+.9;
+  box(.6,dy,2,1.8,dh);seg([2.6,my,.8],[4.6,my,1.6],'y');ac([2.6,my],[4.6,my],1.2);
+  txt(-.2,dy+1.8,0,depts[i][2],'lab','end');}
+box(3.4,15.6,2.4,2.2,.2,'l');cyl(4.1,16.8,.45,1);cyl(5.1,16.8,.45,1);
+txt(2.9,17.6,0,'FINANCE SUBSTATION','lab','end');
+txt(3.8,18.5,0,'DATA ⇄ INSIGHT','','end');
+
+/* ---- Stage 7: full city ---- */
+S(7);
+var occ=[[11,11,2,2],[13,8,6,4],[6,4,2,10],[7,4,6,8],[13,13,4,4],[19,3,4,5],[9,16,3,3],[11.5,0,1,24],[0,18,24,1],[18,9,7,1.5],
+  [6.2,12.9,.8,5.6],[15.2,12.1,3.4,.8],[17.4,11.4,1.4,7],[22.8,4,1.2,15],[0,2,5.2,11.5],[3.2,15.4,2.8,2.6]];
 function free(x,y,w,dp){for(var i=0;i<occ.length;i++){var o=occ[i];if(x<o[0]+o[2]&&x+w>o[0]&&y<o[1]+o[3]&&y+dp>o[1])return false;}return true;}
 var seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647;}
 for(var yy=0.5;yy<23;yy+=2.5)for(var xx=0.5;xx<23;xx+=2.5){var w=1.2+rnd()*1,dp=1.2+rnd()*1,h=.5+rnd()*2.2;if(rnd()<.18)continue;if(free(xx,yy,w,dp)){box(xx,yy,w,dp,h,'l',null);if(h>1.6)floors(xx,yy,w,dp,[Math.round(h/2)],'f');}}
@@ -403,15 +451,15 @@ poly([[-.9,-.9,0],[24.9,-.9,0],[24.9,24.9,0],[-.9,24.9,0]],'l',true);
 txt(12,26,0,'CITY · POP. 200+ CLIENTS · SERIES A–D','lab','middle',26.57);
 
 var svg=document.getElementById('dwg'),html='';
-for(var k=0;k<7;k++)html+='<g class="s'+(k?' m':' on init')+'" id="g'+k+'">'+stages[k]+'</g>';
+for(var k=0;k<8;k++)html+='<g class="s'+(k?' m':' on init')+'" id="g'+k+'">'+stages[k]+'</g>';
 svg.innerHTML=html;
 
 /* ---------- camera: [world x, world y, scale] ---------- */
-var cam=[[12,12.5,2.6],[14,11,2],[10.5,9,1.5],[13,13,1.3],[21,8,1.25],[11,16,1.2],[12,12,1]];
-var gs=[];for(k=0;k<7;k++)gs.push(document.getElementById('g'+k));
+var cam=[[12,12.5,2.6],[14,11,2],[10.5,9,1.5],[13,13,1.3],[21,8,1.25],[11,16,1.2],[3.8,14,1.9],[12,12,1]];
+var gs=[];for(k=0;k<8;k++)gs.push(document.getElementById('g'+k));
 var tb=document.getElementById('tb');
 var st=0,pending=false;
-function apply(){pending=false;for(var k=0;k<7;k++){gs[k].classList.toggle('on',k<=st);gs[k].classList.toggle('cur',k===st);}
+function apply(){pending=false;for(var k=0;k<8;k++){gs[k].classList.toggle('on',k<=st);gs[k].classList.toggle('cur',k===st);}
   var c=cam[st],p=P(c[0],c[1],0),s=c[2];
   /* viewBox center 400,310 -> zoom toward world point */
   var tx=(400-p[0]*s)/800*100,ty=(310-p[1]*s)/620*100;
@@ -419,7 +467,7 @@ function apply(){pending=false;for(var k=0;k<7;k++){gs[k].classList.toggle('on',
   /* screen px per drawing unit at this stop; size labels to ~9px, drop them if that would be > 14 units */
   var cs=getComputedStyle(svg),u=Math.min(parseFloat(cs.width)/800,parseFloat(cs.height)/620)*s,fs=9/u;
   svg.style.setProperty('--fs',Math.max(6.5,fs).toFixed(2));svg.classList.toggle('nolab',!(fs<=14));
-  tb.classList.toggle('on',st===6);}
+  tb.classList.toggle('on',st===7);}
 function set(n){if(n===st)return;st=n;if(!pending){pending=true;requestAnimationFrame(apply);}}
 var secs=document.querySelectorAll('section.st');
 if('IntersectionObserver' in window){
@@ -427,7 +475,7 @@ if('IntersectionObserver' in window){
     es.forEach(function(e){if(e.isIntersecting&&(!best||e.intersectionRatio>best.intersectionRatio))best=e;});
     if(best)set(+best.target.getAttribute('data-st'));},{threshold:[.35,.6],rootMargin:'-10% 0px -10% 0px'});
   secs.forEach(function(s){io.observe(s);});
-}else{st=6;}
+}else{st=7;}
 addEventListener('resize',function(){if(!pending){pending=true;requestAnimationFrame(apply);}});
 apply();
 })();
