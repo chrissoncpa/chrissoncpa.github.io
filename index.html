@@ -401,11 +401,10 @@ function bent(x,y,z,nx,ny){seg([x+nx,y+ny,0],[x+nx,y+ny,z],'l');seg([x-nx,y-ny,0
 /* a valve ring where a lateral tees off a main */
 function tee(x,y){ell(x,y,0,.13,'b');}
 
-/* ---- Stage 0: ground + one house at the head of what becomes First St ---- */
+/* ---- Stage 0: ground + one house; First St draws in with stage 1 ---- */
 S(0);
 for(var g=0;g<=24;g+=4){seg([g,0,0],[g,24,0],'f');seg([0,g,0],[24,g,0],'f');}
 house(11.2,11.2,1.6,1.6,.9);
-paved(FIRST,12.8,20,'f');
 txt(13.6,11.9,0,'1 HOUSE · YEAR 0','lab','start');
 txt(0,24,0,'DATUM 0.00','','start');
 
