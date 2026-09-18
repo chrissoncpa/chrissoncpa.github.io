@@ -372,7 +372,8 @@ function pipe(pts,z,c){var d='M'+pt(P(pts[0][0],pts[0][1],z));
   path(d+'L'+pt(P(e[0],e[1],z)),c);
   seg([e[0]-uy*.22,e[1]+ux*.22,z],[e[0]+uy*.22,e[1]-ux*.22,z],c);}
 /* power line: two conductors on H-frame poles every 2 units, plus an animated current overlay */
-function ac(a,b,z){var p=P(a[0],a[1],z),q=P(b[0],b[1],z);
+/* each end may carry its own height ([x,y,z]) so pulses can ride a sloped conductor; z is the fallback */
+function ac(a,b,z){var p=P(a[0],a[1],a[2]==null?z:a[2]),q=P(b[0],b[1],b[2]==null?z:b[2]);
   stages[cur]+='<line class="ac" x1="'+p[0].toFixed(1)+'" y1="'+p[1].toFixed(1)+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'"/>';}
 function grid(a,b,z){var L=dist(a,b),ux=(b[0]-a[0])/L,uy=(b[1]-a[1])/L,nx=-uy*.2,ny=ux*.2;
   seg([a[0]+nx,a[1]+ny,z],[b[0]+nx,b[1]+ny,z],'y');seg([a[0]-nx,a[1]-ny,z],[b[0]-nx,b[1]-ny,z],'y');
@@ -445,7 +446,7 @@ S(6);
 var depts=[[2.5,1.4,'SALES'],[6.8,1.1,'MARKETING'],[11.1,1.7,'OPERATIONS']];
 grid([4.6,3.4],[4.6,15.8],1.6);
 for(var i=0;i<depts.length;i++){var dy=depts[i][0],dh=depts[i][1],my=dy+.9;
-  box(.6,dy,2,1.8,dh);seg([2.6,my,.8],[4.6,my,1.6],'y');ac([2.6,my],[4.6,my],1.2);
+  box(.6,dy,2,1.8,dh);seg([2.6,my,.8],[4.6,my,1.6],'y');ac([2.6,my,.8],[4.6,my,1.6]);
   txt(-.2,dy+1.8,0,depts[i][2],'lab','end');}
 box(3.4,15.6,2.4,2.2,.2,'l');cyl(4.1,16.8,.45,1);cyl(5.1,16.8,.45,1);
 txt(2.9,17.6,0,'FINANCE SUBSTATION','lab','end');
