@@ -336,8 +336,8 @@ function path(dstr,c){stages[cur][lay(c)]+='<path class="p '+c+'" d="'+dstr+'" p
 function poly(pts,c,close){var s='';for(var i=0;i<pts.length;i++){var p=P(pts[i][0],pts[i][1],pts[i][2]);s+=(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}path(s+(close?'Z':''),c);}
 function txt(x,y,z,t,c,anchor,rot){var p=P(x,y,z),x1=p[0].toFixed(1),y1=p[1].toFixed(1);stages[cur][2]+='<text class="'+(c||'')+'" x="'+x1+'" y="'+y1+'"'+(anchor?' text-anchor="'+anchor+'"':'')+(rot?' transform="rotate('+rot+' '+x1+' '+y1+')"':'')+'>'+t+'</text>';}
 /* box with hidden edges faint */
-function box(x,y,w,dp,h,c,hid){c=c||'k';hid=hid===undefined?'f':hid;keep(x,y,w,dp);
-  poly([[x,y,h],[x+w,y,h],[x+w,y+dp,h],[x,y+dp,h]],c,true);
+function box(x,y,w,dp,h,c,hid,open){c=c||'k';hid=hid===undefined?'f':hid;keep(x,y,w,dp);
+  poly([[x,y,h],[x+w,y,h],[x+w,y+dp,h],[x,y+dp,h]],c,!open);if(open)seg([x,y+dp,h],[x,y,h],'f');
   seg([x+w,y,0],[x+w,y,h],c);seg([x+w,y+dp,0],[x+w,y+dp,h],c);seg([x,y+dp,0],[x,y+dp,h],c);
   poly([[x+w,y,0],[x+w,y+dp,0],[x,y+dp,0]],c);
   if(hid){seg([x,y,0],[x,y,h],hid);poly([[x+w,y,0],[x,y,0],[x,y+dp,0]],hid);}}
@@ -354,7 +354,7 @@ function belt(a,b,z,c){c=c||'l';keep(Math.min(a[0],b[0])-.3,Math.min(a[1],b[1])-
   seg([a[0]+nx,a[1]+ny,z],[b[0]+nx,b[1]+ny,z],c);seg([a[0]-nx,a[1]-ny,z],[b[0]-nx,b[1]-ny,z],c);
   for(var t=.6;t<L-.3;t+=.8){var cx=a[0]+ux*t,cy=a[1]+uy*t;
     poly([[cx-ux*.25+nx*.8,cy-uy*.25+ny*.8,z],[cx,cy,z],[cx-ux*.25-nx*.8,cy-uy*.25-ny*.8,z]],'f');}}
-function house(x,y,w,dp,h,c){c=c||'k';box(x,y,w,dp,h,c);
+function house(x,y,w,dp,h,c){c=c||'k';box(x,y,w,dp,h,c,undefined,true);
   var r=h+.7;seg([x,y+dp/2,r],[x+w,y+dp/2,r],c);
   seg([x+w,y,h],[x+w,y+dp/2,r],c);seg([x+w,y+dp,h],[x+w,y+dp/2,r],c);seg([x,y+dp,h],[x,y+dp/2,r],c);seg([x,y,h],[x,y+dp/2,r],c);}
 function pylonLine(a,b,z,c){seg(a.concat(z),b.concat(z),c);seg([a[0],a[1]+.25,z-.15],[b[0],b[1]+.25,z-.15],c);
@@ -406,7 +406,6 @@ S(0);
 for(var g=0;g<=24;g+=4){seg([g,0,0],[g,24,0],'f');seg([0,g,0],[24,g,0],'f');}
 house(11.2,11.2,1.6,1.6,.9);
 txt(13.6,11.9,0,'1 HOUSE · YEAR 0','lab','start');
-txt(0,24,0,'DATUM 0.00','','start');
 
 /* ---- Stage 1: ledger hall, its entities across the way, and the first paved street ---- */
 S(1);
@@ -415,7 +414,7 @@ box(13,8,5,4,1.1);
 floors(13,8,5,4,[.55],'f');
 box(19.5,9.9,.8,.8,.5,'l');box(19.5,11.1,.8,.8,.5,'l');box(19.5,12.3,.8,.8,.5,'l');
 paved(FIRST,12.8,20);paved(CENTER,12.45,16.4);paved(LANE,12,13.55);
-txt(11.8,7.4,1.1,'GL HALL · CHART OF ACCOUNTS','lab','start');
+txt(15.5,7.4,1.1,'GL HALL · CHART OF ACCOUNTS','lab','middle');
 txt(20.7,10.7,0,'ENTITIES','','start');
 
 /* ---- Stage 2: silos + belts, all inside one yard so no conveyor ever crosses a street ---- */
