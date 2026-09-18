@@ -124,12 +124,12 @@ footer{border-top:1px solid var(--faint);padding-block:22px 40px;display:flex;ju
 
 /* drawing */
 svg{font-family:var(--mono)}
-svg .k{stroke:var(--ink);stroke-width:.8}
-svg .l{stroke:var(--line);stroke-width:.6}
-svg .f{stroke:var(--dash);stroke-width:.45}
-svg .a{stroke:var(--accent);stroke-width:.9}
-svg .b{stroke:var(--accent2);stroke-width:.9}
-svg .y{stroke:var(--accent3);stroke-width:.9}
+svg .k{stroke:var(--ink);stroke-width:max(.8px,calc(var(--dp,0)*1px))}
+svg .l{stroke:var(--line);stroke-width:max(.6px,calc(var(--dp,0)*.75px))}
+svg .f{stroke:var(--dash);stroke-width:max(.45px,calc(var(--dp,0)*.55px))}
+svg .a{stroke:var(--accent);stroke-width:max(.9px,calc(var(--dp,0)*1.1px))}
+svg .b{stroke:var(--accent2);stroke-width:max(.9px,calc(var(--dp,0)*1.1px))}
+svg .y{stroke:var(--accent3);stroke-width:max(.9px,calc(var(--dp,0)*1.1px))}
 svg .ds{stroke-dasharray:2 2}
 /* --fs is set per camera stop so labels land at ~9 screen px; .nolab when that would crowd the drawing */
 svg text{fill:var(--ink2);font-size:calc(var(--fs,6.5)*1px);letter-spacing:.05em}
@@ -462,7 +462,6 @@ road([0,6.5],[24,6.5]);road([6,0],[6,24]);road([18.5,12.5],[18.5,24]);
 /* rail loop */
 poly([[-.6,-.6,0],[24.6,-.6,0],[24.6,24.6,0],[-.6,24.6,0]],'k',true);
 poly([[-.9,-.9,0],[24.9,-.9,0],[24.9,24.9,0],[-.9,24.9,0]],'l',true);
-txt(12,26,0,'CITY · POP. 200+ CLIENTS · SERIES A–D','lab','middle',26.57);
 
 var svg=document.getElementById('dwg'),lens=document.getElementById('cam'),html='';
 for(var k=0;k<8;k++)html+='<g class="s'+(k?' m':' on init')+'" id="g'+k+'">'+stages[k]+'</g>';
@@ -480,6 +479,8 @@ function apply(){pending=false;for(var k=0;k<8;k++){gs[k].classList.toggle('on',
   lens.style.transform='translate('+tx+'%,'+ty+'%) scale('+s+')';svg.setAttribute('data-st',st);
   /* screen px per drawing unit at this stop; size labels to ~9px, drop them if that would be > 14 units */
   var cs=getComputedStyle(svg),u=Math.min(parseFloat(cs.width)/800,parseFloat(cs.height)/620)*s,fs=9/u;
+  /* --dp = drawing units per DEVICE pixel: strokes scale with the camera but never render thinner than ~1 physical px */
+  svg.style.setProperty('--dp',(1/(u*(window.devicePixelRatio||1))).toFixed(4));
   svg.style.setProperty('--fs',Math.max(6.5,fs).toFixed(2));svg.classList.toggle('nolab',!(fs<=14));
   tb.classList.toggle('on',st===7);}
 function set(n){if(n===st)return;st=n;if(!pending){pending=true;requestAnimationFrame(apply);}}
@@ -497,6 +498,8 @@ if('IntersectionObserver' in window){
   watch();if(phone.addEventListener)phone.addEventListener('change',watch);else phone.addListener(watch);
 }else{st=7;}
 addEventListener('resize',function(){if(!pending){pending=true;requestAnimationFrame(apply);}});
+/* a window dragged to a monitor with a different pixel density changes devicePixelRatio without a resize */
+try{(function dprWatch(){matchMedia('(resolution:'+(window.devicePixelRatio||1)+'dppx)').addEventListener('change',function(){apply();dprWatch();},{once:true});})();}catch(e){}
 apply();
 })();
 </script>
