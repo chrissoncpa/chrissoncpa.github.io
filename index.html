@@ -336,7 +336,7 @@ function path(dstr,c){stages[cur][lay(c)]+='<path class="p '+c+'" d="'+dstr+'" p
 function poly(pts,c,close){var s='';for(var i=0;i<pts.length;i++){var p=P(pts[i][0],pts[i][1],pts[i][2]);s+=(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}path(s+(close?'Z':''),c);}
 function txt(x,y,z,t,c,anchor,rot){var p=P(x,y,z),x1=p[0].toFixed(1),y1=p[1].toFixed(1);stages[cur][2]+='<text class="'+(c||'')+'" x="'+x1+'" y="'+y1+'"'+(anchor?' text-anchor="'+anchor+'"':'')+(rot?' transform="rotate('+rot+' '+x1+' '+y1+')"':'')+'>'+t+'</text>';}
 /* box with hidden edges faint */
-function box(x,y,w,dp,h,c,hid){c=c||'k';hid=hid===undefined?'f':hid;
+function box(x,y,w,dp,h,c,hid){c=c||'k';hid=hid===undefined?'f':hid;keep(x,y,w,dp);
   poly([[x,y,h],[x+w,y,h],[x+w,y+dp,h],[x,y+dp,h]],c,true);
   seg([x+w,y,0],[x+w,y,h],c);seg([x+w,y+dp,0],[x+w,y+dp,h],c);seg([x,y+dp,0],[x,y+dp,h],c);
   poly([[x+w,y,0],[x+w,y+dp,0],[x,y+dp,0]],c);
@@ -345,21 +345,18 @@ function floors(x,y,w,dp,zs,c){for(var i=0;i<zs.length;i++)poly([[x+w,y,zs[i]],[
 function ell(x,y,z,r,c,half){var p=P(x,y,z),rx=r*TW,ry=r*TH;
   path(half?('M'+(p[0]-rx).toFixed(1)+' '+p[1].toFixed(1)+'A'+rx+' '+ry+' 0 0 0 '+(p[0]+rx).toFixed(1)+' '+p[1].toFixed(1))
    :('M'+(p[0]-rx).toFixed(1)+' '+p[1].toFixed(1)+'A'+rx+' '+ry+' 0 1 0 '+(p[0]+rx).toFixed(1)+' '+p[1].toFixed(1)+'A'+rx+' '+ry+' 0 1 0 '+(p[0]-rx).toFixed(1)+' '+p[1].toFixed(1)),c);}
-function cyl(x,y,r,h,c){c=c||'k';ell(x,y,h,r,c);ell(x,y,0,r,c,true);
+function cyl(x,y,r,h,c){c=c||'k';keep(x-r,y-r,2*r,2*r);ell(x,y,h,r,c);ell(x,y,0,r,c,true);
   var p=P(x,y,0);var rx=r*TW;
   stages[cur][lay(c)]+='<line class="p '+c+'" x1="'+(p[0]-rx).toFixed(1)+'" y1="'+(p[1]).toFixed(1)+'" x2="'+(p[0]-rx).toFixed(1)+'" y2="'+(p[1]-h*ZH).toFixed(1)+'" pathLength="1" style="--i:'+(cnt++)+'"/>';
   stages[cur][lay(c)]+='<line class="p '+c+'" x1="'+(p[0]+rx).toFixed(1)+'" y1="'+(p[1]).toFixed(1)+'" x2="'+(p[0]+rx).toFixed(1)+'" y2="'+(p[1]-h*ZH).toFixed(1)+'" pathLength="1" style="--i:'+(cnt++)+'"/>';}
 /* conveyor belt: two rails + chevrons */
-function belt(a,b,z,c){c=c||'l';var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy),ux=dx/L,uy=dy/L,nx=-uy*.22,ny=ux*.22;
+function belt(a,b,z,c){c=c||'l';keep(Math.min(a[0],b[0])-.3,Math.min(a[1],b[1])-.3,Math.abs(b[0]-a[0])+.6,Math.abs(b[1]-a[1])+.6);var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy),ux=dx/L,uy=dy/L,nx=-uy*.22,ny=ux*.22;
   seg([a[0]+nx,a[1]+ny,z],[b[0]+nx,b[1]+ny,z],c);seg([a[0]-nx,a[1]-ny,z],[b[0]-nx,b[1]-ny,z],c);
   for(var t=.6;t<L-.3;t+=.8){var cx=a[0]+ux*t,cy=a[1]+uy*t;
     poly([[cx-ux*.25+nx*.8,cy-uy*.25+ny*.8,z],[cx,cy,z],[cx-ux*.25-nx*.8,cy-uy*.25-ny*.8,z]],'f');}}
-function road(a,b,c){var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy),nx=-dy/L*.45,ny=dx/L*.45;
-  seg([a[0]+nx,a[1]+ny,0],[b[0]+nx,b[1]+ny,0],c||'l');seg([a[0]-nx,a[1]-ny,0],[b[0]-nx,b[1]-ny,0],c||'l');
-  seg([a[0],a[1],0],[b[0],b[1],0],'f ds');}
 function house(x,y,w,dp,h,c){c=c||'k';box(x,y,w,dp,h,c);
   var r=h+.7;seg([x,y+dp/2,r],[x+w,y+dp/2,r],c);
-  seg([x+w,y,h],[x+w,y+dp/2,r],c);seg([x+w,y+dp,h],[x+w,y+dp/2,r],c);seg([x,y+dp,h],[x,y+dp/2,r],c);seg([x,y,h],[x,y+dp/2,r],'f');}
+  seg([x+w,y,h],[x+w,y+dp/2,r],c);seg([x+w,y+dp,h],[x+w,y+dp/2,r],c);seg([x,y+dp,h],[x,y+dp/2,r],c);seg([x,y,h],[x,y+dp/2,r],c);}
 function pylonLine(a,b,z,c){seg(a.concat(z),b.concat(z),c);seg([a[0],a[1]+.25,z-.15],[b[0],b[1]+.25,z-.15],c);
   var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy);
   for(var t=0;t<=L;t+=2){var px=a[0]+dx/L*t,py=a[1]+dy/L*t;seg([px,py,0],[px,py,z],'l');seg([px,py+.25,0],[px,py+.25,z-.15],'f');}}
@@ -367,7 +364,8 @@ function pylonLine(a,b,z,c){seg(a.concat(z),b.concat(z),c);seg([a[0],a[1]+.25,z-
 function pt(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}
 function dist(a,b){return Math.sqrt((b[0]-a[0])*(b[0]-a[0])+(b[1]-a[1])*(b[1]-a[1]));}
 /* utility pipe: axis-aligned runs with rounded elbows, flange tick where it enters the building */
-function pipe(pts,z,c){var d='M'+pt(P(pts[0][0],pts[0][1],z));
+function pipe(pts,z,c){for(var k=1;k<pts.length;k++)keep(Math.min(pts[k-1][0],pts[k][0])-.15,Math.min(pts[k-1][1],pts[k][1])-.15,Math.abs(pts[k][0]-pts[k-1][0])+.3,Math.abs(pts[k][1]-pts[k-1][1])+.3);
+  var d='M'+pt(P(pts[0][0],pts[0][1],z));
   for(var i=1;i<pts.length-1;i++){var a=pts[i-1],b=pts[i],n=pts[i+1],la=dist(a,b),ln=dist(b,n),ra=Math.min(.35,la/2),rn=Math.min(.35,ln/2);
     d+='L'+pt(P(b[0]+(a[0]-b[0])/la*ra,b[1]+(a[1]-b[1])/la*ra,z))+'Q'+pt(P(b[0],b[1],z))+' '+pt(P(b[0]+(n[0]-b[0])/ln*rn,b[1]+(n[1]-b[1])/ln*rn,z));}
   var e=pts[pts.length-1],q=pts[pts.length-2],l=dist(q,e),ux=(e[0]-q[0])/l,uy=(e[1]-q[1])/l;
@@ -377,91 +375,112 @@ function pipe(pts,z,c){var d='M'+pt(P(pts[0][0],pts[0][1],z));
 /* each end may carry its own height ([x,y,z]) so pulses can ride a sloped conductor; z is the fallback */
 function ac(a,b,z){var p=P(a[0],a[1],a[2]==null?z:a[2]),q=P(b[0],b[1],b[2]==null?z:b[2]);
   stages[cur][2]+='<line class="ac" x1="'+p[0].toFixed(1)+'" y1="'+p[1].toFixed(1)+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'"/>';}
-function grid(a,b,z){var L=dist(a,b),ux=(b[0]-a[0])/L,uy=(b[1]-a[1])/L,nx=-uy*.2,ny=ux*.2;
+function grid(a,b,z){keep(Math.min(a[0],b[0])-.4,Math.min(a[1],b[1])-.4,Math.abs(b[0]-a[0])+.8,Math.abs(b[1]-a[1])+.8);var L=dist(a,b),ux=(b[0]-a[0])/L,uy=(b[1]-a[1])/L,nx=-uy*.2,ny=ux*.2;
   seg([a[0]+nx,a[1]+ny,z],[b[0]+nx,b[1]+ny,z],'y');seg([a[0]-nx,a[1]-ny,z],[b[0]-nx,b[1]-ny,z],'y');
   for(var t=0;t<=L+.01;t+=2){var x=a[0]+ux*t,y=a[1]+uy*t;
     seg([x+nx,y+ny,0],[x+nx,y+ny,z+.2],'l');seg([x-nx,y-ny,0],[x-nx,y-ny,z+.2],'l');seg([x+nx*1.6,y+ny*1.6,z],[x-nx*1.6,y-ny*1.6,z],'l');}
   ac([a[0]+nx,a[1]+ny],[b[0]+nx,b[1]+ny],z);ac([a[0]-nx,a[1]-ny],[b[0]-nx,b[1]-ny],z);}
 
-/* ---- Stage 0: ground + one house ---- */
+/* ---------- city plan ----------
+   Laid out like a real town: a street grid defines the blocks, buildings sit inside blocks with a setback,
+   water mains run UNDER the streets with short laterals into each building, power runs on poles in the street
+   verge with service drops, and anything that must cross a street (the 606 line, the plant conveyor) bridges it.
+   Every footprint, right-of-way and corridor registers in occ[], so the stage-7 infill can never land on one. */
+var occ=[];function keep(x,y,w,d){occ.push([x,y,w,d]);}
+/* streets: h=1 runs east-west at y=c, h=0 runs north-south at x=c; [a,b] is its extent, w its half-width */
+var ST=[];function street(h,c,a,b,w){w=w||.45;ST.push({h:h,c:c,a:a,b:b,w:w});if(h)keep(a,c-w,b-a,2*w);else keep(c-w,a,2*w,b-a);return ST.length-1;}
+var FIRST=street(0,12,12.8,24),CENTER=street(1,14,0,24),MAIN=street(1,20,0,24),WEST=street(0,5.5,0,24),EAST=street(0,18.7,0,24),
+    LANE=street(0,15.5,12,13.55,.3),NORTH=street(1,1,0,24);
+/* draw street i between p and q: kerb lines break wherever another street opens onto that side, so junctions read as junctions */
+function paved(i,p,q,c){var s=ST[i];c=c||'l';for(var side=-1;side<=1;side++){var e=s.c+side*s.w,cuts=[];
+    for(var j=0;j<ST.length;j++){var t=ST[j];if(j!==i&&t.h!==s.h&&t.a<=e+.01&&t.b>=e-.01&&t.c+t.w>p&&t.c-t.w<q)cuts.push([t.c-t.w,t.c+t.w]);}
+    cuts.sort(function(m,n){return m[0]-n[0];});var at=p;cuts.push([q,q]);
+    for(var k=0;k<cuts.length;k++){var to=Math.min(cuts[k][0],q);if(to-at>.05){if(s.h)seg([at,e,0],[to,e,0],side?c:'f');else seg([e,at,0],[e,to,0],side?c:'f');}at=Math.max(at,cuts[k][1]);}}}
+/* legs under an elevated run */
+function bent(x,y,z,nx,ny){seg([x+nx,y+ny,0],[x+nx,y+ny,z],'l');seg([x-nx,y-ny,0],[x-nx,y-ny,z],'l');}
+/* a valve ring where a lateral tees off a main */
+function tee(x,y){ell(x,y,0,.13,'b');}
+
+/* ---- Stage 0: ground + one house at the head of what becomes First St ---- */
 S(0);
 for(var g=0;g<=24;g+=4){seg([g,0,0],[g,24,0],'f');seg([0,g,0],[24,g,0],'f');}
 house(11.2,11.2,1.6,1.6,.9);
-road([12,12.8],[12,18],'f');
+paved(FIRST,12.8,20,'f');
 txt(13.6,11.9,0,'1 HOUSE · YEAR 0','lab','start');
 txt(0,24,0,'DATUM 0.00','','start');
 
-/* ---- Stage 1: ledger hall ---- */
+/* ---- Stage 1: ledger hall, its entities across the way, and the first paved street ---- */
 S(1);
 poly([[13,8,0],[18,8,0],[18,12,0],[13,12,0]],'a ds',true);
 box(13,8,5,4,1.1);
 floors(13,8,5,4,[.55],'f');
-box(18.4,9,.8,.8,.5,'l');box(18.4,10.2,.8,.8,.5,'l');box(18.4,11.4,.8,.8,.5,'l');
-road([12,12.8],[12,18]);road([12,14],[13,14]);
-txt(13,7.4,1.1,'GL HALL · CHART OF ACCOUNTS','lab','start');
-txt(19.4,9,0,'ENTITIES','','start');
+box(19.5,9.9,.8,.8,.5,'l');box(19.5,11.1,.8,.8,.5,'l');box(19.5,12.3,.8,.8,.5,'l');
+paved(FIRST,12.8,20);paved(CENTER,12.45,16.4);paved(LANE,12,13.55);
+txt(11.8,7.4,1.1,'GL HALL · CHART OF ACCOUNTS','lab','start');
+txt(20.7,10.7,0,'ENTITIES','','start');
 
-/* ---- Stage 2: silos + belts ---- */
+/* ---- Stage 2: silos + belts, all inside one yard so no conveyor ever crosses a street ---- */
 S(2);
 var names=['CONTRACTS','METERING','BILLING','PAYABLES','PAYROLL'];
-for(var i=0;i<5;i++){var sy=4+i*2;cyl(6.5,sy+.5,.6,1.6);belt([7.3,sy+.5],[11.3,sy+.5],.15);txt(5.6,sy+.6,1.9,names[i],'','end');}
-belt([11.5,4.3],[11.5,10.5],.15);belt([11.5,10.5],[13,10.5],.15);
-txt(11.5,3.4,.3,'TRUNK → GL','','middle');
+for(var i=0;i<5;i++){var sy=2+i*2;cyl(7,sy+.5,.6,1.6);belt([7.8,sy+.5],[11.28,sy+.5],.15);txt(6.1,sy+.6,1.9,names[i],'','end');}
+belt([11.5,2.3],[11.5,10.5],.15);belt([11.5,10.5],[13,10.5],.15);
+txt(11.5,1.5,.3,'TRUNK → GL','','middle');
 
-/* ---- Stage 3: tower + avenues ---- */
+/* ---- Stage 3: town hall on the corner of First and Center, then the avenues ---- */
 S(3);
-box(13,13,4,4,3);
-floors(13,13,4,4,[1,2],'l');
-poly([[13,13,3.35],[17,13,3.35],[17,17,3.35],[13,17,3.35]],'f',true);seg([17,13,3],[17,13,3.35],'f');seg([17,17,3],[17,17,3.35],'f');seg([13,17,3],[13,17,3.35],'f');
-txt(17.4,13,3.1,'L3 BOARD','','start');txt(17.4,13,2.1,'L2 AUDIT','','start');txt(17.4,13,1.1,'L1 CLOSE','','start');
-road([0,18.5],[24,18.5]);road([12,0],[12,24]);
-txt(1,18.2,0,'MAIN AVE','','start');
+box(13,15,4,4,3);
+floors(13,15,4,4,[1,2],'l');
+poly([[13,15,3.35],[17,15,3.35],[17,19,3.35],[13,19,3.35]],'f',true);seg([17,15,3],[17,15,3.35],'f');seg([17,19,3],[17,19,3.35],'f');seg([13,19,3],[13,19,3.35],'f');
+txt(17.5,17.4,3.1,'L3 BOARD','','start');txt(17.5,17.4,2.1,'L2 AUDIT','','start');txt(17.5,17.4,1.1,'L1 CLOSE','','start');
+paved(MAIN,0,24);paved(CENTER,0,12.45);paved(CENTER,16.4,24);paved(FIRST,20,24);paved(WEST,0,24);paved(EAST,0,24);
+txt(1,19.7,0,'MAIN AVE','','start');
 
-/* ---- Stage 4: ASC 606 elevated line + plant ---- */
+/* ---- Stage 4: rev rec plant, fed over East St by a conveyor bridge; the 606 line leaves on a viaduct ---- */
 S(4);
-box(19,3,4,3,1.4);cyl(20,7,.7,1.2);cyl(22,7,.7,1.2);
-seg([22.4,3.4,1.4],[22.4,3.4,3.2],'k');ell(22.4,3.4,3.2,.2,'k');
-belt([18,10],[19,7.6],.15);
-pylonLine([18,9.6],[31,9.6],1.5,'a');
-txt(19,2.4,1.4,'REV REC PLANT','lab','start');
-txt(25,9.2,1.7,'ASC 606 LINE · OUT PAST CITY LIMITS','acc','start');
-txt(24.6,10.4,0,'CITY LIMIT','','start');seg([24,0,0],[24,24,0],'l ds');
+box(19.6,3,3.8,3,1.4);cyl(20.4,7,.7,1.2);cyl(22.4,7,.7,1.2);
+seg([22.8,3.4,1.4],[22.8,3.4,3.2],'k');ell(22.8,3.4,3.2,.2,'k');
+belt([17,8],[17,7],1);belt([17,7],[19.7,7],1);bent(17,7,1,.22,0);bent(18,7,1,0,.22);bent(19.4,7,1,0,.22);keep(16.7,6.7,3,1.3);
+pylonLine([18,9.2],[31,9.2],1.5,'a');keep(18,8.9,6,.9);
+txt(19.6,2.4,1.4,'REV REC PLANT','lab','start');
+txt(25,8.8,1.7,'ASC 606 LINE · OUT PAST CITY LIMITS','acc','start');
+txt(24.6,10.8,0,'CITY LIMIT','','start');seg([24,0,0],[24,24,0],'l ds');
 
-/* ---- Stage 5: data core + pipes ---- */
+/* ---- Stage 5: data core; one water main under the streets, a valved lateral into every building ---- */
 S(5);
-cyl(10.5,17.5,1.1,5);
-for(var z=1;z<5;z++)ell(10.5,17.5,z,1.1,'b');
-ell(10.5,17.5,5.4,.4,'k');seg([10.5,17.5,5],[10.5,17.5,5.9],'k');
-/* leave the core where each lane sits, then follow Main Ave and the x=12 road; lanes that run
-   furthest east sit furthest south so no run crosses another */
-function ex(y,s){return 10.5+s*Math.sqrt(1.21-(y-17.5)*(y-17.5));}
-pipe([[ex(17.2,1),17.2],[12.25,17.2],[12.25,15],[13,15]],.35,'b');                          /* town hall */
-pipe([[ex(17.95,1),17.95],[17.75,17.95],[17.75,12.5],[15.5,12.5],[15.5,12.05]],.35,'b');   /* ledger hall */
-pipe([[ex(18.2,1),18.2],[18.15,18.2],[18.15,11.8],[18.4,11.8]],.35,'b');                   /* entities */
-pipe([[ex(18.45,1),18.45],[23.6,18.45],[23.6,4.5],[23,4.5]],.35,'b');                      /* rev rec plant */
-pipe([[ex(18.2,-1),18.2],[6.6,18.2],[6.6,13.1]],.35,'b');                                    /* payroll silo */
-txt(9.1,17.5,5.4,'DATA CORE · SALESFORCE','lab','end');
-txt(4,20.2,0,'PIPES · SQL · BIGQUERY','dat','start',26.57);
+cyl(10.2,17.5,1.1,5);
+for(var z=1;z<5;z++)ell(10.2,17.5,z,1.1,'b');
+ell(10.2,17.5,5.4,.4,'k');seg([10.2,17.5,5],[10.2,17.5,5.9],'k');
+/* the main leaves the core south to Main Ave, where it stays in front of the buildings it serves, then turns up East St */
+pipe([[10.2,18.6],[10.2,19.75],[18.95,19.75],[18.95,4.5],[19.6,4.5]],0,'b');                  /* main: core → Main Ave → East St → plant */
+tee(15,19.75);pipe([[15,19.75],[15,19]],0,'b');                                               /* town hall */
+tee(18.95,10.4);pipe([[18.95,10.4],[18,10.4]],0,'b');                                               /* ledger hall */
+tee(18.95,11.5);pipe([[18.95,11.5],[19.5,11.5]],0,'b');                                             /* entities */
+tee(10.2,19.75);pipe([[10.2,19.75],[5.75,19.75],[5.75,10.5],[6.4,10.5]],0,'b');               /* west along Main, up West St to the payroll silo */
+txt(8.8,17.5,5.4,'DATA CORE · SALESFORCE','lab','end');
+txt(13.4,21.4,0,'PIPES · SQL · BIGQUERY','dat','start',26.57);
 
-/* ---- Stage 6: the grid: departments <-> finance, on the open west side ---- */
+/* ---- Stage 6: the grid: poles in the West St verge, a drop to each department, a feeder along Main Ave to the town hall ---- */
 S(6);
 var depts=[[2.5,1.4,'SALES'],[6.8,1.1,'MARKETING'],[11.1,1.7,'OPERATIONS']];
 grid([4.6,3.4],[4.6,15.8],1.6);
 for(var i=0;i<depts.length;i++){var dy=depts[i][0],dh=depts[i][1],my=dy+.9;
-  box(.6,dy,2,1.8,dh);seg([2.6,my,.8],[4.6,my,1.6],'y');ac([2.6,my,.8],[4.6,my,1.6]);
+  box(.6,dy,2,1.8,dh);seg([2.6,my,.8],[4.6,my,1.6],'y');ac([2.6,my,.8],[4.6,my,1.6]);keep(2.6,my-.2,2,.4);
   txt(-.2,dy+1.8,0,depts[i][2],'lab','end');}
-box(3.4,15.6,2.4,2.2,.2,'l');cyl(4.1,16.8,.45,1);cyl(5.1,16.8,.45,1);
-txt(2.9,17.6,0,'FINANCE SUBSTATION','lab','end');
-txt(3.8,18.5,0,'DATA ↔ INSIGHT','','end');
+box(2.6,15.6,2.3,2.2,.2,'l');cyl(3.3,16.8,.45,1);cyl(4.3,16.8,.45,1);
+grid([4.6,17.8],[4.6,19.2],1.6);grid([4.6,19.2],[12.6,19.2],1.6);
+seg([12.6,19.2,1.6],[13,18.6,2.2],'y');ac([12.6,19.2,1.6],[13,18.6,2.2]);
+txt(2.2,17.6,0,'FINANCE SUBSTATION','lab','end');
+txt(3,18.5,0,'DATA ↔ INSIGHT','','end');
 
-/* ---- Stage 7: full city ---- */
+/* ---- Stage 7: the side streets, then infill on every lot the plan left open ---- */
 S(7);
-var occ=[[11,11,2,2],[13,8,6,4],[6,4,2,10],[7,4,6,8],[13,13,4,4],[19,3,4,5],[9,16,3,3],[11.5,0,1,24],[0,18,24,1],[18,9,7,1.5],
-  [6.2,12.9,.8,5.6],[15.2,12.1,3.4,.8],[17.4,11.4,1.4,7],[22.8,4,1.2,15],[0,2,5.2,11.5],[3.2,15.4,2.8,2.6]];
-function free(x,y,w,dp){for(var i=0;i<occ.length;i++){var o=occ[i];if(x<o[0]+o[2]&&x+w>o[0]&&y<o[1]+o[3]&&y+dp>o[1])return false;}return true;}
+paved(NORTH,0,24);
+function free(x,y,w,dp){var m=.25;for(var i=0;i<occ.length;i++){var o=occ[i];if(x-m<o[0]+o[2]&&x+w+m>o[0]&&y-m<o[1]+o[3]&&y+dp+m>o[1])return false;}return true;}
 var seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647;}
-for(var yy=0.5;yy<23;yy+=2.5)for(var xx=0.5;xx<23;xx+=2.5){var w=1.2+rnd()*1,dp=1.2+rnd()*1,h=.5+rnd()*2.2;if(rnd()<.18)continue;if(free(xx,yy,w,dp)){box(xx,yy,w,dp,h,'l',null);if(h>1.6)floors(xx,yy,w,dp,[Math.round(h/2)],'f');}}
-road([0,6.5],[24,6.5]);road([6,0],[6,24]);road([18.5,12.5],[18.5,24]);
+/* walk the plan in half-unit steps and build on the first open lot found, so infill lines up along the street frontages */
+for(var yy=.4;yy<22.6;yy+=.5)for(var xx=.4;xx<22.6;xx+=.5){var w=1+rnd()*1.1,dp=1+rnd()*1.1,h=.5+rnd()*2.2;
+  if(xx+w>23.7||yy+dp>23.7||!free(xx,yy,w,dp))continue;if(rnd()<.3){keep(xx,yy,w,dp);continue;}
+  box(xx,yy,w,dp,h,'l',null);if(h>1.6)floors(xx,yy,w,dp,[Math.round(h/2)],'f');}
 /* rail loop */
 poly([[-.6,-.6,0],[24.6,-.6,0],[24.6,24.6,0],[-.6,24.6,0]],'k',true);
 poly([[-.9,-.9,0],[24.9,-.9,0],[24.9,24.9,0],[-.9,24.9,0]],'l',true);
@@ -471,7 +490,7 @@ for(var L=0;L<3;L++)for(var k=0;k<8;k++)html+='<g class="s'+(k?' m':' on init')+
 svg.innerHTML=html;
 
 /* ---------- camera: [world x, world y, scale] ---------- */
-var cam=[[12,12.5,2.6],[14,11,2],[10.5,9,1.5],[13,13,1.3],[21,8,1.25],[11,16,1.2],[3.8,14,1.9],[12,12,1]];
+var cam=[[12,12.5,2.6],[14.5,11,2],[10,7,1.5],[13.5,15,1.3],[20.5,7,1.3],[13.5,14.5,1.15],[3.4,12.5,1.45],[12,12,1]];
 var gs=[];for(k=0;k<8;k++)gs.push(svg.querySelectorAll('g.s[data-k="'+k+'"]'));
 function cls(k,n,on){for(var i=0;i<gs[k].length;i++)gs[k][i].classList.toggle(n,on);}
 /* a stage spans three layer groups, so hover is mirrored onto all of them */
